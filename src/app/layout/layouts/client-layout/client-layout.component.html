@@ -1,0 +1,157 @@
+<header >
+  <nav class="navBar flex">
+    <div id="nav__toggle">
+      <i id="nav__toggle-icon" class="ri-menu-2-line"></i>
+    </div>
+    <h1 class="logo flex">NoisyDeo</h1>
+    <div class="flex nav__list ">
+      <ul class="menu_items flex-c-s">
+        <li class="nav__item has-submenu ">
+          <div class="flex nav_link_icon">
+            <a class="nav__link "  href="#">
+              Categories
+            </a>
+            <i class="ri-arrow-right-s-line"></i>
+          </div>
+
+          <ul class="sub-menu">
+            <li class="sub-menu__item">
+              <a href="">Action</a>
+            </li>
+            <li class="sub-menu__item">
+              <a href="">Adventure</a>
+
+            </li>
+            <li class="sub-menu__item">
+              <a href="">Comedy</a>
+
+            </li>
+            <li class="sub-menu__item">
+              <a href="">Crime</a>
+
+            </li>
+            <li class="sub-menu__item">
+              <a href="">Drama</a>
+
+            </li>
+            <li class="sub-menu__item">
+              <a href="">Fantasy</a>
+
+            </li>
+            <li class="sub-menu__item">
+              <a href="">Historical</a>
+
+            </li>
+            <li class="sub-menu__item">
+              <a href="">Horror</a>
+
+            </li>
+            <li class="sub-menu__item">
+              <a href="">Mystery</a>
+
+            </li>
+            <li class="sub-menu__item">
+              <a href="">Political</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav__item"><a class="nav__link" href="">Eventionents</a></li>
+        <li class="nav__item"><a class="nav__link" href="">Pour les entreprise</a></li>
+        <li class="nav__item"><a class="nav__link" href="">Comment ça marche</a></li>
+      </ul>
+
+      <div id="close-icon">
+        <i class="ri-close-line"></i>
+      </div>
+    </div>
+    <div class="search__bar">
+      <button>
+        <i class="ri-search-line"></i>
+      </button>
+      <label>
+        <input type="text" placeholder="Search">
+      </label>
+
+    </div>
+    <div class="user__account flex">
+      <div class="user__account--icon flex">
+        <i class="ri-user-line"></i>
+      </div>
+      <div class="user__account--text cursor-pointer flex">
+        <p>
+          <a href="account-client.html">Se connecter</a>
+        </p>
+      </div>
+    </div>
+  </nav>
+</header>
+<main>
+  <router-outlet></router-outlet>
+</main>
+<!--FOOTER -->
+<footer class="">
+  <div class="footer-group-1  container grid">
+    <div class="subscribe">
+      <div class="subscribe__inner">
+        <div class="subscribe__inner-title">
+          <h4 >Subscribe to our newsletter</h4>
+          <p class="mt-0-5">Soyez les premiers à être informés des nouvelles stars et des meilleures offres sur Cameo
+          </p>
+        </div>
+        <div class="subscribe__inner-form">
+          <form action="">
+            <label>
+              <input type="text" placeholder="Enter your email">
+            </label>
+            <button class="subscribe__inner-form-submit" type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="subscribe__social flex">
+        <div class="subscribe__social-item">
+          <a href="#"><i class="ri-facebook-circle-line"></i></a>
+        </div>
+        <div class="subscribe__social-item">
+          <a href="#"><i class="ri-twitter-line"></i></a>
+        </div>
+        <div class="subscribe__social-item">
+          <a href="#"><i class="ri-instagram-line"></i></a>
+        </div>
+        <div class="subscribe__social-item">
+          <a href="#"><i class="ri-linkedin-box-line"></i></a>
+        </div>
+      </div>
+
+    </div>
+    <div class="footer-item-2 flex">
+      <div class="footer-item-2-item ">
+        <p>Prêt à devenir un talent sur Cameo ?</p>
+        <a class="became-celebrity" href="became_talent.html">Devenir une célébrité </a>
+      </div>
+      <div class="footer-item-2-item">
+        <p>Vous avez un compte?</p>
+        <a class="became-celebrity" href="login.html">Se Connecter</a>
+
+      </div>
+    </div>
+  </div>
+  <div class="footer-group-2 container">
+    <div class="footer-tem-3 ">
+      <div class="footer_item_3-info mt-1">
+        Pour toutes autres informations contacte-nous : <a href="hello@vidoleo.com">hello@vidoleo.com</a>
+      </div>
+      <div class="footer_item_3-pages flex">
+        <a href="faq.html">Faq</a>
+        <a href="mentionlégales.html">Mentions Légales</a>
+        <a href="cgv_cgu.html">CGV & CGU</a>
+        <a href="RGPD.html">RGPD</a>
+        <a href="avis.html">Avis Clients</a>
+      </div>
+    </div>
+    <div class="footer_item_3-copyright">
+      <p>© 2020 Vidoleo. All rights reserved.</p>
+    </div>
+  </div>
+
+
+</footer>

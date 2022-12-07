@@ -8,10 +8,12 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {ErrorInterceptor} from "./core/interceptors/error.interceptor";
 import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
 import {CacheInterceptor} from "./core/interceptors/cache.interceptor";
+import { ClientLayoutComponent } from './layout/layouts/client-layout/client-layout.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ClientLayoutComponent
   ],
   imports: [
     BrowserModule,
