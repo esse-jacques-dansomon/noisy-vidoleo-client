@@ -9,23 +9,26 @@ import {ErrorInterceptor} from "./core/interceptors/error.interceptor";
 import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
 import {CacheInterceptor} from "./core/interceptors/cache.interceptor";
 import { ClientLayoutComponent } from './layout/layouts/client-layout/client-layout.component';
+import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ClientLayoutComponent
+    ClientLayoutComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxUsefulSwiperModule
   ],
   providers: [
-    {provide: ErrorHandler, useClass: GlobalErrorHandler},
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptor,
-      multi: true
-    },
+    // {provide: ErrorHandler, useClass: GlobalErrorHandler},
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: ErrorInterceptor,
+    //   multi: true
+    // },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CacheInterceptor,

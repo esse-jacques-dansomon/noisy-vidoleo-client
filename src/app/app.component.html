@@ -3,12 +3,12 @@
     <div id="nav__toggle">
       <i id="nav__toggle-icon" class="ri-menu-2-line"></i>
     </div>
-    <h1 class="logo flex">NoisyDeo</h1>
+    <h1 class="logo flex"><a [routerLink]="'/'">NoisyDeo</a></h1>
     <div class="flex nav__list ">
       <ul class="menu_items flex-c-s">
         <li class="nav__item has-submenu ">
           <div class="flex nav_link_icon">
-            <a class="nav__link "  href="#">
+            <a class="nav__link "  [routerLink]="'categories'">
               Categories
             </a>
             <i class="ri-arrow-right-s-line"></i>
@@ -55,9 +55,9 @@
             </li>
           </ul>
         </li>
-        <li class="nav__item"><a class="nav__link" href="">Eventionents</a></li>
-        <li class="nav__item"><a class="nav__link" href="">Pour les entreprise</a></li>
-        <li class="nav__item"><a class="nav__link" href="">Comment ça marche</a></li>
+        <li class="nav__item"><a class="nav__link" [routerLink]="'categories'">Eventionents</a></li>
+        <li class="nav__item"><a class="nav__link" [routerLink]="'categories'">Pour les entreprise</a></li>
+        <li class="nav__item"><a class="nav__link" [routerLink]="'categories'">Comment ça marche</a></li>
       </ul>
 
       <div id="close-icon">
@@ -79,7 +79,7 @@
       </div>
       <div class="user__account--text cursor-pointer flex">
         <p>
-          <a href="account-client.html">Se connecter</a>
+          <a [routerLink]="['auth/se-connecter']">Se connecter</a>
         </p>
       </div>
     </div>
@@ -126,11 +126,11 @@
     <div class="footer-item-2 flex">
       <div class="footer-item-2-item ">
         <p>Prêt à devenir un talent sur Cameo ?</p>
-        <a class="became-celebrity" href="became_talent.html">Devenir une célébrité </a>
+        <a class="became-celebrity" [routerLink]="'devenir-createur'">Devenir une célébrité </a>
       </div>
       <div class="footer-item-2-item">
         <p>Vous avez un compte?</p>
-        <a class="became-celebrity" href="login.html">Se Connecter</a>
+        <a class="became-celebrity" [routerLink]="'auth/se-connecter'">Se Connecter</a>
 
       </div>
     </div>
@@ -138,18 +138,18 @@
   <div class="footer-group-2 container">
     <div class="footer-tem-3 ">
       <div class="footer_item_3-info mt-1">
-        Pour toutes autres informations contacte-nous : <a href="hello@vidoleo.com">hello@vidoleo.com</a>
+        Pour toutes autres informations contacte-nous : <a href="mailto:hello@vidoleo.com">hello@vidoleo.com</a>
       </div>
       <div class="footer_item_3-pages flex">
-        <a href="faq.html">Faq</a>
-        <a href="mentionlégales.html">Mentions Légales</a>
-        <a href="cgv_cgu.html">CGV & CGU</a>
-        <a href="RGPD.html">RGPD</a>
-        <a href="avis.html">Avis Clients</a>
+        <a [routerLink]="'/faqs'" >Faq</a>
+        <a [routerLink]="'/mentions-legales'" >Mentions Légales</a>
+        <a [routerLink]="'/cgu-et-confidentialite'" >CGV & CGU</a>
+        <a [routerLink]="'/rgpd'" >RGPD</a>
+        <a [routerLink]="'/avis'" >Avis Clients</a>
       </div>
     </div>
     <div class="footer_item_3-copyright">
-      <p>© 2020 Vidoleo. All rights reserved.</p>
+      <p>© 2022 Noisy. All rights reserved.</p>
     </div>
   </div>
 

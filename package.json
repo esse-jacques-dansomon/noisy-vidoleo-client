@@ -20,7 +20,9 @@
     "@angular/router": "^14.2.0",
     "moment": "^2.29.4",
     "ngx-toastr": "^15.2.1",
+    "ngx-useful-swiper": "^10.0.1",
     "rxjs": "~7.5.0",
+    "swiper": "^6.8.4",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

@@ -35,14 +35,14 @@
         <input type="text" placeholder="Mot de Passe">
       </div>
       <div class="form__group">
-        <a href="index.html" class="form__button">Créer un compte</a>
+        <a  class="form__button">Créer un compte</a>
       </div>
       <div class="">
         <input type="checkbox">
-        <label for="">Tenez-moi au courant des offres exclusives de Cameo, des mises à jour et d’autres actus ! Tu peux te désinscrire à tout moment.</label>
+        <label>Tenez-moi au courant des offres exclusives de Cameo, des mises à jour et d’autres actus ! Tu peux te désinscrire à tout moment.</label>
       </div>
       <div class="">
-        <a href="login.html" class="forgot__password">Tu as déjà un compte ? Connecte-toi</a>
+        <a [routerLink]="'/auth/se-connecter'" class="forgot__password">Tu as déjà un compte ? Connecte-toi</a>
       </div>
     </form>
   </section>

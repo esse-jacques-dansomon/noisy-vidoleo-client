@@ -3,21 +3,26 @@ import {AlertMessageComponent} from "./components/alert-messaga.component";
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ContactVendorComponent} from "./components/contact-vendor.component";
+import {CreatorCard} from "../layout/common/creator-card";
+import {RouterLinkWithHref} from "@angular/router";
 
 
 @NgModule({
    declarations: [
       SniperLoaderComponent,
       AlertMessageComponent,
-      ContactVendorComponent
+      ContactVendorComponent,
+     CreatorCard
 
    ],
-    exports: [
-        SniperLoaderComponent,
-       AlertMessageComponent
-    ],
-   imports: [
-      CommonModule,
-   ]
+  exports: [
+    SniperLoaderComponent,
+    AlertMessageComponent,
+    CreatorCard
+  ],
+  imports: [
+    CommonModule,
+    RouterLinkWithHref,
+  ]
 })
 export class SharedModule { }

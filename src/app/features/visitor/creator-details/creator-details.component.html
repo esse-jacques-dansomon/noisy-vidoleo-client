@@ -1,38 +1,38 @@
 <main>
   <div class="breadcrumb container">
-    <a href="index.html">Home</a>
+    <a [routerLink]="['/']">Home</a>
     <span> / </span>
-    <a href="category.html">Celebrities</a>
+    <a [routerLink]="['/categories']">Celebrities</a>
     <span> / </span>
-    <a href="category.html">Presentation</a>
+    <a [routerLink]="['/']">Presentation</a>
     <span> / </span>
     <a href="#">Author</a>
   </div>
   <div class="container ">
     <div class="celebrity">
-      <div class="celebrity-videos swiper">
-        <div class="celebrity-videos-container swiper-wrapper">
-          <div class="swiper-slide celebrity-videos-response">
-            <img class=" video-item" src="assets/img/1.jpg" alt="">
-            <i class="video-item-play ri-play-circle-line"></i>
-            <i class="video-item-volume ri-volume-down-line"></i>
-          </div>
-          <div class="swiper-slide celebrity-videos-response">
-            <img class=" video-item" src="assets/img/2.jpg" alt="">
-            <button>
+        <swiper class="celebrity-videos" [config]="config">
+          <div class="celebrity-videos-container swiper-wrapper">
+            <div class="swiper-slide celebrity-videos-response">
+              <img class=" video-item" src="assets/img/1.jpg" alt="">
               <i class="video-item-play ri-play-circle-line"></i>
-            </button>
-            <button type="submit">
               <i class="video-item-volume ri-volume-down-line"></i>
-            </button>
+            </div>
+            <div class="swiper-slide celebrity-videos-response">
+              <img class=" video-item" src="assets/img/2.jpg" alt="">
+              <button>
+                <i class="video-item-play ri-play-circle-line"></i>
+              </button>
+              <button type="submit">
+                <i class="video-item-volume ri-volume-down-line"></i>
+              </button>
+            </div>
+            <div class="swiper-slide celebrity-videos-response">
+              <img class=" video-item" src="assets/img/3.jpg" alt="">
+              <i class="video-item-play ri-play-circle-line"></i>
+              <i class="video-item-volume ri-volume-down-line"></i>
+            </div>
           </div>
-          <div class="swiper-slide celebrity-videos-response">
-            <img class=" video-item" src="assets/img/3.jpg" alt="">
-            <i class="video-item-play ri-play-circle-line"></i>
-            <i class="video-item-volume ri-volume-down-line"></i>
-          </div>
-        </div>
-      </div>
+        </swiper>
       <div class="celebrity-details-container">
         <div class="celebrity-details">
           <div class="celebrity__card  flex">
@@ -74,10 +74,10 @@
           </div>
         </div>
         <div class="book__buttons flex">
-          <a href="booking.html" class="book__buttons-item-button">
+          <a [routerLink]="['/client/booking']" class="book__buttons-item-button">
             Demander une vidéo 10.000 FCFA
           </a>
-          <a href="booking.html" class="book__buttons-item-button">
+          <a [routerLink]="['/client/booking']" class="book__buttons-item-button">
             Je suis une entreprise 100.000 FCFA
           </a>
         </div>
@@ -87,52 +87,54 @@
 
       </div>
     </div>
+
     <div class="celebrity-how-it-works">
-      <div class="celebrity-how-it-works-swiper swiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide celebrity-how-it-works-item">
-            <div class="celebrity-how-it-works-item-title flex">
-              <i class="ri-edit-box-line"></i>
-              <h3>100% personnalisé</h3>
+      <div class="celebrity-how-it-works-swiper">
+        <div class="celebrity-request-content">
+          <swiper [config]="howItWorksCelebrity">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide celebrity-how-it-works-item">
+                <div class="celebrity-how-it-works-item-title flex">
+                  <i class="ri-edit-box-line"></i>
+                  <h3>100% personnalisé</h3>
+                </div>
+                <div class="celebrity-how-it-works-item-content">
+                  La célébrité va suivre tes instructions et te faire une vidéo sur mesure
+                </div>
+              </div>
+              <div class="swiper-slide celebrity-how-it-works-item">
+                <div class="celebrity-how-it-works-item-title flex">
+                  <i class="ri-lock-fill"></i>
+                  <h3>Paiement Sécurisé</h3>
+                </div>
+                <div class="celebrity-how-it-works-item-content">
+                  Nous utilisons le cryptage SSL/TLS pour des paiements en toute sécurité
+                </div>
+              </div>
+              <div class="swiper-slide celebrity-how-it-works-item">
+                <div class="celebrity-how-it-works-item-title flex">
+                  <i class="ri-money-dollar-box-line"></i>
+                  <h3>Remboursement Garanti</h3>
+                </div>
+                <div class="celebrity-how-it-works-item-content">
+                  Si la célébrité ne répond pas, tu seras immédiatement remboursé
+                </div>
+              </div>
+              <div class="swiper-slide celebrity-how-it-works-item">
+                <div class="celebrity-how-it-works-item-title flex">
+                  <i class="ri-phone-line"></i>
+                  <h3>Service Après Vente</h3>
+                </div>
+                <div class="celebrity-how-it-works-item-content">
+                  Besoin d'aide ? Nous sommes à ton service 7 jours sur 7
+                </div>
+              </div>
             </div>
-            <div class="celebrity-how-it-works-item-content">
-              La célébrité va suivre tes instructions et te faire une vidéo sur mesure
-            </div>
-          </div>
-
-          <div class="swiper-slide celebrity-how-it-works-item">
-            <div class="celebrity-how-it-works-item-title flex">
-              <i class="ri-lock-fill"></i>
-              <h3>Paiement Sécurisé</h3>
-            </div>
-            <div class="celebrity-how-it-works-item-content">
-              Nous utilisons le cryptage SSL/TLS pour des paiements en toute sécurité
-            </div>
-          </div>
-
-          <div class="swiper-slide celebrity-how-it-works-item">
-            <div class="celebrity-how-it-works-item-title flex">
-              <i class="ri-money-dollar-box-line"></i>
-              <h3>Remboursement Garanti</h3>
-            </div>
-            <div class="celebrity-how-it-works-item-content">
-              Si la célébrité ne répond pas, tu seras immédiatement remboursé
-            </div>
-          </div>
-
-          <div class="swiper-slide celebrity-how-it-works-item">
-            <div class="celebrity-how-it-works-item-title flex">
-              <i class="ri-phone-line"></i>
-              <h3>Service Après Vente</h3>
-            </div>
-            <div class="celebrity-how-it-works-item-content">
-              Besoin d'aide ? Nous sommes à ton service 7 jours sur 7
-            </div>
-          </div>
-
+          </swiper>
         </div>
       </div>
     </div>
+
     <div class="celebrity-feedbacks">
       <div class="celebrity-feedbacks-title flex">
         <div class="celebrity-feedbacks-title-item flex">
@@ -191,46 +193,51 @@
         </div>
       </div>
     </div>
+
     <div class="celebrity-request-step">
       <div class="celebrity-request-step-title">
         <h4>Comment ça marche ?</h4>
       </div>
-      <div class="celebrity-request-content swiper">
-        <div class="swiper-wrapper">
-          <div class="celebrity-request-content-item swiper-slide">
-            <div class="celebrity-request-content-item-header flex">
-              <div class="celebrity-request-content-item-header-title">
-                <h4>1. Choisis ta célébrité</h4>
+      <div class="celebrity-request-content">
+        <swiper [config]="celebrityRequestContentSteps">
+          <div class="swiper-wrapper">
+            <div class="celebrity-request-content-item swiper-slide">
+              <div class="celebrity-request-content-item-header flex">
+                <div class="celebrity-request-content-item-header-title">
+                  <h4>1. Choisis ta célébrité</h4>
+                </div>
+              </div>
+              <div class="celebrity-request-content-item-content">
+                <p>Commande en quelques clics et reçois ta dédicace vidéo personnalisée de Laurent Paganelli sous 7 jours.                             </p>
               </div>
             </div>
-            <div class="celebrity-request-content-item-content">
-              <p>Commande en quelques clics et reçois ta dédicace vidéo personnalisée de Laurent Paganelli sous 7 jours.                             </p>
-            </div>
-          </div>
-          <div class="celebrity-request-content-item swiper-slide">
-            <div class="celebrity-request-content-item-header flex">
-              <div class="celebrity-request-content-item-header-title">
-                <h4>2. Obtiens ta vidéo</h4>
+            <div class="celebrity-request-content-item swiper-slide">
+              <div class="celebrity-request-content-item-header flex">
+                <div class="celebrity-request-content-item-header-title">
+                  <h4>2. Obtiens ta vidéo</h4>
+                </div>
+              </div>
+              <div class="celebrity-request-content-item-content">
+                <p>
+                  Dès que ta vidéo sera disponible, nous t'enverrons le lien de téléchargement par email.                             </p>
               </div>
             </div>
-            <div class="celebrity-request-content-item-content">
-              <p>
-                Dès que ta vidéo sera disponible, nous t'enverrons le lien de téléchargement par email.                             </p>
-            </div>
-          </div>
-          <div class="celebrity-request-content-item swiper-slide">
-            <div class="celebrity-request-content-item-header flex">
-              <div class="celebrity-request-content-item-header-title">
-                <h4>3. Le cadeau idéal</h4>
+            <div class="celebrity-request-content-item swiper-slide">
+              <div class="celebrity-request-content-item-header flex">
+                <div class="celebrity-request-content-item-header-title">
+                  <h4>3. Le cadeau idéal</h4>
+                </div>
+              </div>
+              <div class="celebrity-request-content-item-content">
+                <p>
+                  Que ce soit pour toi ou un proche, obtiens un moment unique et un souvenir inoubliable.                            </p>
               </div>
             </div>
-            <div class="celebrity-request-content-item-content">
-              <p>
-                Que ce soit pour toi ou un proche, obtiens un moment unique et un souvenir inoubliable.                            </p>
-            </div>
           </div>
-        </div>
+        </swiper>
       </div>
+
+
       <!--    FEATURED AUTHORS-->
       <section class="container authors">
         <div class="flex container authors__category" >
@@ -238,7 +245,7 @@
             De la même categorie
           </div>
           <div class="authors__category-title-buttons flex">
-            <a class="authors__category-title-buttons-title" href="category.html">
+            <a class="authors__category-title-buttons-title" [routerLink]="['/categories']">
               Voir tous
             </a>
             <div class="authors__category-title-buttons-icons flex">
@@ -251,200 +258,11 @@
             </div>
           </div>
         </div>
-        <div class="swiper mySwiper">
+        <swiper [config]="otherAuthorCon">
           <div class="authors_container swiper-wrapper">
-            <div class="author__card swiper-slide">
-              <a href="author.html">
-                <div class="author__card-img">
-                  <img src="assets/img/2.jpg" alt="">
-                </div>
-                <div class="author__card-info">
-                  <div class="author__card-info-title">
-                    <h3>John Doe</h3>
-                  </div>
-                  <div class="author__card-info-subtitle">
-                    <span>Actor - Harry Potter</span>
-                  </div>
-                  <div class="author__card-info-price">
-                    <span>From $ 100</span>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <div class="author__card swiper-slide">
-              <a href="author.html">
-                <div class="author__card-img">
-                  <img src="assets/img/1.jpg" alt="">
-                </div>
-                <div class="author__card-info">
-                  <div class="author__card-info-title">
-                    <h3>James Bond</h3>
-                  </div>
-                  <div class="author__card-info-subtitle">
-                    <span>Actor - Harry Potter</span>
-                  </div>
-                  <div class="author__card-info-price">
-                    <span>From $ 100</span>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <div class="author__card swiper-slide">
-              <a href="author.html">
-                <div class="author__card-img">
-                  <img src="assets/img/3.jpg" alt="">
-                </div>
-                <div class="author__card-info">
-                  <div class="author__card-info-title">
-                    <h3>John Doe</h3>
-                  </div>
-                  <div class="author__card-info-subtitle">
-                    <span>Actor - Harry Potter</span>
-                  </div>
-                  <div class="author__card-info-price">
-                    <span>From $ 100</span>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="author__card swiper-slide">
-              <a href="author.html">
-                <div class="author__card-img">
-                  <img src="assets/img/4.png" alt="">
-                </div>
-                <div class="author__card-info">
-                  <div class="author__card-info-title">
-                    <h3>John Doe</h3>
-                  </div>
-                  <div class="author__card-info-subtitle">
-                    <span>Actor - Harry Potter</span>
-                  </div>
-                  <div class="author__card-info-price">
-                    <span>From $ 100</span>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="author__card swiper-slide">
-              <a href="author.html">
-                <div class="author__card-img">
-                  <img src="assets/img/5.jpg" alt="">
-                </div>
-                <div class="author__card-info">
-                  <div class="author__card-info-title">
-                    <h3>John Doe</h3>
-                  </div>
-                  <div class="author__card-info-subtitle">
-                    <span>Actor - Harry Potter</span>
-                  </div>
-                  <div class="author__card-info-price">
-                    <span>From $ 100</span>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <div class="author__card swiper-slide">
-              <a href="author.html">
-                <div class="author__card-img">
-                  <img src="assets/img/2.jpg" alt="">
-                </div>
-                <div class="author__card-info">
-                  <div class="author__card-info-title">
-                    <h3>John Doe</h3>
-                  </div>
-                  <div class="author__card-info-subtitle">
-                    <span>Actor - Harry Potter</span>
-                  </div>
-                  <div class="author__card-info-price">
-                    <span>From $ 100</span>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <div class="author__card swiper-slide">
-              <a href="author.html">
-                <div class="author__card-img">
-                  <img src="assets/img/1.jpg" alt="">
-                </div>
-                <div class="author__card-info">
-                  <div class="author__card-info-title">
-                    <h3>James Bond</h3>
-                  </div>
-                  <div class="author__card-info-subtitle">
-                    <span>Actor - Harry Potter</span>
-                  </div>
-                  <div class="author__card-info-price">
-                    <span>From $ 100</span>
-                  </div>
-                </div>
-              </a>
-
-            </div>
-
-            <div class="author__card swiper-slide">
-              <a href="author.html">
-                <div class="author__card-img">
-                  <img src="assets/img/3.jpg" alt="">
-                </div>
-                <div class="author__card-info">
-                  <div class="author__card-info-title">
-                    <h3>John Doe</h3>
-                  </div>
-                  <div class="author__card-info-subtitle">
-                    <span>Actor - Harry Potter</span>
-                  </div>
-                  <div class="author__card-info-price">
-                    <span>From $ 100</span>
-                  </div>
-                </div>
-              </a>
-
-            </div>
-
-            <div class="author__card swiper-slide">
-              <a href="author.html">
-                <div class="author__card-img">
-                  <img src="assets/img/4.png" alt="">
-                </div>
-                <div class="author__card-info">
-                  <div class="author__card-info-title">
-                    <h3>John Doe</h3>
-                  </div>
-                  <div class="author__card-info-subtitle">
-                    <span>Actor - Harry Potter</span>
-                  </div>
-                  <div class="author__card-info-price">
-                    <span>From $ 100</span>
-                  </div>
-                </div>
-              </a>
-
-            </div>
-
-            <div class="author__card swiper-slide">
-              <a href="author.html">
-                <div class="author__card-img">
-                  <img src="assets/img/5.jpg" alt="">
-                </div>
-                <div class="author__card-info">
-                  <div class="author__card-info-title">
-                    <h3>John Doe</h3>
-                  </div>
-                  <div class="author__card-info-subtitle">
-                    <span>Actor - Harry Potter</span>
-                  </div>
-                  <div class="author__card-info-price">
-                    <span>From $ 100</span>
-                  </div>
-                </div>
-              </a>
-            </div>
+            <creator-card class="swiper-slide" *ngFor="let creator of creators" [creator]="creator"></creator-card>
           </div>
-        </div>
+        </swiper>
       </section>
 
       <!--    -->

@@ -1,20 +1,8 @@
-import { Component, OnInit } from '@angular/core';
 import {SwiperOptions} from "swiper";
 
-@Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
-})
-export class HomeComponent implements OnInit {
+export class AppSwiperConfigs {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  //swiper config
-  breakpoints = {
+  private static  breakpoints = {
     200:  {
       slidesPerView: 1,
       spaceBetween: 5,
@@ -48,8 +36,7 @@ export class HomeComponent implements OnInit {
       spaceBetween: 20,
     },
   };
-
-  getSwiperConfig(index: number): SwiperOptions  {
+  public static getSwiperConfig(index: any): SwiperOptions  {
     return {
       slidesPerView: 2.5,
       spaceBetween: 20,
@@ -68,17 +55,15 @@ export class HomeComponent implements OnInit {
       breakpoints: this.breakpoints,
     };
   }
-
-
-  //generate 40 creators
-  creators = Array.from({length: 15}, (_, k) => k + 1).map(i => ({
-    id: i,
-    name: 'Createur ' + i,
-    role: 'Actor - Harry Potter' + i,
-    price: 'From $ '+ i*100,
-  }));
-
-  howItWorksSwiperConfig : SwiperOptions = {
+  public static createCreators(total: number){
+    return  Array.from({length: total}, (_, k) => k + 1).map(i => ({
+      id: i,
+      name: 'Createur ' + i,
+      role: 'Actor - Harry Potter' + i,
+      price: 'From $ '+ i*100,
+    }));
+  }
+  public static howItWorksSwiperConfig : SwiperOptions = {
     slidesPerView: 1.1,
     spaceBetween: 20,
     mousewheel: {
@@ -102,7 +87,7 @@ export class HomeComponent implements OnInit {
       },
     },
   };
-  pressSwiperConfig : SwiperOptions = {
+  public static  pressSwiperConfig : SwiperOptions = {
     slidesPerView: 1.1,
     spaceBetween: 20,
     mousewheel: {
@@ -133,6 +118,4 @@ export class HomeComponent implements OnInit {
       },
     },
   };
-
-
 }
