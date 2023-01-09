@@ -271,6 +271,5 @@ window.onload = function() {
     })
 
 
-    showAndHide("#show-filter-mobile", "#hide-filter-mobile", ".search__filter-content-filters");
 
 }

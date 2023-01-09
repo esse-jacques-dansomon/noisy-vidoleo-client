@@ -14,45 +14,11 @@
             <i class="ri-arrow-right-s-line"></i>
           </div>
 
-          <ul class="sub-menu">
-            <li class="sub-menu__item">
-              <a href="">Action</a>
+          <ul class="sub-menu" *ngIf="$categories | async as categories">
+            <li class="sub-menu__item" *ngFor="let category of categories ">
+              <a href="">{{category.name}}</a>
             </li>
-            <li class="sub-menu__item">
-              <a href="">Adventure</a>
 
-            </li>
-            <li class="sub-menu__item">
-              <a href="">Comedy</a>
-
-            </li>
-            <li class="sub-menu__item">
-              <a href="">Crime</a>
-
-            </li>
-            <li class="sub-menu__item">
-              <a href="">Drama</a>
-
-            </li>
-            <li class="sub-menu__item">
-              <a href="">Fantasy</a>
-
-            </li>
-            <li class="sub-menu__item">
-              <a href="">Historical</a>
-
-            </li>
-            <li class="sub-menu__item">
-              <a href="">Horror</a>
-
-            </li>
-            <li class="sub-menu__item">
-              <a href="">Mystery</a>
-
-            </li>
-            <li class="sub-menu__item">
-              <a href="">Political</a>
-            </li>
           </ul>
         </li>
         <li class="nav__item"><a class="nav__link"  [routerLink]="'categories'">Eventionents</a></li>

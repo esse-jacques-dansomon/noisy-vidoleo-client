@@ -10,41 +10,29 @@
   </div>
   <div class="container ">
     <div class="celebrity">
-        <swiper class="celebrity-videos" [config]="config">
+      <div class="celebrity-videos ">
+        <swiper  class="height-100" [config]="config">
           <div class="celebrity-videos-container swiper-wrapper">
-            <div class="swiper-slide celebrity-videos-response">
-              <img class=" video-item" src="assets/img/1.jpg" alt="">
-              <i class="video-item-play ri-play-circle-line"></i>
-              <i class="video-item-volume ri-volume-down-line"></i>
-            </div>
-            <div class="swiper-slide celebrity-videos-response">
-              <img class=" video-item" src="assets/img/2.jpg" alt="">
-              <button>
-                <i class="video-item-play ri-play-circle-line"></i>
-              </button>
-              <button type="submit">
-                <i class="video-item-volume ri-volume-down-line"></i>
-              </button>
-            </div>
-            <div class="swiper-slide celebrity-videos-response">
-              <img class=" video-item" src="assets/img/3.jpg" alt="">
+            <div *ngFor="let number of [1, 2, 3, 4, 5, 6, 7]" class="swiper-slide celebrity-videos-response">
+              <img class="video-item" [src]="creator.video_presentation" alt="">
               <i class="video-item-play ri-play-circle-line"></i>
               <i class="video-item-volume ri-volume-down-line"></i>
             </div>
           </div>
         </swiper>
+      </div>
       <div class="celebrity-details-container">
         <div class="celebrity-details">
           <div class="celebrity__card  flex">
             <div class="celebrity__card-author">
               <div class="celebrity__card-author-name">
-                <h2>Pascal Le Grand Frère</h2>
+                <h2>{{creator.first_name}}  {{creator.last_name}}</h2>
               </div>
               <div class="celebrity__card-author-title">
-                <span>Personnalité TV</span>
+                <span>{{creator.titre}}</span>
               </div>
             </div>
-            <img class="celebrity__card-author-img"  src="assets/img/1.jpg" alt="">
+            <img class="celebrity__card-author-img"  [src]="creator.profile_image" alt="">
           </div>
           <div class="celebrity__context flex">
             <div class="flex">
@@ -65,20 +53,12 @@
             </div>
           </div>
           <div class="celebrity__content-author-context">
-            Coucou c'est Elodie Costa de The Voice 10 🎤  Je suis ici sur Vidoleo pour répondre à vos demandes de dédicaces dans la joie et toujours avec le sourire car oui Elodie aime sourire à la vie 😃
-            <br><br>
-            Je peux même vous chanter une petite chanson si vous le souhaitez ✨
-            <br><br>
-            J'ai à mon actif deux singles<br>
-            " Mélodie"  et "baisse pas les bras" dont le clip vient de sortir sur YouTube. Hésitez pas à le regarder
+            {{creator.description}}
           </div>
         </div>
         <div class="book__buttons flex">
-          <a [routerLink]="['/client/booking']" class="book__buttons-item-button">
-            Demander une vidéo 10.000 FCFA
-          </a>
-          <a [routerLink]="['/client/booking']" class="book__buttons-item-button">
-            Je suis une entreprise 100.000 FCFA
+          <a [routerLink]="['/client/booking/'+ occasionType.id]" *ngFor="let occasionType of creator.occasionsTypes" class="book__buttons-item-button">
+           {{occasionType.occasionType.name}}  {{occasionType.price}}  FCFA
           </a>
         </div>
         <div class="promotion-text">
@@ -145,57 +125,44 @@
           Voir tous les avis
         </div>
       </div>
-      <div class="celebrity-feedbacks-content">
-        <div class="celebrity-feedbacks-item flex">
+      <div class="celebrity-feedbacks-content" *ngIf="creatorDemands$ | async as creatorDemands">
+        <div *ngFor="let demand of creatorDemands.data" class="celebrity-feedbacks-item flex">
           <div class="celebrity-feedbacks-item-stars flex">
-            <i class="ri-star-fill"></i>
-            <i class="ri-star-fill"></i>
-            <i class="ri-star-fill"></i>
-            <i class="ri-star-fill"></i>
-            <i class="ri-star-half-line"></i>
-          </div>
-          <h4>Par Lino et D**** - 28 août 2022</h4>
-          <p>Vidéo parfaite, elle en a pleuré de joie merci elo!</p>
-        </div>
-        <div class="celebrity-feedbacks-item flex">
-          <div class="celebrity-feedbacks-item-stars flex">
-            <i class="ri-star-fill"></i>
-            <i class="ri-star-fill"></i>
-            <i class="ri-star-fill"></i>
-            <i class="ri-star-fill"></i>
+            {{demand.comment.stars}}
             <i class="ri-star-fill"></i>
           </div>
-          <h4>Par Lino et D**** - 28 août 2022</h4>
-          <p>Vidéo parfaite, elle en a pleuré de joie merci elo!</p>
+          <h4>Par {{demand.sender}} le {{demand.comment.created_at}}</h4>
+          <p>{{demand.comment.body}}</p>
         </div>
+
       </div>
-      <div class="celebrity-categories ">
-        <div class="celebrity-categories-title">
-          <h4>Catégories Associées</h4>
-        </div>
-        <div class="celebrity-categories-items flex">
-          <div class="celebrity-categories-item flex">
-            <i class="ri-search-line"></i>
-            <span>Chanteuse</span>
-          </div>
-          <div class="celebrity-categories-item flex">
-            <i class="ri-search-line"></i>
-            <span>En Vedette</span>
-          </div>
-          <div class="celebrity-categories-item flex">
-            <i class="ri-search-line"></i>
-            <span>TikTok</span>
-          </div>
-          <div class="celebrity-categories-item flex">
-            <i class="ri-search-line"></i>
-            <span>The Voice</span>
-          </div>
-        </div>
-      </div>
+<!--      <div class="celebrity-categories ">-->
+<!--        <div class="celebrity-categories-title">-->
+<!--          <h4>Catégories Associées</h4>-->
+<!--        </div>-->
+<!--        <div class="celebrity-categories-items flex">-->
+<!--          <div class="celebrity-categories-item flex">-->
+<!--            <i class="ri-search-line"></i>-->
+<!--            <span>Chanteuse</span>-->
+<!--          </div>-->
+<!--          <div class="celebrity-categories-item flex">-->
+<!--            <i class="ri-search-line"></i>-->
+<!--            <span>En Vedette</span>-->
+<!--          </div>-->
+<!--          <div class="celebrity-categories-item flex">-->
+<!--            <i class="ri-search-line"></i>-->
+<!--            <span>TikTok</span>-->
+<!--          </div>-->
+<!--          <div class="celebrity-categories-item flex">-->
+<!--            <i class="ri-search-line"></i>-->
+<!--            <span>The Voice</span>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
 
     <div class="celebrity-request-step">
-      <div class="celebrity-request-step-title">
+      <div class="celebrity-request-step-title" >
         <h4>Comment ça marche ?</h4>
       </div>
       <div class="celebrity-request-content">
@@ -245,7 +212,7 @@
             De la même categorie
           </div>
           <div class="authors__category-title-buttons flex">
-            <a class="authors__category-title-buttons-title" [routerLink]="['/categories']">
+            <a class="authors__category-title-buttons-title" [routerLink]="['/categories/'+creator.sub_category.category.slug]">
               Voir tous
             </a>
             <div class="authors__category-title-buttons-icons flex">
@@ -258,11 +225,17 @@
             </div>
           </div>
         </div>
-        <swiper [config]="otherAuthorCon">
-          <div class="authors_container swiper-wrapper">
-            <creator-card class="swiper-slide" *ngFor="let creator of creators" [creator]="creator"></creator-card>
-          </div>
-        </swiper>
+        <ng-container *ngIf="creatorsInSameCategory$ | async as creatorsInSameCategory">
+          <swiper [config]="otherAuthorCon">
+            <div class="authors_container swiper-wrapper">
+              <ng-container *ngFor="let creatorSame of creatorsInSameCategory.data">
+                <ng-container *ngIf="creator.id !== creatorSame.id " >
+                  <creator-card class="swiper-slide" [creator]="creatorSame"></creator-card>
+                </ng-container>
+              </ng-container>
+            </div>
+          </swiper>
+        </ng-container>
       </section>
 
       <!--    -->

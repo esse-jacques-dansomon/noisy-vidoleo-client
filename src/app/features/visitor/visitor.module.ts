@@ -15,6 +15,8 @@ import { MentionLegalesComponent } from './mention-legales/mention-legales.compo
 import { BecameCreatorComponent } from './became-creator/became-creator.component';
 import {SharedModule} from "../../shared/shared.module";
 import {NgxUsefulSwiperModule} from "ngx-useful-swiper";
+import {CoreModule} from "../../core/core.module";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import {NgxUsefulSwiperModule} from "ngx-useful-swiper";
         CommonModule,
         VisitorRoutingModule,
         SharedModule,
-        NgxUsefulSwiperModule
+        NgxUsefulSwiperModule,
+        CoreModule,
+        ReactiveFormsModule
     ]
 })
 export class VisitorModule { }

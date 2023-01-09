@@ -1,0 +1,5 @@
+@media (max-width: 567px) {
+    .client-request-status-list {
+        flex-direction: column;
+    }
+}

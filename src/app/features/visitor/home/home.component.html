@@ -17,88 +17,127 @@
 
   </section>
   <!--    FEATURED AUTHORS-->
-  <section class="container authors">
-    <div class="flex container authors__category" >
-      <div class="authors__category-title">
-        À la une
-      </div>
-      <div class="authors__category-title-buttons flex">
-        <a class="authors__category-title-buttons-title" [routerLink]="'categories'">
-          Voir tous
-        </a>
-        <div class="authors__category-title-buttons-icons flex">
-          <div class="button-prev">
-            <i class="pagination-icon ri-arrow-left-s-line"></i>
-          </div>
-          <div class="button-next">
-            <i class=" pagination-icon ri-arrow-right-s-line"></i>
-          </div>
+  <section class="container authors" *ngIf="$featuredCreators  | withLoading | async as creatorWithPagination">
+    <ng-template [ngIf]="creatorWithPagination.value">
+      <div class="flex container authors__category" >
+        <div class="authors__category-title">
+          À la une
         </div>
-      </div>
-    </div>
-
-    <swiper [config]="getSwiperConfig(0)">
-        <div class="authors_container swiper-wrapper">
-          <creator-card class="swiper-slide" *ngFor="let creator of creators" [creator]="creator"></creator-card>
-        </div>
-    </swiper>
-
-  </section>
-
-  <!--    Tendance AUTHORS-->
-  <section class="container authors">
-    <div class="flex container authors__category">
-      <div class="authors__category-title">
-        Tendance
-      </div>
-      <div class="authors__category-title-buttons flex">
-        <a class="authors__category-title-buttons-title" [routerLink]="'categories'">
-          Voir tous
-        </a>
-        <div class="authors__category-title-buttons-icons">
+        <div class="authors__category-title-buttons flex">
+          <a class="authors__category-title-buttons-title" [routerLink]="'categories/features'">
+            Voir tous
+          </a>
           <div class="authors__category-title-buttons-icons flex">
-            <div class="button-prev2">
+            <div class="button-prev0">
               <i class="pagination-icon ri-arrow-left-s-line"></i>
             </div>
-            <div class="button-next2">
+            <div class="button-next0">
               <i class=" pagination-icon ri-arrow-right-s-line"></i>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <swiper [config]="getSwiperConfig(2)">
-      <div class="authors_container swiper-wrapper">
-        <creator-card class="swiper-slide" *ngFor="let creator of creators" [creator]="creator"></creator-card>
+      <div >
+        <swiper [config]="getSwiperConfig(0)">
+          <div class="authors_container swiper-wrapper">
+            <creator-card class="swiper-slide" *ngFor="let creator of creatorWithPagination.value.data" [creator]="creator"></creator-card>
+          </div>
+        </swiper>
+      </div  >
+    </ng-template>
+
+    <ng-template [ngIf]="creatorWithPagination.loading">
+      <app-loader-spinner [isLoading]="true"></app-loader-spinner>
+    </ng-template>
+
+    <ng-template [ngIf]="creatorWithPagination.error">
+      <div class="error">
+        {{creatorWithPagination.error}}
       </div>
-    </swiper>
+    </ng-template>
+
   </section>
 
-  <!--   Music AUTHORS-->
-  <section class="container authors">
-    <div class="flex container authors__category">
-      <div class="authors__category-title">
-        Acteurs
-      </div>
-      <div class="authors__category-title-buttons flex">
-        <a class="authors__category-title-buttons-title" [routerLink]="'categories'">
-          Voir tous
-        </a>
-        <div class="authors__category-title-buttons-icons flex">
-          <div class="button-prev3">
-            <i class="pagination-icon ri-arrow-left-s-line"></i>
-          </div>
-          <div class="button-next3">
-            <i class=" pagination-icon ri-arrow-right-s-line"></i>
+  <!--    Acteurs AUTHORS-->
+  <section class="container authors"  *ngIf="$acteurs  | withLoading | async as creatorWithPagination">
+
+    <ng-template [ngIf]="creatorWithPagination.value">
+      <div class="flex container authors__category">
+        <div class="authors__category-title">
+          Acteurs
+        </div>
+        <div class="authors__category-title-buttons flex">
+          <a class="authors__category-title-buttons-title" [routerLink]="'categories/acteurs'">
+            Voir tous
+          </a>
+          <div class="authors__category-title-buttons-icons">
+            <div class="authors__category-title-buttons-icons flex">
+              <div class="button-prev2">
+                <i class="pagination-icon ri-arrow-left-s-line"></i>
+              </div>
+              <div class="button-next2">
+                <i class=" pagination-icon ri-arrow-right-s-line"></i>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <swiper [config]="getSwiperConfig(3)">
-      <div class="authors_container swiper-wrapper">
-        <creator-card class="swiper-slide" *ngFor="let creator of creators" [creator]="creator"></creator-card>
+      <swiper [config]="getSwiperConfig(2)">
+        <div class="authors_container swiper-wrapper">
+          <creator-card class="swiper-slide" *ngFor="let creator of creatorWithPagination.value.data" [creator]="creator"></creator-card>
+        </div>
+      </swiper>
+    </ng-template>
+
+    <ng-template [ngIf]="creatorWithPagination.loading">
+      <app-loader-spinner [isLoading]="true"></app-loader-spinner>
+    </ng-template>
+
+    <ng-template [ngIf]="creatorWithPagination.error">
+      <div class="error">
+        {{creatorWithPagination.error}}
       </div>
-    </swiper>
+    </ng-template>
+
+  </section>
+
+  <!--   Artistes AUTHORS-->
+  <section class="container authors"  *ngIf="$artistes  | withLoading | async as creatorWithPagination">
+    <ng-template [ngIf]="creatorWithPagination.value">
+      <div class="flex container authors__category">
+        <div class="authors__category-title">
+          Artistes
+        </div>
+        <div class="authors__category-title-buttons flex">
+          <a class="authors__category-title-buttons-title" [routerLink]="'categories/artistes'">
+            Voir tous
+          </a>
+          <div class="authors__category-title-buttons-icons flex">
+            <div class="button-prev3">
+              <i class="pagination-icon ri-arrow-left-s-line"></i>
+            </div>
+            <div class="button-next3">
+              <i class=" pagination-icon ri-arrow-right-s-line"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <swiper [config]="getSwiperConfig(3)">
+        <div class="authors_container swiper-wrapper">
+          <creator-card class="swiper-slide" *ngFor="let creator of creatorWithPagination.value.data" [creator]="creator"></creator-card>
+        </div>
+      </swiper>
+    </ng-template>
+    <ng-template [ngIf]="creatorWithPagination.loading">
+      <app-loader-spinner [isLoading]="true"></app-loader-spinner>
+    </ng-template>
+
+    <ng-template [ngIf]="creatorWithPagination.error">
+      <div class="error">
+        {{creatorWithPagination.error}}
+      </div>
+    </ng-template>
+
   </section>
 
   <!--    HOW IT WORKS-->
@@ -153,118 +192,86 @@
         </div>
       </div>
     </swiper>
-
   </section>
 
   <!-- INFLUENCES-->
-  <section class="container authors">
-    <div class="flex container authors__category">
-      <div class="authors__category-title">
-        influencers
-      </div>
-      <div class="authors__category-title-buttons flex">
-        <a class="authors__category-title-buttons-title" [routerLink]="'categories'">
-          Voir tous
-        </a>
-        <div class="authors__category-title-buttons-icons flex">
-          <div class="button-prev4">
-            <i class="pagination-icon ri-arrow-left-s-line"></i>
-          </div>
-          <div class="button-next4">
-            <i class=" pagination-icon ri-arrow-right-s-line"></i>
-          </div>
+  <section class="container authors"  *ngIf="$creators  | withLoading | async as creatorWithPagination">
+    <ng-template [ngIf]="creatorWithPagination.value">
+      <div class="flex container authors__category">
+        <div class="authors__category-title">
+          influenceurs
         </div>
-      </div>
-    </div>
-    <swiper [config]="getSwiperConfig(4)">
-      <div class="authors_container swiper-wrapper">
-        <creator-card class="swiper-slide" *ngFor="let creator of creators" [creator]="creator"></creator-card>
-      </div>
-    </swiper>
-  </section>
-
-  <!--    FEATURED AUTHORS-->
-  <section class="container authors">
-    <div class="flex container authors__category" >
-      <div class="authors__category-title">
-        À la une
-      </div>
-      <div class="authors__category-title-buttons flex">
-        <a class="authors__category-title-buttons-title" [routerLink]="'categories'">
-          Voir tous
-        </a>
-        <div class="authors__category-title-buttons-icons flex">
-          <div class="button-prev5">
-            <i class="pagination-icon ri-arrow-left-s-line"></i>
-          </div>
-          <div class="button-next5">
-            <i class=" pagination-icon ri-arrow-right-s-line"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    <swiper [config]="getSwiperConfig(5)">
-      <div class="authors_container swiper-wrapper">
-        <creator-card class="swiper-slide" *ngFor="let creator of creators" [creator]="creator"></creator-card>
-      </div>
-    </swiper>
-  </section>
-
-  <!--    Tendance AUTHORS-->
-  <section class="container authors">
-    <div class="flex container authors__category">
-      <div class="authors__category-title">
-        Tendance
-      </div>
-      <div class="authors__category-title-buttons flex">
-        <a class="authors__category-title-buttons-title" [routerLink]="'categories'">
-          Voir tous
-        </a>
-        <div class="authors__category-title-buttons-icons">
+        <div class="authors__category-title-buttons flex">
+          <a class="authors__category-title-buttons-title" [routerLink]="'categories/influenceurs'">
+            Voir tous
+          </a>
           <div class="authors__category-title-buttons-icons flex">
-            <div class="button-prev6">
+            <div class="button-prev4">
               <i class="pagination-icon ri-arrow-left-s-line"></i>
             </div>
-            <div class="button-next6">
+            <div class="button-next4">
               <i class=" pagination-icon ri-arrow-right-s-line"></i>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <swiper [config]="getSwiperConfig(6)">
-      <div class="authors_container swiper-wrapper">
-        <creator-card class="swiper-slide" *ngFor="let creator of creators" [creator]="creator"></creator-card>
+      <swiper [config]="getSwiperConfig(4)">
+        <div class="authors_container swiper-wrapper">
+          <creator-card class="swiper-slide" *ngFor="let creator of creatorWithPagination.value.data" [creator]="creator"></creator-card>
+        </div>
+      </swiper>
+    </ng-template>
+
+    <ng-template [ngIf]="creatorWithPagination.loading">
+      <app-loader-spinner [isLoading]="true"></app-loader-spinner>
+    </ng-template>
+
+    <ng-template [ngIf]="creatorWithPagination.error">
+      <div class="error">
+        {{creatorWithPagination.error}}
       </div>
-    </swiper>
+    </ng-template>
   </section>
 
-  <!--   Music AUTHORS-->
-  <section class="container authors">
-    <div class="flex container authors__category">
-      <div class="authors__category-title">
-        Acteurs
-      </div>
-      <div class="authors__category-title-buttons flex">
-        <a class="authors__category-title-buttons-title" [routerLink]="'categories'">
-          Voir tous
-        </a>
-        <div class="authors__category-title-buttons-icons flex">
-          <div class="button-prev7">
-            <i class="pagination-icon ri-arrow-left-s-line"></i>
-          </div>
-          <div class="button-next7">
-            <i class=" pagination-icon ri-arrow-right-s-line"></i>
+  <!--   SPORTIFS AUTHORS-->
+  <section class="container authors"  *ngIf="$sportifs  | withLoading | async as creatorWithPagination">
+    <ng-template [ngIf]="creatorWithPagination.value">
+      <div class="flex container authors__category" >
+        <div class="authors__category-title">
+          À la une
+        </div>
+        <div class="authors__category-title-buttons flex">
+          <a class="authors__category-title-buttons-title" [routerLink]="'categories'">
+            Voir tous
+          </a>
+          <div class="authors__category-title-buttons-icons flex">
+            <div class="button-prev5">
+              <i class="pagination-icon ri-arrow-left-s-line"></i>
+            </div>
+            <div class="button-next5">
+              <i class=" pagination-icon ri-arrow-right-s-line"></i>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <swiper [config]="getSwiperConfig(7)">
-      <div class="authors_container swiper-wrapper">
-        <creator-card class="swiper-slide" *ngFor="let creator of creators" [creator]="creator"></creator-card>
+      <swiper [config]="getSwiperConfig(5)">
+        <div class="authors_container swiper-wrapper">
+          <creator-card class="swiper-slide" *ngFor="let creator of creatorWithPagination.value.data" [creator]="creator"></creator-card>
+        </div>
+      </swiper>
+    </ng-template>
+    <ng-template [ngIf]="creatorWithPagination.loading">
+      <app-loader-spinner [isLoading]="true"></app-loader-spinner>
+    </ng-template>
+
+    <ng-template [ngIf]="creatorWithPagination.error">
+      <div class="error">
+        {{creatorWithPagination.error}}
       </div>
-    </swiper>
+    </ng-template>
+
   </section>
+
 
   <!-- /*=================== C'EST QUOI ===========================*/-->
   <section class="container presentation">

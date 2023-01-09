@@ -1,16 +1,18 @@
-export interface LoginResponse{
+import {User} from "../../data/models/user";
 
-   etat ?: boolean;
-   canAddProduct?: boolean;
-   isExclusive?: boolean;
-   plan ?:string;
-   profil_image?: string;
-   boutique_name?: string;
-   vendeur_id?: number;
-   boutique_id?: number;
-   adresse ?:string;
-   access_token :string;
-   token_type ?:string;
-   expires_in :number;
+export interface LoginResponse{
+  status: string;
+  access_token: string;
+  refresh_token: string;
+  expires_in: number;
+  user: User;
+
+}
+
+export interface LoginResponsePayload {
+  id: number;
+  roles: string[];
+  first_name: string;
+  last_name: string;
 
 }

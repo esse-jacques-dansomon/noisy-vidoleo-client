@@ -4,10 +4,10 @@
     <div class="search__header container  justify-space-between flex">
       <div class="search__header-text">
         <h3>Resultats pour</h3>
-        <p> ''Search for your favorite movies''</p>
+        <p>Search for your favorite movies</p>
       </div>
       <div class="search__header-buttons  flex">
-        <button id="show-filter-mobile" class="show__filter-button">
+        <button  (click)="hideAndShow()" id="show-filter-mobile" class="show__filter-button">
           Afficher les filtres
         </button>
         <button class="hide__filter-button">
@@ -22,91 +22,24 @@
 
       <!--   START  FILTER  CONTENT FILTERS-->
       <div class="search__filter-content-filters hide">
-        <i id="hide-filter-mobile" class="ri-close-line search__filter-content-filters-close-button"></i>
+        <i (click)="hideAndShowMobile()" id="hide-filter-mobile" class="ri-close-line search__filter-content-filters-close-button"></i>
 
         <div class="search__filter-content-filters-container ">
 
           <div class="search__filter-content-filters-title">
             <h3>Filtres</h3>
           </div>
-          <form action="">
+          <form action="" [formGroup]="filterForm">
             <!--     START FILTER ITEM : TRI-->
             <div class="search__filter-content-filters-item">
               <div class="search__filter-content-filters-item-title">
                 Trier par
               </div>
               <div class="filter-item">
-                <div class="search__radio-item">
-                  <input type="radio"  name="drone" value="huey" checked>
-                  <label >Recommandé</label>
+                <div class="search__radio-item" *ngFor="let trieElement of trieData">
+                  <input type="radio"  [id]="trieElement.value"  formControlName="triType" [value]="trieElement.value" >
+                  <label  [for]="trieElement.value">{{trieElement.name}}</label>
                 </div>
-
-                <div class="search__radio-item">
-                  <input type="radio"  name="drone" value="huey">
-                  <label >Prix : décroissant</label>
-                </div>
-
-                <div class="search__radio-item">
-                  <input type="radio"  name="drone" value="huey">
-                  <label >Prix : croissant</label>
-                </div>
-
-                <div class="search__radio-item">
-                  <input type="radio" name="drone" value="huey">
-                  <label >Nombre d'avis</label>
-                </div>
-
-                <div class="search__radio-item">
-                  <input type="radio"  name="drone" value="huey">
-                  <label >Les plus récemts</label>
-                </div>
-
-                <div class="search__radio-item">
-                  <input type="radio"  name="drone" value="huey">
-                  <label >Alphabétiques</label>
-                </div>
-              </div>
-              <div class="filter__divider"></div>
-            </div>
-            <!--     END FILTER ITEM-->
-
-            <!--     START FILTER ITEM : 24H-->
-            <div class="search__filter-content-filters-item">
-              <div class="search__filter-content-filters-item-title">
-                Envoi dans les 24h
-              </div>
-              <div class="filter-item">
-                <div class="search__checkbox-item">
-                  <input type="checkbox" id="24h" name="drone" value="huey" >
-                  <label >
-                        <span class="checkbox__icon">
-                           <i class="ri-flashlight-fill"></i>
-                        </span>
-                    <span class="checkbox__text">Envoi dans les 24h</span>
-                  </label>
-                </div>
-
-              </div>
-              <div class="filter__divider"></div>
-            </div>
-            <!--     END FILTER ITEM-->
-
-            <!--     START FILTER ITEM : 24H-->
-            <div class="search__filter-content-filters-item">
-              <div class="search__filter-content-filters-item-title">
-                Pour les entreprises
-              </div>
-              <div class="filter-item">
-                <div class="search__checkbox-item">
-                  <input type="checkbox" id="bussiness" name="drone" value="huey" >
-                  <label >
-                        <span class="checkbox__icon">
-                           <i class="ri-briefcase-line"></i>
-                        </span>
-                    <span class="checkbox__text">Envoi dans les 24h</span>
-                  </label>
-                </div>
-
               </div>
               <div class="filter__divider"></div>
             </div>
@@ -119,8 +52,8 @@
               </div>
               <div class="filter-item">
                 <div class="search__checkbox-item">
-                  <input placeholder="0$" class="filter-item-price" type="number" name="min" id="min">
-                  <input placeholder="+1000$" class="filter-item-price" type="number"  name="min" id="max">
+                  <input placeholder="0 FCFA" class="filter-item-price" type="number"  formControlName="minPrice" id="min">
+                  <input placeholder="+1000$" class="filter-item-price" type="number"   formControlName="maxPrice" id="max">
                 </div>
               </div>
               <div class="filter__divider"></div>
@@ -133,64 +66,9 @@
                 Note Moyenne
               </div>
               <div class="filter-item">
-                <div class="search__radio-item">
-                  <input type="radio" id="n4" name="note" value="4" checked>
-                  <label >4 étoiles et plus</label>
-                </div>
-
-                <div class="search__radio-item">
-                  <input type="radio" id="n3" name="note" value="3">
-                  <label >3 étoiles et plus</label>
-                </div>
-
-                <div class="search__radio-item">
-                  <input type="radio" id="n2" name="note" value="2">
-                  <label >2 étoiles et plus</label>
-                </div>
-
-                <div class="search__radio-item">
-                  <input type="radio" id="n1" name="note" value="1">
-                  <label >1 étoiles et plus</label>
-                </div>
-              </div>
-              <div class="filter__divider"></div>
-            </div>
-            <!--     END FILTER ITEM-->
-
-            <!--     START FILTER ITEM : nombre d'avis-->
-            <div class="search__filter-content-filters-item">
-              <div class="search__filter-content-filters-item-title">
-                Nom d'avis
-              </div>
-              <div class="filter-item">
-                <div class="search__radio-item">
-                  <input type="radio"  name="avis" value="1000" checked>
-                  <label >1000+</label>
-                </div>
-
-                <div class="search__radio-item">
-                  <input type="radio"  name="avis" value="500">
-                  <label >500+</label>
-                </div>
-
-                <div class="search__radio-item">
-                  <input type="radio"  name="avis" value="200">
-                  <label >200+</label>
-                </div>
-
-                <div class="search__radio-item">
-                  <input type="radio" name="avis" value="100">
-                  <label >100+</label>
-                </div>
-
-                <div class="search__radio-item">
-                  <input type="radio"  name="avis" value="50">
-                  <label >50+</label>
-                </div>
-
-                <div class="search__radio-item">
-                  <input type="radio"  name="avis" value="25">
-                  <label >25+</label>
+                <div class="search__radio-item" *ngFor="let star of trieData2">
+                  <input  formControlName="stars" type="radio" [id]="star.value"  [value]="star.value" >
+                  <label [for]="star.value" >{{star.name}}</label>
                 </div>
               </div>
               <div class="filter__divider"></div>
@@ -204,34 +82,9 @@
                 Réactivité
               </div>
               <div class="filter-item">
-                <div class="search__radio-item">
-                  <input type="radio"  name="reactivite" value="1000" checked>
-                  <label > < 1 jour </label>
-                </div>
-
-                <div class="search__radio-item">
-                  <input type="radio"  name="reactivite" value="500">
-                  <label > < 2 jour </label>
-                </div>
-
-                <div class="search__radio-item">
-                  <input type="radio"  name="reactivite" value="200">
-                  <label >< 3 jour </label>
-                </div>
-
-                <div class="search__radio-item">
-                  <input type="radio" name="reactivite" value="100">
-                  <label >< 4 jour </label>
-                </div>
-
-                <div class="search__radio-item">
-                  <input type="radio"  name="reactivite" value="50">
-                  <label >< 5 jour </label>
-                </div>
-
-                <div class="search__radio-item">
-                  <input type="radio"  name="reactivite" value="25">
-                  <label >< 6 jour </label>
+                <div class="search__radio-item" *ngFor="let timeReponse of trieData1">
+                  <input type="radio" formControlName="responseTime"  [id]="timeReponse.value"[value]="timeReponse.value" >
+                  <label  [for]="timeReponse.value"> {{timeReponse.name}} </label>
                 </div>
               </div>
               <div class="filter__divider"></div>
@@ -252,210 +105,37 @@
       <!--  START FILTER  CONTENT RESULTS-->
       <div class="search__filter-content-results">
         <!-- ALL IN CATEGORY-->
-        <section class="all-category">
-          <div class="all-category-title">
-            <h3>All in category</h3>
-          </div>
-          <div class="all-category-celebrities grid">
-            <div class="author__card ">
-              <a href="author.html">
-                <div class="author__card-img">
-                  <img src="assets/img/2.jpg" alt="">
+        <ng-container *ngIf="creators$ | withLoading | async as creatorsWithPagination">
+          <ng-template [ngIf]="creatorsWithPagination.value">
+            <ng-template [ngIf]="creatorsWithPagination.value.data.length > 0 ">
+              <section class="all-category">
+                <div class="all-category-title">
+                  <h3>Recherche</h3>
                 </div>
-                <div class="author__card-info">
-                  <div class="author__card-info-title">
-                    <h3>John Doe</h3>
-                  </div>
-                  <div class="author__card-info-subtitle">
-                    <span>Actor - Harry Potter</span>
-                  </div>
-                  <div class="author__card-info-price">
-                    <span>From $ 100</span>
-                  </div>
+                <div class="all-category-celebrities grid">
+                  <creator-card *ngFor="let creator of creatorsWithPagination.value.data" [creator]="creator"></creator-card>
                 </div>
-              </a>
-            </div>
-            <div class="author__card ">
-              <a href="author.html">
-                <div class="author__card-img">
-                  <img src="assets/img/1.jpg" alt="">
-                </div>
-                <div class="author__card-info">
-                  <div class="author__card-info-title">
-                    <h3>James Bond</h3>
+              </section>
+              <section class="pagination grid ">
+                <div class="pagination__container">
+                  <div  class="pagination__item   flex cursor-pointer" >
+                    <i class="pagination__link ri-arrow-left-circle-line" (click)="pageChange(creatorsWithPagination.value.meta.current_page-1)"  [ngClass]=" creatorsWithPagination.value.meta.current_page == 1 ? 'pagination-disable-color' : ''"></i>
                   </div>
-                  <div class="author__card-info-subtitle">
-                    <span>Actor - Harry Potter</span>
+                  <div class="pagination-page">
+                    <span>Page {{creatorsWithPagination.value.meta.current_page}} sur {{creatorsWithPagination.value.meta.last_page}}</span>
                   </div>
-                  <div class="author__card-info-price">
-                    <span>From $ 100</span>
+                  <div class="pagination__item  flex cursor-pointer ">
+                    <i class=" pagination__link  ri-arrow-right-circle-line"  (click)="pageChange(creatorsWithPagination.value.meta.current_page+1)"  [ngClass]=" creatorsWithPagination.value.meta.current_page == creatorsWithPagination.value.meta.last_page ? 'pagination-disable-color' : ''"></i>
                   </div>
                 </div>
-              </a>
-            </div>
-            <div class="author__card ">
-              <a href="author.html">
-                <div class="author__card-img">
-                  <img src="assets/img/3.jpg" alt="">
-                </div>
-                <div class="author__card-info">
-                  <div class="author__card-info-title">
-                    <h3>John Doe</h3>
-                  </div>
-                  <div class="author__card-info-subtitle">
-                    <span>Actor - Harry Potter</span>
-                  </div>
-                  <div class="author__card-info-price">
-                    <span>From $ 100</span>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="author__card ">
-              <a href="author.html">
-                <div class="author__card-img">
-                  <img src="assets/img/4.png" alt="">
-                </div>
-                <div class="author__card-info">
-                  <div class="author__card-info-title">
-                    <h3>John Doe</h3>
-                  </div>
-                  <div class="author__card-info-subtitle">
-                    <span>Actor - Harry Potter</span>
-                  </div>
-                  <div class="author__card-info-price">
-                    <span>From $ 100</span>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="author__card ">
-              <a href="author.html">
-                <div class="author__card-img">
-                  <img src="assets/img/5.jpg" alt="">
-                </div>
-                <div class="author__card-info">
-                  <div class="author__card-info-title">
-                    <h3>John Doe</h3>
-                  </div>
-                  <div class="author__card-info-subtitle">
-                    <span>Actor - Harry Potter</span>
-                  </div>
-                  <div class="author__card-info-price">
-                    <span>From $ 100</span>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="author__card ">
-              <a href="author.html">
-                <div class="author__card-img">
-                  <img src="assets/img/2.jpg" alt="">
-                </div>
-                <div class="author__card-info">
-                  <div class="author__card-info-title">
-                    <h3>John Doe</h3>
-                  </div>
-                  <div class="author__card-info-subtitle">
-                    <span>Actor - Harry Potter</span>
-                  </div>
-                  <div class="author__card-info-price">
-                    <span>From $ 100</span>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="author__card ">
-              <a href="author.html">
-                <div class="author__card-img">
-                  <img src="assets/img/1.jpg" alt="">
-                </div>
-                <div class="author__card-info">
-                  <div class="author__card-info-title">
-                    <h3>James Bond</h3>
-                  </div>
-                  <div class="author__card-info-subtitle">
-                    <span>Actor - Harry Potter</span>
-                  </div>
-                  <div class="author__card-info-price">
-                    <span>From $ 100</span>
-                  </div>
-                </div>
-              </a>
+              </section>
+            </ng-template>
+            <ng-template [ngIf]="creatorsWithPagination.value.data.length == 0 ">
 
-            </div>
-            <div class="author__card ">
-              <a href="author.html">
-                <div class="author__card-img">
-                  <img src="assets/img/3.jpg" alt="">
-                </div>
-                <div class="author__card-info">
-                  <div class="author__card-info-title">
-                    <h3>John Doe</h3>
-                  </div>
-                  <div class="author__card-info-subtitle">
-                    <span>Actor - Harry Potter</span>
-                  </div>
-                  <div class="author__card-info-price">
-                    <span>From $ 100</span>
-                  </div>
-                </div>
-              </a>
+            </ng-template>
+          </ng-template>
+        </ng-container>
 
-            </div>
-            <div class="author__card ">
-              <a href="author.html">
-                <div class="author__card-img">
-                  <img src="assets/img/4.png" alt="">
-                </div>
-                <div class="author__card-info">
-                  <div class="author__card-info-title">
-                    <h3>John Doe</h3>
-                  </div>
-                  <div class="author__card-info-subtitle">
-                    <span>Actor - Harry Potter</span>
-                  </div>
-                  <div class="author__card-info-price">
-                    <span>From $ 100</span>
-                  </div>
-                </div>
-              </a>
-
-            </div>
-            <div class="author__card ">
-              <a href="author.html">
-                <div class="author__card-img">
-                  <img src="assets/img/5.jpg" alt="">
-                </div>
-                <div class="author__card-info">
-                  <div class="author__card-info-title">
-                    <h3>John Doe</h3>
-                  </div>
-                  <div class="author__card-info-subtitle">
-                    <span>Actor - Harry Potter</span>
-                  </div>
-                  <div class="author__card-info-price">
-                    <span>From $ 100</span>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </section>
-
-        <section class="pagination grid ">
-          <div class="pagination__container">
-            <div class="pagination__item flex">
-              <i class="pagination__link ri-arrow-left-circle-line "></i>
-            </div>
-            <div class="pagination-page">
-              <span>Page 1 sur 11</span>
-            </div>
-            <div class="pagination__item flex">
-              <i class=" pagination__link ri-arrow-right-circle-line"></i>
-            </div>
-          </div>
-        </section>
       </div>
       <!--  END FILTER  CONTENT RESULTS-->
     </div>

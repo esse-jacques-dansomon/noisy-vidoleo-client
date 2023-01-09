@@ -17,17 +17,17 @@
       <div class="form_divider-item-text">Ou</div>
       <div class="form_divider-item">.</div>
     </div>
-    <form action="" class="form__login">
+    <form  [formGroup]="loginForm"  class="form__login">
       <div class="form__group">
-        <label >Email</label>
-        <input type="email" placeholder="Email">
+        <label  for="email" >Email</label>
+        <input formControlName="email" id="email" type="email" placeholder="Email">
       </div>
       <div class="form__group">
-        <label >Mot de Passe</label>
-        <input type="password" placeholder="Mot de Passe">
+        <label for="password" >Mot de Passe</label>
+        <input formControlName="password" id="password" type="password" placeholder="Mot de Passe">
       </div>
       <div class="form__group">
-        <button type="submit" class="form__button">Se connecter</button>
+        <button type="submit" [disabled]="loginForm.invalid" (click)="login()"  class="form__button">Se connecter</button>
       </div>
       <p>En t'inscrivant, tu acceptes les Conditions d'utilisation de Noisy, y compris les Conditions supplémentaires et la Politique de confidentialité.</p>
       <div class="">

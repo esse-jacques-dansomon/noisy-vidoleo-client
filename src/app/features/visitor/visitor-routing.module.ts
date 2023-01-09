@@ -11,6 +11,7 @@ import {MentionLegalesComponent} from "./mention-legales/mention-legales.compone
 import {RgpdComponent} from "./rgpd/rgpd.component";
 import {TestimoneyComponent} from "./testimoney/testimoney.component";
 import {BecameCreatorComponent} from "./became-creator/became-creator.component";
+import {CreatorDetailsResolver} from "./visitor-resolvers.resolver";
 
 const routes: Routes = [
   {
@@ -22,15 +23,18 @@ const routes: Routes = [
     component: SearchComponent
   },
   {
-    path: 'createurs',
-    component: CreatorDetailsComponent
+    path: 'createurs/:slug',
+    component: CreatorDetailsComponent,
+    resolve: {
+      creator: CreatorDetailsResolver
+    }
   },
   {
     path: 'devenir-createur',
     component: BecameCreatorComponent
   },
   {
-    path: 'categories',
+    path: 'categories/:slug',
     component: CategoryComponent
   },{
     path: 'a-apropos',

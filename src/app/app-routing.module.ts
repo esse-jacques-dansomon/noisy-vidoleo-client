@@ -4,7 +4,9 @@ import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./features/visitor/visitor.module').then(m => m.VisitorModule)
+    //not lazy loading
+    loadChildren: () => import('./features/visitor/visitor.module').then(m => m.VisitorModule),
+    //lazy loading
   },
   {
     path: 'client',
@@ -21,7 +23,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true, scrollPositionRestoration: 'enabled' , preloadingStrategy: PreloadAllModules})],
+  imports: [RouterModule.forRoot(routes, { useHash: true, scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {SwiperOptions} from "swiper";
+import {CreatorService} from "../../../data/services/creator.service";
+import {Observable} from "rxjs";
+import {PaginationType} from "../../../core/data/PaginationType";
+import {Creator} from "../../../data/models/creator";
 
 @Component({
   selector: 'app-home',
@@ -8,11 +12,20 @@ import {SwiperOptions} from "swiper";
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(
+    private creatorService: CreatorService,
+  ) { }
 
   ngOnInit(): void {
   }
 
+  //get creators vedettes
+  $featuredCreators : Observable<PaginationType<Creator>> =  this.creatorService.getOneByTypeAndUri$("featured") ;
+  $acteurs : Observable<PaginationType<Creator>> =  this.creatorService.getOneByTypeAndUri$("category/tv") ;
+  $artistes : Observable<PaginationType<Creator>> =  this.creatorService.getOneByTypeAndUri$("category/artistes") ;
+  $creators : Observable<PaginationType<Creator>> =  this.creatorService.getOneByTypeAndUri$("category/createurs") ;
+  $sportifs : Observable<PaginationType<Creator>> =  this.creatorService.getOneByTypeAndUri$("category/sportifs") ;
   //swiper config
   breakpoints = {
     200:  {
@@ -48,7 +61,6 @@ export class HomeComponent implements OnInit {
       spaceBetween: 20,
     },
   };
-
   getSwiperConfig(index: number): SwiperOptions  {
     return {
       slidesPerView: 2.5,
@@ -68,16 +80,14 @@ export class HomeComponent implements OnInit {
       breakpoints: this.breakpoints,
     };
   }
-
-
   //generate 40 creators
   creators = Array.from({length: 15}, (_, k) => k + 1).map(i => ({
     id: i,
     name: 'Createur ' + i,
     role: 'Actor - Harry Potter' + i,
     price: 'From $ '+ i*100,
+    image: "https://via.placeholder.com/468x468?text=Visit+Blogging.com+Now%20C/O%20https://placeholder.com/#How_To_Set_Custom_Text"+i,
   }));
-
   howItWorksSwiperConfig : SwiperOptions = {
     slidesPerView: 1.1,
     spaceBetween: 20,
@@ -133,6 +143,5 @@ export class HomeComponent implements OnInit {
       },
     },
   };
-
 
 }

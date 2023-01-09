@@ -188,6 +188,7 @@ button{ cursor: pointer}
 input{outline: none}
 
 
+
 /*=================VARIABLE DARK THEME================*/
 body.dark-theme{
   --first-color-second: hsl(var(--hue-color), 54%, 12%);
@@ -198,6 +199,8 @@ body.dark-theme{
   --scroll-bar-color: hsl(var(--hue-color), 12%, 48%);
   --scroll-thumb-color: hsl(var(--hue-color), 12%, 36%);
 }
+
+
 /*==================DAKAR/LIGHT========================*/
 .nav__dark{
   position: absolute;
@@ -210,6 +213,16 @@ body.dark-theme{
 .change-theme,
 .change-theme-name{
   color: var(--text-color);
+}
+/* Styles de transition pour le défilement doux */
+html, body {
+  transition: scroll-position 500ms ease-in-out;
+}
+
+/* Styles pour masquer le défilement pendant la transition */
+.transition-scroll {
+  overflow: hidden;
+  height: 100%;
 }
 
 .change-theme{
@@ -355,7 +368,7 @@ header{
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: .5rem;
+  padding: 8px;
   background-color: var(--first-color-second);
   color: white;
   border-radius: 50px;
@@ -364,6 +377,8 @@ header{
 }
 .user__account--text{
   cursor: pointer;
+  margin-left: 5px;
+  font-size: 12px;
 }
 .user__account--text > p > a{
   color: white;
@@ -381,13 +396,13 @@ header{
 
 }
 @media (max-width: 400px) {
-  .user__account >  .user__account--text{
+  .user__account--text{
     display: none;
   }
   .user__account{
     max-width: 50px;
     margin: 0 auto;
-    padding: .6rem 0;
+    padding: 5px 0;
   }
 
 }
@@ -426,6 +441,10 @@ header{
   padding-left: .3rem;
 }
 
+.no-scroll{
+  overflow: hidden;
+  z-index: 0;
+}
 
 
 
@@ -620,8 +639,13 @@ header{
   column-gap: .2rem;
 
 }
+
+.height-100{
+  height: 100%;
+}
 .celebrity-videos{
   margin-top: 1rem;
+  height: 100%;
 }
 .celebrity__card, .celebrity__context{
   justify-content: space-between;
@@ -959,6 +983,7 @@ footer{
   margin: 2rem auto;
 }
 
+
 .pagination__container{
   display: flex;
   column-gap: 2rem;
@@ -1147,7 +1172,7 @@ textarea{
 }
 
 .book__occasions{
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)););
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
 .book__occasion-item{
@@ -1260,9 +1285,13 @@ input[type="checkbox"]{
     right: 0;
     position: absolute;
     width: 100%;
-    height: 100%;
     background-color: white;
+    height: 100%;
   }
+  .overlay {
+    position: fixed;
+    overflow-y: scroll;
+    inset: 0; }
   .search__filter-content-filters-container{
     height: 92%;
     background: white;
@@ -1391,6 +1420,10 @@ input[type="checkbox"]{
 
 .search__radio-item{
   margin-bottom: .5rem;
+  margin-right: .5rem;
+}
+
+.search__radio-item > input{
   margin-right: .5rem;
 }
 /*=======END CLIENT ACCOUNT*/
@@ -1567,6 +1600,13 @@ input[type="checkbox"]{
 main{
   margin-top: 5rem;
 }
+
+.pagination-disable-color{
+  color: #cccccc !important;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 
 /*=========START NAVBAR==========*/
 

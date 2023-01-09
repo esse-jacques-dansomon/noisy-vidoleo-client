@@ -15,240 +15,70 @@
     </div>
   </section>
 
-  <!-- NEWS IN CATEGORY-->
-  <section class="container category">
-    <div class="flex container authors__category">
-      <div class="authors__category-title">
-        Acteurs
-      </div>
-      <div class="authors__category-title-buttons flex">
-        <a class="authors__category-title-buttons-title" [routerLink]="'/categories'">
-          Voir tous
-        </a>
-        <div class="authors__category-title-buttons-icons flex">
-          <div class="button-prev">
-            <i class="pagination-icon ri-arrow-left-s-line"></i>
-          </div>
-          <div class="button-next">
-            <i class=" pagination-icon ri-arrow-right-s-line"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    <swiper [config]="config">
-      <div class="authors_container swiper-wrapper">
-        <creator-card class="swiper-slide" *ngFor="let creator of creators" [creator]="creator"></creator-card>
-      </div>
-    </swiper>
+<!--  &lt;!&ndash; NEWS IN CATEGORY&ndash;&gt;-->
+<!--  <section class="container category">-->
+<!--    <div class="flex container authors__category">-->
+<!--      <div class="authors__category-title">-->
+<!--        Acteurs-->
+<!--      </div>-->
+<!--      <div class="authors__category-title-buttons flex">-->
+<!--        <a class="authors__category-title-buttons-title" [routerLink]="'/categories'">-->
+<!--          Voir tous-->
+<!--        </a>-->
+<!--        <div class="authors__category-title-buttons-icons flex">-->
+<!--          <div class="button-prev">-->
+<!--            <i class="pagination-icon ri-arrow-left-s-line"></i>-->
+<!--          </div>-->
+<!--          <div class="button-next">-->
+<!--            <i class=" pagination-icon ri-arrow-right-s-line"></i>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--&lt;!&ndash;    <swiper [config]="config">&ndash;&gt;-->
+<!--&lt;!&ndash;      <div class="authors_container swiper-wrapper">&ndash;&gt;-->
+<!--&lt;!&ndash;        <creator-card class="swiper-slide" *ngFor="let creator of creators" [creator]="creator"></creator-card>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </swiper>&ndash;&gt;-->
 
-  </section>
+<!--  </section>-->
 
   <!-- ALL IN CATEGORY-->
-  <section class="all-category container">
-    <div class="all-category-title">
-      <h3>All in category</h3>
-    </div>
-    <div class="all-category-celebrities grid">
-      <div class="author__card ">
-        <a href="author.html">
-          <div class="author__card-img">
-            <img src="assets/img/2.jpg" alt="">
+  <ng-container *ngIf="categoryCreators$ | withLoading | async as creatorsWithPagination">
+    <ng-template [ngIf]="creatorsWithPagination.value">
+      <section class="all-category container" >
+        <div class="all-category-title">
+          <h3>All in category</h3>
+        </div>
+        <div class="all-category-celebrities grid">
+          <creator-card *ngFor="let creator of creatorsWithPagination.value.data" [creator]="creator"></creator-card>
+        </div>
+      </section>
+      <section class="pagination grid ">
+        <div class="pagination__container">
+          <div  class="pagination__item   flex cursor-pointer" >
+            <i class="pagination__link ri-arrow-left-circle-line" (click)="pageChange(creatorsWithPagination.value.meta.current_page-1)"  [ngClass]=" creatorsWithPagination.value.meta.current_page == 1 ? 'pagination-disable-color' : ''"></i>
           </div>
-          <div class="author__card-info">
-            <div class="author__card-info-title">
-              <h3>John Doe</h3>
-            </div>
-            <div class="author__card-info-subtitle">
-              <span>Actor - Harry Potter</span>
-            </div>
-            <div class="author__card-info-price">
-              <span>From $ 100</span>
-            </div>
+          <div class="pagination-page">
+            <span>Page {{creatorsWithPagination.value.meta.current_page}} sur {{creatorsWithPagination.value.meta.last_page}}</span>
           </div>
-        </a>
-      </div>
-      <div class="author__card ">
-        <a href="author.html">
-          <div class="author__card-img">
-            <img src="assets/img/1.jpg" alt="">
+          <div class="pagination__item  flex cursor-pointer ">
+            <i class=" pagination__link  ri-arrow-right-circle-line"  (click)="pageChange(creatorsWithPagination.value.meta.current_page+1)"  [ngClass]=" creatorsWithPagination.value.meta.current_page == creatorsWithPagination.value.meta.last_page ? 'pagination-disable-color' : ''"></i>
           </div>
-          <div class="author__card-info">
-            <div class="author__card-info-title">
-              <h3>James Bond</h3>
-            </div>
-            <div class="author__card-info-subtitle">
-              <span>Actor - Harry Potter</span>
-            </div>
-            <div class="author__card-info-price">
-              <span>From $ 100</span>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="author__card ">
-        <a href="author.html">
-          <div class="author__card-img">
-            <img src="assets/img/3.jpg" alt="">
-          </div>
-          <div class="author__card-info">
-            <div class="author__card-info-title">
-              <h3>John Doe</h3>
-            </div>
-            <div class="author__card-info-subtitle">
-              <span>Actor - Harry Potter</span>
-            </div>
-            <div class="author__card-info-price">
-              <span>From $ 100</span>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="author__card ">
-        <a href="author.html">
-          <div class="author__card-img">
-            <img src="assets/img/4.png" alt="">
-          </div>
-          <div class="author__card-info">
-            <div class="author__card-info-title">
-              <h3>John Doe</h3>
-            </div>
-            <div class="author__card-info-subtitle">
-              <span>Actor - Harry Potter</span>
-            </div>
-            <div class="author__card-info-price">
-              <span>From $ 100</span>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="author__card ">
-        <a href="author.html">
-          <div class="author__card-img">
-            <img src="assets/img/5.jpg" alt="">
-          </div>
-          <div class="author__card-info">
-            <div class="author__card-info-title">
-              <h3>John Doe</h3>
-            </div>
-            <div class="author__card-info-subtitle">
-              <span>Actor - Harry Potter</span>
-            </div>
-            <div class="author__card-info-price">
-              <span>From $ 100</span>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="author__card ">
-        <a href="author.html">
-          <div class="author__card-img">
-            <img src="assets/img/2.jpg" alt="">
-          </div>
-          <div class="author__card-info">
-            <div class="author__card-info-title">
-              <h3>John Doe</h3>
-            </div>
-            <div class="author__card-info-subtitle">
-              <span>Actor - Harry Potter</span>
-            </div>
-            <div class="author__card-info-price">
-              <span>From $ 100</span>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="author__card ">
-        <a href="author.html">
-          <div class="author__card-img">
-            <img src="assets/img/1.jpg" alt="">
-          </div>
-          <div class="author__card-info">
-            <div class="author__card-info-title">
-              <h3>James Bond</h3>
-            </div>
-            <div class="author__card-info-subtitle">
-              <span>Actor - Harry Potter</span>
-            </div>
-            <div class="author__card-info-price">
-              <span>From $ 100</span>
-            </div>
-          </div>
-        </a>
+        </div>
+      </section>
 
-      </div>
-      <div class="author__card ">
-        <a href="author.html">
-          <div class="author__card-img">
-            <img src="assets/img/3.jpg" alt="">
-          </div>
-          <div class="author__card-info">
-            <div class="author__card-info-title">
-              <h3>John Doe</h3>
-            </div>
-            <div class="author__card-info-subtitle">
-              <span>Actor - Harry Potter</span>
-            </div>
-            <div class="author__card-info-price">
-              <span>From $ 100</span>
-            </div>
-          </div>
-        </a>
+    </ng-template>
+    <ng-template [ngIf]="creatorsWithPagination.loading">
+      <app-loader-spinner [isLoading]="true"></app-loader-spinner>
+    </ng-template>
 
+    <ng-template [ngIf]="creatorsWithPagination.error">
+      <div class="error">
+        {{creatorsWithPagination.error}}
       </div>
-      <div class="author__card ">
-        <a href="author.html">
-          <div class="author__card-img">
-            <img src="assets/img/4.png" alt="">
-          </div>
-          <div class="author__card-info">
-            <div class="author__card-info-title">
-              <h3>John Doe</h3>
-            </div>
-            <div class="author__card-info-subtitle">
-              <span>Actor - Harry Potter</span>
-            </div>
-            <div class="author__card-info-price">
-              <span>From $ 100</span>
-            </div>
-          </div>
-        </a>
-
-      </div>
-      <div class="author__card ">
-        <a href="author.html">
-          <div class="author__card-img">
-            <img src="assets/img/5.jpg" alt="">
-          </div>
-          <div class="author__card-info">
-            <div class="author__card-info-title">
-              <h3>John Doe</h3>
-            </div>
-            <div class="author__card-info-subtitle">
-              <span>Actor - Harry Potter</span>
-            </div>
-            <div class="author__card-info-price">
-              <span>From $ 100</span>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="pagination grid ">
-    <div class="pagination__container">
-      <div class="pagination__item flex">
-        <i class="pagination__link ri-arrow-left-circle-line "></i>
-      </div>
-      <div class="pagination-page">
-        <span>Page 1 sur 11</span>
-      </div>
-      <div class="pagination__item flex">
-        <i class=" pagination__link ri-arrow-right-circle-line"></i>
-      </div>
-    </div>
-  </section>
-
+    </ng-template>
+  </ng-container>
 
 
 </main>

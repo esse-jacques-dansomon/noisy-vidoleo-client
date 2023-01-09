@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {SwiperOptions} from "swiper";
+import {CreatorService} from "../../../data/services/creator.service";
+import {ActivatedRoute} from "@angular/router";
+import {PaginationType} from "../../../core/data/PaginationType";
+import {Creator} from "../../../data/models/creator";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-category',
@@ -58,17 +63,27 @@ export class CategoryComponent implements OnInit {
       },
     };
 
-  creators = Array.from({length: 15}, (_, k) => k + 1).map(i => ({
-    id: i,
-    name: 'Createur ' + i,
-    role: 'Actor - Harry Potter' + i,
-    price: 'From $ '+ i*100,
-  }));
+
+  slug: string = this._route.snapshot.paramMap.get('slug') || '';
+  categoryCreators$ : Observable<PaginationType<Creator>>;
 
 
-  constructor() { }
+  constructor(
+    private _creatorService: CreatorService,
+    private _route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    //evry time the slug change we get the new data
+    this._route.params.subscribe(params => {
+      this.slug = params['slug'];
+      this.categoryCreators$ = this._creatorService.getOneByTypeAndUri$('category/'+this.slug);
+    });
   }
-
+  pageChange(number: number) {
+   this.categoryCreators$  = this._creatorService.getOneByTypeAndUriAndPage$('category/'+this.slug, number);
+   window.scrollTo(0, 0);
+  }
 }
+
+

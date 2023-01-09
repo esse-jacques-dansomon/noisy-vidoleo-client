@@ -1,0 +1,58 @@
+/* Styles de transition pour le défilement doux */
+html, body {
+  transition: scroll-position 500ms ease-in-out;
+}
+
+/* Styles pour masquer le défilement pendant la transition */
+.transition-scroll {
+  overflow: hidden;
+  height: 100%;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+}
+/*.dropdown:hover*/
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+  min-width: 130px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  padding: 20px 15px;
+  right: -30px;
+  top: 30px;
+  /*margin: auto;*/
+}
+
+.show-dropdown {
+  display: flex;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 7px 0px;
+  text-decoration: none;
+  display: block;
+  font-size:12px;
+}
+
+@media (min-width: 351px) {
+  .dropdown-content {
+    right: 1px;
+  }
+}
+
+.user__account{
+  position: relative;
+}

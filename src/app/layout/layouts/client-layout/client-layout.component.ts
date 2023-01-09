@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CategoryService} from "../../../data/services/category.service";
 
 @Component({
   selector: 'app-client-layout',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientLayoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _categoryService : CategoryService
+  ) { }
 
   ngOnInit(): void {
   }
+
+  $categories = this._categoryService.getAll$();
 
 }
