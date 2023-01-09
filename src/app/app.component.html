@@ -40,17 +40,22 @@
 
     </div>
     <div  class="user__account flex cursor-pointer avatar " (click)="showDropdown()">
-      <div class="dropdown cursor-pointer"  >
-        <div class="flex">
+      <div class="dropdown cursor-pointer"   >
+        <div class="flex" >
           <i class="ri-user-line "></i>
           <p class="user__account--text">
-            <a>Se connecter</a>
+            <a *ngIf="!isLogged()">Se connecter</a>
+            <a *ngIf="isLogged()">Mon Compte</a>
           </p>
         </div>
-        <div class="dropdown-content hide">
+        <div class="dropdown-content hide" *ngIf="isLogged()">
           <a [routerLink]="['auth/se-connecter']">Profile</a>
           <a [routerLink]="['client/demandes']">Mes Demandes</a>
           <a [routerLink]="['auth/se-connecter']">Logout</a>
+        </div>
+        <div class="dropdown-content hide" *ngIf="!isLogged()">
+          <a [routerLink]="['auth/se-connecter']">Se Connecter </a>
+          <a [routerLink]="['auth/s-inscrire']">Créer un compte</a>
         </div>
       </div>
     </div>

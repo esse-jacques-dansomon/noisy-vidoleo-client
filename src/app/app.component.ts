@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRouteSnapshot, RouterStateSnapshot, NavigationEnd, NavigationStart} from '@angular/router';
 import {CategoryService} from "./data/services/category.service";
+import {AuthService} from "./core/services/AuthService";
 
 @Component({
   selector: 'app-root',
@@ -9,17 +10,19 @@ import {CategoryService} from "./data/services/category.service";
 })
 export class AppComponent implements OnInit{
   title = 'angular-start-prototype';
-   keyWorld: any;
+  keyWorld: any;
 
+  connectedUser$ = this._authService.connectedUser$;
 
-
-
-  constructor(private router: Router,
-              private _categoryService : CategoryService
-
-  ) {
-
+  isLogged() : boolean{
+   return this._authService.isLoggedIn();
   }
+
+  constructor(
+    private router: Router,
+    private _categoryService : CategoryService,
+    private _authService: AuthService,
+  ) {}
 
   categories$ = this._categoryService.getOneByTypeAndUri$('');
   showDropdown() {

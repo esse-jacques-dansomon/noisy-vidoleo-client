@@ -5,6 +5,8 @@ import { ClientRoutingModule } from './client-routing.module';
 import { BookingComponent } from './booking/booking.component';
 import { PaymentComponent } from './payment/payment.component';
 import { DemandVideoComponent } from './demand-video/demand-video.component';
+import {CoreModule} from "../../core/core.module";
+import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { DemandVideoComponent } from './demand-video/demand-video.component';
   ],
   imports: [
     CommonModule,
-    ClientRoutingModule
+    ClientRoutingModule,
+    CoreModule,
+    SharedModule
   ]
 })
 export class ClientModule { }

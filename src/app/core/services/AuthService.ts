@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import * as moment from 'moment';
-import {BehaviorSubject, finalize, Observable, tap} from 'rxjs';
+import {BehaviorSubject, finalize, Observable, of, tap} from 'rxjs';
 import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
 import {LoginResponse, LoginResponsePayload} from "../data/LoginResponse";
@@ -15,7 +15,7 @@ export class AuthService {
 
   private _connectedVendor: BehaviorSubject<LoginResponsePayload> = new BehaviorSubject(null);
 
-  connectedUser$ : Observable<LoginResponsePayload> = this.verifyInfos();
+  connectedUser$ : Observable<LoginResponsePayload> = of(this.getUserConnectedInfo());
 
   verifyInfos() : Observable<LoginResponsePayload> {
     return  this.http.get<LoginResponsePayload>(`${this.apiUrl}/jwt/me`);
@@ -29,8 +29,7 @@ export class AuthService {
       tap(
         next => {
           this.setSession(next);
-          this.decodeToken(next.access_token);
-          this._connectedVendor.next(this.decodeToken(next.access_token) as LoginResponsePayload);
+          this._connectedVendor.next(this.getUserConnectedInfo());
         }
       )
     );
@@ -55,13 +54,9 @@ export class AuthService {
     );
   }
 
-
   private setSession(authResult: LoginResponse) {
     // Set the time that the access token will expire moment
-    const expiresAt = moment().add(authResult.expires_in, 'second');
     localStorage.setItem('access_token', authResult.access_token);
-    localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
-
   }
 
   clearLocalStorage() {
@@ -81,15 +76,26 @@ export class AuthService {
       ).subscribe();
   }
 
-  public isLoggedIn() {
-    return  moment().isBefore(this.getExpiration());
+  public isLoggedIn() : boolean {
+    // Check if current date is greater than expiration for access token and verify if token is present
+    let isExpired = this.getExpiration();
+    if (isExpired) {
+      return moment().isBefore(isExpired);
+    }
+    return false;
   }
 
-  getExpiration() {
+  getExpiration() : moment.Moment {
     const token = localStorage.getItem('access_token');
-    const decoded = this.decodeToken(token);
-    const expiresAt = decoded.exp;
-    return moment(expiresAt);
+    if(!token) {
+      return null;
+    }
+    //get payload from token
+    const payload = token.split('.')[1];
+    //decode payload to json
+    const infos = JSON.parse(atob(payload));
+    const expiresAt = infos.exp;
+    return moment.unix(expiresAt);
   }
 
   forgetPassword(email: string) {
@@ -98,29 +104,23 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/auth/password/forget`, {email});
   }
   sendotp(otp: string) {
-
     let email = localStorage.getItem('email_reset');
     return this.http.post(`${this.apiUrl}/auth/password/otp/verif`, {email, otp});
   }
 
-
-  updateVendeur(vendeur: any){
-    let url = `${this.apiUrl}` + '/vendeur';
-    return this.http.post(url, vendeur);
-
-  }
   updatePassword(vendeur: any){
     let url = `${this.apiUrl}` + '/auth/password/update';
     return this.http.post(url, vendeur);
   }
 
-
-  private decodeToken(token: string) {
-    if (token) {
-      const base64Url = token.split('.')[1];
-      const base64 = base64Url.replace('-', '+').replace('_', '/');
-      return JSON.parse(window.atob(base64));
-    }
-    return null;
+  public  getUserConnectedInfo() : LoginResponsePayload {
+    const token = localStorage.getItem('access_token');
+    //get payload from token
+    const payload = token.split('.')[1];
+    //decode payload to json
+    const infos = JSON.parse(atob(payload));
+    return infos as LoginResponsePayload;
   }
+
+
 }

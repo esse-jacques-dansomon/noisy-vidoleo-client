@@ -5,20 +5,23 @@ import { CommonModule } from '@angular/common';
 import {ContactVendorComponent} from "./components/contact-vendor.component";
 import {CreatorCard} from "../layout/common/creator-card";
 import {RouterLinkWithHref} from "@angular/router";
+import {DemandClientCard} from "../layout/common/demand-client-card";
 
 
 @NgModule({
-   declarations: [
-      SniperLoaderComponent,
-      AlertMessageComponent,
-      ContactVendorComponent,
-     CreatorCard
+  declarations: [
+    SniperLoaderComponent,
+    AlertMessageComponent,
+    ContactVendorComponent,
+    CreatorCard,
+    DemandClientCard
 
-   ],
+  ],
   exports: [
     SniperLoaderComponent,
     AlertMessageComponent,
-    CreatorCard
+    CreatorCard,
+    DemandClientCard
   ],
   imports: [
     CommonModule,

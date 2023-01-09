@@ -1,234 +1,38 @@
 <main >
-  <section class="container">
-    <div class="form__card">
-      <h4 class="form__card-title">Tes demandes de video</h4>
-      <div class="client-request-status-list mt-1 flex">
-        <button class="client-request-status-list-item client-request-status-list-item-active ">
-          Tous
-        </button>
-        <button class="client-request-status-list-item">
-          Réalisés
-        </button>
-        <button class="client-request-status-list-item">
-          En cours
-        </button>
-        <button class="client-request-status-list-item">
-          Déclinés
-        </button>
-      </div>
-    </div>
-
-    <div class="client-request-content container grid mt-1">
-      <div class="client-request-item flex-c-s card">
-        <div class="author flex">
-          <img width="50px" src="assets/img/1.jpg" alt="">
-          <div class="author-info flex-c-s">
-            <h3 class="client-request-item__content__author__name">NoisyDeo</h3>
-            <p class="client-request-item__content__author__titre">Acteurs dans les in</p>
+  <ng-container *ngIf="demands$ | withLoading | async as demandsWithPagination">
+    <ng-template [ngIf]="demandsWithPagination.value" >
+      <section class="container">
+        <div class="form__card">
+          <h4 class="form__card-title">Tes demandes de video</h4>
+          <div class="client-request-status-list mt-1 flex">
+            <button (click)="filter(statusElement.value)" *ngFor="let statusElement of status " [ngClass]="selectedValue==statusElement.value? 'client-request-status-list-item-active ':'' " class="client-request-status-list-item ">
+              {{statusElement.viewValue}}
+            </button>
           </div>
         </div>
-        <div class="client-request-item__info">
-          <div class="client-request-item__info__content">
-            <h4 class="client-request-item__info__content__title">En Cours</h4>
-            <p class="client-request-item__info__content__description">Lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Adipisci, quae.</p>
-          </div>
-          <div class="client-request-item__info__status">
-            <p class="client-request-item__info__status__text">En cours</p>
-          </div>
-          <a href="resquest-details.html" class="client-request-item-button flex">
-            <i class="ri-arrow-right-s-line"></i>
-            Details
-          </a>
 
+        <div class="client-request-content container grid mt-1">
+          <demand-client-card *ngFor="let demand of demandsWithPagination.value.data" [demand]="demand"></demand-client-card>
         </div>
 
-
-      </div>
-      <div class="client-request-item flex-c-s card">
-        <div class="author flex">
-          <img width="50px" src="assets/img/1.jpg" alt="">
-          <div class="author-info flex-c-s">
-            <h3 class="client-request-item__content__author__name">NoisyDeo</h3>
-            <p class="client-request-item__content__author__titre">Acteurs dans les in</p>
+        <section class="pagination grid ">
+          <div class="pagination__container">
+            <div  class="pagination__item   flex cursor-pointer" >
+              <i class="pagination__link ri-arrow-left-circle-line" (click)="pageChange(demandsWithPagination.value.meta.current_page-1)"  [ngClass]=" demandsWithPagination.value.meta.current_page == 1 ? 'pagination-disable-color' : ''"></i>
+            </div>
+            <div class="pagination-page">
+              <span>Page {{demandsWithPagination.value.meta.current_page}} sur {{demandsWithPagination.value.meta.last_page}}</span>
+            </div>
+            <div class="pagination__item  flex cursor-pointer ">
+              <i class=" pagination__link  ri-arrow-right-circle-line"  (click)="pageChange(demandsWithPagination.value.meta.current_page+1)"  [ngClass]=" demandsWithPagination.value.meta.current_page == demandsWithPagination.value.meta.last_page ? 'pagination-disable-color' : ''"></i>
+            </div>
           </div>
-        </div>
-        <div class="client-request-item__info">
-          <div class="client-request-item__info__content">
-            <h4 class="client-request-item__info__content__title">En Cours</h4>
-            <p class="client-request-item__info__content__description">Lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Adipisci, quae.</p>
-          </div>
-          <div class="client-request-item__info__status">
-            <p class="client-request-item__info__status__text">En cours</p>
-          </div>
-          <button class="client-request-item-button flex">
-            <i class="ri-arrow-right-s-line"></i>
-            Details
-          </button>
+        </section>
 
-        </div>
-
-
-      </div>
-      <div class="client-request-item flex-c-s card">
-        <div class="author flex">
-          <img width="50px" src="assets/img/1.jpg" alt="">
-          <div class="author-info flex-c-s">
-            <h3 class="client-request-item__content__author__name">NoisyDeo</h3>
-            <p class="client-request-item__content__author__titre">Acteurs dans les in</p>
-          </div>
-        </div>
-        <div class="client-request-item__info">
-          <div class="client-request-item__info__content">
-            <h4 class="client-request-item__info__content__title">En Cours</h4>
-            <p class="client-request-item__info__content__description">Lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Adipisci, quae.</p>
-          </div>
-          <div class="client-request-item__info__status">
-            <p class="client-request-item__info__status__text">En cours</p>
-          </div>
-          <button class="client-request-item-button flex">
-            <i class="ri-arrow-right-s-line"></i>
-            Details
-          </button>
-
-        </div>
-
-
-      </div>
-      <div class="client-request-item flex-c-s card">
-        <div class="author flex">
-          <img width="50px" src="assets/img/1.jpg" alt="">
-          <div class="author-info flex-c-s">
-            <h3 class="client-request-item__content__author__name">NoisyDeo</h3>
-            <p class="client-request-item__content__author__titre">Acteurs dans les in</p>
-          </div>
-        </div>
-        <div class="client-request-item__info">
-          <div class="client-request-item__info__content">
-            <h4 class="client-request-item__info__content__title">En Cours</h4>
-            <p class="client-request-item__info__content__description">Lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Adipisci, quae.</p>
-          </div>
-          <div class="client-request-item__info__status">
-            <p class="client-request-item__info__status__text">En cours</p>
-          </div>
-          <button class="client-request-item-button flex">
-            <i class="ri-arrow-right-s-line"></i>
-            Details
-          </button>
-
-        </div>
-
-
-      </div>
-      <div class="client-request-item flex-c-s card">
-        <div class="author flex">
-          <img width="50px" src="assets/img/1.jpg" alt="">
-          <div class="author-info flex-c-s">
-            <h3 class="client-request-item__content__author__name">NoisyDeo</h3>
-            <p class="client-request-item__content__author__titre">Acteurs dans les in</p>
-          </div>
-        </div>
-        <div class="client-request-item__info">
-          <div class="client-request-item__info__content">
-            <h4 class="client-request-item__info__content__title">En Cours</h4>
-            <p class="client-request-item__info__content__description">Lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Adipisci, quae.</p>
-          </div>
-          <div class="client-request-item__info__status">
-            <p class="client-request-item__info__status__text">En cours</p>
-          </div>
-          <button class="client-request-item-button flex">
-            <i class="ri-arrow-right-s-line"></i>
-            Details
-          </button>
-
-        </div>
-
-
-      </div>
-      <div class="client-request-item flex-c-s card">
-        <div class="author flex">
-          <img width="50px" src="assets/img/1.jpg" alt="">
-          <div class="author-info flex-c-s">
-            <h3 class="client-request-item__content__author__name">NoisyDeo</h3>
-            <p class="client-request-item__content__author__titre">Acteurs dans les in</p>
-          </div>
-        </div>
-        <div class="client-request-item__info">
-          <div class="client-request-item__info__content">
-            <h4 class="client-request-item__info__content__title">En Cours</h4>
-            <p class="client-request-item__info__content__description">Lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Adipisci, quae.</p>
-          </div>
-          <div class="client-request-item__info__status">
-            <p class="client-request-item__info__status__text">En cours</p>
-          </div>
-          <button class="client-request-item-button flex">
-            <i class="ri-arrow-right-s-line"></i>
-            Details
-          </button>
-
-        </div>
-
-
-      </div>
-      <div class="client-request-item flex-c-s card">
-        <div class="author flex">
-          <img width="50px" src="assets/img/1.jpg" alt="">
-          <div class="author-info flex-c-s">
-            <h3 class="client-request-item__content__author__name">NoisyDeo</h3>
-            <p class="client-request-item__content__author__titre">Acteurs dans les in</p>
-          </div>
-        </div>
-        <div class="client-request-item__info">
-          <div class="client-request-item__info__content">
-            <h4 class="client-request-item__info__content__title">En Cours</h4>
-            <p class="client-request-item__info__content__description">Lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Adipisci, quae.</p>
-          </div>
-          <div class="client-request-item__info__status">
-            <p class="client-request-item__info__status__text">En cours</p>
-          </div>
-          <button class="client-request-item-button flex">
-            <i class="ri-arrow-right-s-line"></i>
-            Details
-          </button>
-
-        </div>
-
-
-      </div>
-      <div class="client-request-item flex-c-s card">
-        <div class="author flex">
-          <img width="50px" src="assets/img/1.jpg" alt="">
-          <div class="author-info flex-c-s">
-            <h3 class="client-request-item__content__author__name">NoisyDeo</h3>
-            <p class="client-request-item__content__author__titre">Acteurs dans les in</p>
-          </div>
-        </div>
-        <div class="client-request-item__info">
-          <div class="client-request-item__info__content">
-            <h4 class="client-request-item__info__content__title">En Cours</h4>
-            <p class="client-request-item__info__content__description">Lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Adipisci, quae.</p>
-          </div>
-          <div class="client-request-item__info__status">
-            <p class="client-request-item__info__status__text">En cours</p>
-          </div>
-          <button class="client-request-item-button flex">
-            <i class="ri-arrow-right-s-line"></i>
-            Details
-          </button>
-
-        </div>
-
-
-      </div>
-    </div>
-
-  </section>
+      </section>
+    </ng-template>
+    <ng-template [ngIf]="demandsWithPagination.error" ></ng-template>
+    <ng-template [ngIf]="demandsWithPagination.loading" ></ng-template>
+  </ng-container>
 
 </main>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import {ClientGuard} from "./core/guards/client.guard";
 
 const routes: Routes = [
   {
@@ -10,6 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'client',
+    canActivate: [ClientGuard],
     loadChildren: () => import('./features/client/client.module').then(m => m.ClientModule)
   },
   {

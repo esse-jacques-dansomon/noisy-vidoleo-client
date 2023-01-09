@@ -1505,11 +1505,12 @@ input[type="checkbox"]{
 
 }
 .client-request-content{
-  margin: 1rem 2rem;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  margin: 1rem auto;
+  grid-template-columns: repeat(auto-fill, minmax(228px, 1fr));
   grid-gap: 1rem;
   align-items: center;
   justify-content: center;
+
 
 }
 
@@ -1526,9 +1527,7 @@ input[type="checkbox"]{
 .client-request-item__content__author__titre{
   text-overflow:ellipsis;
   overflow: hidden;
-  white-space: nowrap;
   width: 100%;
-
 }
 
 .client-request-item__info{
