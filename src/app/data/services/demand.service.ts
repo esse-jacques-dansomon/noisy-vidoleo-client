@@ -6,6 +6,7 @@ import {API_CONSTANTES} from "../../core/constants/API_CONSTANTES";
 import {PaginationType} from "../../core/data/PaginationType";
 import {Observable} from "rxjs";
 import {Demande} from "../models/demande";
+import {AskDemand, PaymentUrl} from "../models/ask-demand";
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +18,8 @@ export class DemandService extends ResourceService<Demande> {
     super.apiUrl =API_CONSTANTES.URI_DEMANDES_VIDEOS;
   }
 
+  public askForDemand(demand: AskDemand): Observable<PaymentUrl> {
+   return this.http.post<PaymentUrl>(API_CONSTANTES.URI_DEMANDES_VIDEOS, demand);
+  }
 
 }

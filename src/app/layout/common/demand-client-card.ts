@@ -16,13 +16,13 @@ import {Demande} from "../../data/models/demande";
       </div>
       <div class="client-request-item__info">
         <div class="client-request-item__info__content">
-          <h4 class="client-request-item__info__content__title">{{demand.status}}</h4>
+          <h4 class="client-request-item__info__content__title">{{statusInFrench(demand.status)}}</h4>
           <p class="client-request-item__info__content__description">
             {{demand.receiver}}
           </p>
         </div>
         <div class="client-request-item__info__status">
-          <p class="client-request-item__info__status__text">{{demand.status}}</p>
+          <p class="client-request-item__info__status__text">{{ statusInFrench(demand.status)}}</p>
         </div>
         <a href="#" class="client-request-item-button flex">
           <i class="ri-arrow-right-s-line"></i>
@@ -36,10 +36,28 @@ import {Demande} from "../../data/models/demande";
   `,
   styles: [`
 
-   `]
+  `]
 })
 export class DemandClientCard {
   @Input()
   demand: Demande ;
 
+  statusInFrench(status : any)  {
+    switch (status) {
+      case 'waiting_for_payment':
+        return 'Non Payé';
+      case 'pending':
+        return 'En cours';
+      case 'completed':
+        return 'Terminé';
+      case 'canceled':
+        return 'Annulé';
+      case 'refunded':
+        return 'Remboursé';
+      case 'waiting_for_refunded':
+        return 'En attente de remboursement';
+      default:
+        return status;
+    }
+  }
 }

@@ -17,7 +17,7 @@
       <div class="form_divider-item-text">Ou</div>
       <div class="form_divider-item">.</div>
     </div>
-    <form  [formGroup]="loginForm"  class="form__login">
+    <form  [formGroup]="loginForm"  (ngSubmit)="loginForm.valid && login()" class="form__login">
       <div class="form__group">
         <label  for="email" >Email</label>
         <input formControlName="email" id="email" type="email" placeholder="Email">
@@ -27,7 +27,7 @@
         <input formControlName="password" id="password" type="password" placeholder="Mot de Passe">
       </div>
       <div class="form__group">
-        <button type="submit" [disabled]="loginForm.invalid" (click)="login()"  class="form__button">Se connecter</button>
+        <button type="submit" [ngClass]="loginForm.invalid ? 'button-disable-color':''" [disabled]="loginForm.invalid" *ngIf="!isLoading"  class="form__button">Se connecter</button>
       </div>
       <p>En t'inscrivant, tu acceptes les Conditions d'utilisation de Noisy, y compris les Conditions supplémentaires et la Politique de confidentialité.</p>
       <div class="">

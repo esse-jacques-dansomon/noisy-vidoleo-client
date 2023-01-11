@@ -1,29 +1,29 @@
-<header >
+<header class="">
   <nav class="navBar flex">
     <div id="nav__toggle">
       <i id="nav__toggle-icon" class="ri-menu-2-line"></i>
     </div>
     <h1 class="logo flex"><a [routerLink]="'/'">NoisyDeo</a></h1>
-    <div class="flex nav__list ">
+    <div class="flex nav__list">
       <ul class="menu_items flex-c-s">
-        <li class="nav__item has-submenu ">
+        <li class="nav__item has-submenu">
           <div class="flex nav_link_icon">
-            <a class="nav__link "  [routerLink]="'categories'">
+            <a class="nav__link cursor-pointer"  (click)="clickOnHasSubmenuIcon()">
               Categories
             </a>
-            <i class="ri-arrow-right-s-line"></i>
+            <i id="category-icon" (click)="clickOnHasSubmenuIcon()" class="ri-arrow-right-s-line cursor-pointer"></i>
           </div>
 
           <ul class="sub-menu" *ngIf="categories$ | async as categories">
-            <li class="sub-menu__item" *ngFor="let category of categories.data ">
-              <a [routerLink]="['/categories/'+category.slug]">{{category.name}}</a>
+            <li  (click)="goToCategory(category.slug)" class="sub-menu__item cursor-pointer" *ngFor="let category of categories.data">
+              <a >{{category.name}}</a>
             </li>
 
           </ul>
 
         </li>
         <li class="nav__item"><a class="nav__link" [routerLink]="'/recherche'">Pour les entreprise</a></li>
-        <li class="nav__item"><a class="nav__link" [routerLink]="'/recherche'">Comment ça marche</a></li>
+        <li class="nav__item"><a class="nav__link" [routerLink]="'/#recherche'">Comment ça marche</a></li>
       </ul>
 
       <div id="close-icon">
@@ -49,9 +49,9 @@
           </p>
         </div>
         <div class="dropdown-content hide" *ngIf="isLogged()">
-          <a [routerLink]="['auth/se-connecter']">Profile</a>
+          <a [routerLink]="['client/profil']">Profile</a>
           <a [routerLink]="['client/demandes']">Mes Demandes</a>
-          <a [routerLink]="['auth/se-connecter']">Logout</a>
+          <a (click)="logout()">Logout</a>
         </div>
         <div class="dropdown-content hide" *ngIf="!isLogged()">
           <a [routerLink]="['auth/se-connecter']">Se Connecter </a>

@@ -21,7 +21,7 @@ export class ClientGuard implements CanActivate {
          if (this.authService.isLoggedIn()) {
             return true;
          } else {
-            this.router.navigate(['auth/login'], {
+            this.router.navigate(['auth/se-connecter'], {
                queryParams: { returnUrl: state.url },
             });
             return false;

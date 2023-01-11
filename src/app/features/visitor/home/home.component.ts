@@ -80,14 +80,7 @@ export class HomeComponent implements OnInit {
       breakpoints: this.breakpoints,
     };
   }
-  //generate 40 creators
-  creators = Array.from({length: 15}, (_, k) => k + 1).map(i => ({
-    id: i,
-    name: 'Createur ' + i,
-    role: 'Actor - Harry Potter' + i,
-    price: 'From $ '+ i*100,
-    image: "https://via.placeholder.com/468x468?text=Visit+Blogging.com+Now%20C/O%20https://placeholder.com/#How_To_Set_Custom_Text"+i,
-  }));
+
   howItWorksSwiperConfig : SwiperOptions = {
     slidesPerView: 1.1,
     spaceBetween: 20,

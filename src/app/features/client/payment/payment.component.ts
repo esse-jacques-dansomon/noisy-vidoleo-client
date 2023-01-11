@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {DemandService} from "../../../data/services/demand.service";
 
 @Component({
   selector: 'app-payment',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaymentComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _demandService : DemandService
+  ) { }
 
   ngOnInit(): void {
   }

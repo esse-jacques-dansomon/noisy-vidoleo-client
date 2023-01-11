@@ -1,101 +1,97 @@
 <main class="container">
-  <section class="book__steps flex">
-    <div class="step">
-      1.Compte
-    </div>
-    <div class="step">
-      <b>2.Demande</b>
-    </div>
-    <div class="step">
-      3.Paiement
-    </div>
+  <form [formGroup]="askDemandForm"  (ngSubmit)="askDemandForm.valid && askForDemand()">
+    <section class="book_celebrity flex">
+      <img [src]="creator.profile_image" alt="">
+      <div class="flex-column">
+        <h3>{{creator.titre}}</h3>
+        <p>Type de Demande : {{selectedOccasion.occasionType.name}}</p>
+      </div>
+    </section>
+    <section class="book__card book__sender">
+      <h3 class="book__card-title">1. Qui a demandé ce Cameo ?</h3>
+      <div class="book__sender flex">
+        <div>
+          <input [formControlName]="'sender'" type="radio" id="huey"  value="moi"
+                 checked>
+          <label class="ml-0-5" for="huey">Moi même</label>
+        </div>
+        <div >
+          <input [formControlName]="'sender'" type="radio" id="dewey"  value="autre">
+          <label  class="ml-0-5" for="dewey">Une autre personne</label>
+        </div>
+      </div>
+      <ng-container *ngIf="isForSome">
+        <div  class="form__group">
+          <label for="">De la part de (prénom)</label>
+          <input [formControlName]="'receiver'" type="text" class="form-control" id="">
+        </div>
+      </ng-container>
 
-  </section>
-  <section class="book_celebrity flex">
-    <img src="assets/img/1.jpg" alt="">
-    <h4>Infos sur le paiement</h4>
-  </section>
-  <section class="book__card book__sender">
-    <h3 class="book__card-title">1. Qui a demandé ce Cameo ?</h3>
-    <div class="book__sender flex">
-      <div>
-        <input type="radio" id="huey" name="drone" value="huey"
-               checked>
-        <label for="huey">Moi même</label>
+      <div class="book__sender-gender flex">
+        <div class="book__sender-gender-item">
+          Il
+        </div>
+        <div class="book__sender-gender-item">
+          Elle
+        </div>
+        <div class="book__sender-gender-item">
+          Ils/elles/eux
+        </div>
       </div>
-      <div>
-        <input type="radio" id="dewey" name="drone" value="dewey">
-        <label for="dewey">Une autre personne</label>
+    </section>
+<!--    <section class="book__card ">-->
+<!--      <h3 class="book__card-title">2. Choisis l'occasion de ta vidéo</h3>-->
+<!--      <div class="book__occasions grid">-->
+<!--        <div class="book__occasion-item">-->
+<!--          <i class="ri-cake-2-line"></i>-->
+<!--          <p>Anniversaire</p>-->
+<!--        </div>-->
+<!--        <div class="book__occasion-item">-->
+<!--          <i class="ri-shape-line"></i>-->
+<!--          <p>Anniversaire</p>-->
+<!--        </div>-->
+<!--        <div class="book__occasion-item">-->
+<!--          <i class="ri-calendar-check-line"></i>-->
+<!--          <p>Anniversaire</p>-->
+<!--        </div>-->
+<!--        <div class="book__occasion-item">-->
+<!--          <i class="ri-hospital-line"></i>-->
+<!--          <p>Anniversaire</p>-->
+<!--        </div>-->
+<!--        <div class="book__occasion-item">-->
+<!--          <i class="ri-mail-fill"></i>-->
+<!--          <p>Anniversaire</p>-->
+<!--        </div>-->
+<!--        <div class="book__occasion-item">-->
+<!--          <i class="ri-medal-2-fill"></i>-->
+<!--          <p>Anniversaire</p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+    <section class="book__card ">
+      <h3 class="book__card-title">2. Quel message veux-tu faire passer ?</h3>
+      <div class="book__message">
+        <textarea [formControlName]="'message'"   rows="4"></textarea>
       </div>
-    </div>
-    <div class="form__group">
-      <label for="">De la part de (prénom)</label>
-      <input type="text" class="form-control" id="">
-    </div>
-    <div class="book__sender-gender flex">
-      <div class="book__sender-gender-item">
-        Il
-      </div>
-      <div class="book__sender-gender-item">
-        Elle
-      </div>
-      <div class="book__sender-gender-item">
-        Ils/elles/eux
-      </div>
-    </div>
-  </section>
-  <section class="book__card ">
-    <h3 class="book__card-title">2. Choisis l'occasion de ta vidéo</h3>
-    <div class="book__occasions grid">
-      <div class="book__occasion-item">
-        <i class="ri-cake-2-line"></i>
-        <p>Anniversaire</p>
-      </div>
-      <div class="book__occasion-item">
-        <i class="ri-shape-line"></i>
-        <p>Anniversaire</p>
-      </div>
-      <div class="book__occasion-item">
-        <i class="ri-calendar-check-line"></i>
-        <p>Anniversaire</p>
-      </div>
-      <div class="book__occasion-item">
-        <i class="ri-hospital-line"></i>
-        <p>Anniversaire</p>
-      </div>
-      <div class="book__occasion-item">
-        <i class="ri-mail-fill"></i>
-        <p>Anniversaire</p>
-      </div>
-      <div class="book__occasion-item">
-        <i class="ri-medal-2-fill"></i>
-        <p>Anniversaire</p>
-      </div>
-    </div>
-  </section>
-  <section class="book__card ">
-    <h3 class="book__card-title">3. Quel message veux-tu faire passer ?</h3>
-    <div class="book__message">
-      <textarea  name=""  rows="4"></textarea>
-    </div>
-    <button class="book__more-texte">
-      Ajouter 250 caractères pour 6.5$
-    </button>
-    <div class="book__options">
-      <div class="book__option-item">
-        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-        <label for="vehicle1"> Masquer cette vidéo du profil de Laurent Paganelli</label><br>
-      </div>
-      <div class="book__option-item">
-        <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-        <label for="vehicle2"> Je veux que Patrick Fabian dise mon nom</label><br>
-      </div>
+      <button class="book__more-texte">
+        Ajouter 250 caractères pour 6.5$
+      </button>
+      <div class="book__options">
+        <div class="book__option-item">
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+          <label for="vehicle1"> Masquer cette vidéo du profil de Laurent Paganelli</label><br>
+        </div>
+        <div class="book__option-item">
+          <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+          <label for="vehicle2"> Je veux que Patrick Fabian dise mon nom</label><br>
+        </div>
 
-    </div>
-    <div class="form__group book__continue_group">
-      <a [routerLink]="['/client/payment']" class="form__button book__continue">Continuer</a>
-    </div>
-  </section>
+      </div>
+      <div class="form__group book__continue_group">
+        <button [ngClass]="askDemandForm.invalid ? 'button-disable-color':''" type="submit" [disabled]="askDemandForm.invalid" class="form__button book__continue">Faire la demande</button>
+      </div>
+    </section>
+  </form>
 
 
 </main>

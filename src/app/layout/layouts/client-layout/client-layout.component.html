@@ -1,29 +1,29 @@
-<header >
+<header class="">
   <nav class="navBar flex">
     <div id="nav__toggle">
       <i id="nav__toggle-icon" class="ri-menu-2-line"></i>
     </div>
-    <h1 class="logo flex">NoisyDeo</h1>
-    <div class="flex nav__list ">
+    <h1 class="logo flex"><a [routerLink]="'/'">NoisyDeo</a></h1>
+    <div class="flex nav__list">
       <ul class="menu_items flex-c-s">
-        <li class="nav__item has-submenu ">
+        <li class="nav__item has-submenu">
           <div class="flex nav_link_icon">
-            <a class="nav__link " [routerLink]="'categories'" >
+            <a class="nav__link cursor-pointer"  (click)="clickOnHasSubmenuIcon()">
               Categories
             </a>
-            <i class="ri-arrow-right-s-line"></i>
+            <i id="category-icon" (click)="clickOnHasSubmenuIcon()" class="ri-arrow-right-s-line cursor-pointer"></i>
           </div>
 
-          <ul class="sub-menu" *ngIf="$categories | async as categories">
-            <li class="sub-menu__item" *ngFor="let category of categories ">
-              <a href="">{{category.name}}</a>
+          <ul class="sub-menu" *ngIf="categories$ | async as categories">
+            <li class="sub-menu__item" *ngFor="let category of categories.data">
+              <a [routerLink]="['/categories/'+category.slug]">{{category.name}}</a>
             </li>
 
           </ul>
+
         </li>
-        <li class="nav__item"><a class="nav__link"  [routerLink]="'categories'">Eventionents</a></li>
-        <li class="nav__item"><a class="nav__link"  [routerLink]="'categories'">Pour les entreprise</a></li>
-        <li class="nav__item"><a class="nav__link"  [routerLink]="'a-propos'">Comment ça marche</a></li>
+        <li class="nav__item"><a class="nav__link" [routerLink]="'/recherche'">Pour les entreprise</a></li>
+        <li class="nav__item"><a class="nav__link" [routerLink]="'/recherche'">Comment ça marche</a></li>
       </ul>
 
       <div id="close-icon">
@@ -31,22 +31,32 @@
       </div>
     </div>
     <div class="search__bar">
-      <button>
+      <button (click)="applyFilter()">
         <i class="ri-search-line"></i>
       </button>
       <label>
-        <input type="text" placeholder="Search">
+        <input  [(ngModel)]="keyWorld" (keyup)="handleKeyUp($event)" type="text" placeholder="Search">
       </label>
 
     </div>
-    <div class="user__account flex">
-      <div class="user__account--icon flex">
-        <i class="ri-user-line"></i>
-      </div>
-      <div class="user__account--text cursor-pointer flex">
-        <p>
-          <a [routerLink]="'s-inscrire'">Se connecter</a>
-        </p>
+    <div  class="user__account flex cursor-pointer avatar " (click)="showDropdown()">
+      <div class="dropdown cursor-pointer"   >
+        <div class="flex" >
+          <i class="ri-user-line "></i>
+          <p class="user__account--text">
+            <a *ngIf="!isLogged()">Se connecter</a>
+            <a *ngIf="isLogged()">Mon Compte</a>
+          </p>
+        </div>
+        <div class="dropdown-content hide" *ngIf="isLogged()">
+          <a [routerLink]="['client/profil']">Profile</a>
+          <a [routerLink]="['client/demandes']">Mes Demandes</a>
+          <a (click)="logout()">Logout</a>
+        </div>
+        <div class="dropdown-content hide" *ngIf="!isLogged()">
+          <a [routerLink]="['auth/se-connecter']">Se Connecter </a>
+          <a [routerLink]="['auth/s-inscrire']">Créer un compte</a>
+        </div>
       </div>
     </div>
   </nav>

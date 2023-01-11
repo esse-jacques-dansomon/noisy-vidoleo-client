@@ -1,17 +1,8 @@
 <main>
   <section class="form__card flex">
     <h4 class="form__card-title">Bienvenue sur Cameo</h4>
-    <p>
-      Réserve des dédicaces vidéo personnalisées réalisées par tes célébrités préférées.        </p>
-    <button class="facebook-login__button flex">
-      <i class="ri-facebook-fill"></i>
-      <span>Se Connecter Avec Facebook</span>
-    </button>
 
     <div class="form-divider flex">
-      <div class="form_divider-item"></div>
-      <div class="form_divider-item-text">Ou continuer avec l’adresse e-mail</div>
-      <div class="form_divider-item"></div>
     </div>
     <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && registerFormSubmit()" class="form__login">
       <div class="form__group">

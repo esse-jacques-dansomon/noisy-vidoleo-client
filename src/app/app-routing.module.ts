@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {ClientGuard} from "./core/guards/client.guard";
+import {ClientLayoutComponent} from "./layout/layouts/client-layout/client-layout.component";
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('./features/client/client.module').then(m => m.ClientModule)
   },
   {
+
     path: 'creator',
     loadChildren: () => import('./features/creator/creator.module').then(m => m.CreatorModule)
   },
@@ -25,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true, scrollPositionRestoration: 'enabled' })],
+  imports: [RouterModule.forRoot(routes, { useHash: true, scrollPositionRestoration: 'enabled' , anchorScrolling: 'enabled', preloadingStrategy: PreloadAllModules})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

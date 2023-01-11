@@ -36,19 +36,11 @@ export class AuthService {
   }
 
   register(data: any) {
-    let body = {
-      "name": data.nom,
-      "first_name": data.prenom,
-      "email": data.login,
-      "password": data.password,
-      "phone": data.telephone,
-      "country": data.codePays,
-      "boutique_name": data.nomboutique,
-    }
-    return this.http.post<LoginResponse>(`${this.apiUrl}/vendeurs`, body).pipe(
+    return this.http.post<LoginResponse>(`${this.apiUrl}clients`,data).pipe(
       tap(
         next => {
           this.setSession(next);
+          this._connectedVendor.next(this.getUserConnectedInfo());
         },
       )
     );
@@ -98,7 +90,7 @@ export class AuthService {
     return moment.unix(expiresAt);
   }
 
-  forgetPassword(email: string) {
+  forgotPassword(email: string) {
     //save email on localStorage
     localStorage.setItem('email_reset', email);
     return this.http.post(`${this.apiUrl}/auth/password/forget`, {email});
@@ -115,6 +107,9 @@ export class AuthService {
 
   public  getUserConnectedInfo() : LoginResponsePayload {
     const token = localStorage.getItem('access_token');
+    if(!token) {
+      return null;
+    }
     //get payload from token
     const payload = token.split('.')[1];
     //decode payload to json

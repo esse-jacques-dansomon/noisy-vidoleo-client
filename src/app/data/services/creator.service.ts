@@ -3,8 +3,6 @@ import {ResourceService} from "../../core/services/resource.service";
 import {Creator} from "../models/creator";
 import {HttpClient} from "@angular/common/http";
 import {API_CONSTANTES} from "../../core/constants/API_CONSTANTES";
-import {PaginationType} from "../../core/data/PaginationType";
-import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'

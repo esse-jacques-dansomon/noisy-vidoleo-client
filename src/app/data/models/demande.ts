@@ -4,6 +4,7 @@ import {CreatorOccasionType} from "./creator-occasion-type.interceptor";
 import {Client} from "./client";
 
 export interface Demande {
+  sender: any;
   id:                  number;
   price:               number;
   code:                string;
