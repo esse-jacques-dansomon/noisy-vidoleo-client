@@ -24,7 +24,7 @@ import {Demande} from "../../data/models/demande";
         <div class="client-request-item__info__status">
           <p class="client-request-item__info__status__text">{{ statusInFrench(demand.status)}}</p>
         </div>
-        <a href="#" class="client-request-item-button flex">
+        <a [routerLink]="['/client/details-demand/'] + demand.id" class="client-request-item-button flex">
           <i class="ri-arrow-right-s-line"></i>
           Details
         </a>

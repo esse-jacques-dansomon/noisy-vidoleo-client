@@ -17,5 +17,14 @@ export interface Demande {
   client:  Client;
   options:          DemandeOption[];
   comment: Comment,
+  payment: Payment,
+
+}
+
+export interface Payment {
+  id: number;
+  type: string;
+  link: string;
+  ref : string;
 
 }

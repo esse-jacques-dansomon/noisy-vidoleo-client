@@ -1,0 +1,64 @@
+<main class="container">
+  <section class="request-details-card flex-c-s ">
+    <div class="">
+      <h5 class="form__card-title">Details de la demande</h5>
+      <div class="flex-c-s mt-1">
+        <p>Talend demandé</p>
+        <h4>{{demand.creatorOccasionType.creator.titre}}</h4>
+      </div>
+
+      <div class="flex-c-s mt-1">
+        <p>Video pour</p>
+        <h4>{{demand.receiver}}</h4>
+      </div>
+
+      <div class="flex-c-s mt-1">
+        <p>Demandé par </p>
+        <h4>{{demand.sender}} </h4>
+      </div>
+      <div class="flex-c-s mt-1" *ngIf="demand.options">
+        <p>Options </p>
+        <h4 *ngFor="let option of demand.options" >{{option.name}}</h4>
+      </div>
+      <div class="flex-c-s mt-1">
+        <h4>Instruction </h4>
+        <p class="flex-c-s ">
+          {{demand.message}}
+        </p>
+      </div>
+    </div>
+    <div class="">
+      <h6 class="form__card-title">Paiement</h6>
+      <div class="flex-c-s mt-1">
+        <p>Total</p>
+        <h4>{{demand.price}} FCFA</h4>
+      </div>
+
+      <div class="flex-c-s mt-1">
+        <p>Etat payment</p>
+        <h4>{{demand.status}}</h4>
+      </div>
+
+      <div class="flex-c-s mt-1">
+        <p>Moyen de paiement </p>
+        <h4> {{demand.payment.type}}</h4>
+      </div>
+
+      <div class="flex-c-s mt-1">
+        <p>Moyen de paiement disponible</p>
+        <h4>Wave, orange money, CB </h4>
+      </div>
+
+      <div class="flex-c-s mt-1">
+        <h4>Actions </h4>
+        <div class="flex ">
+          <button (click)="makePayment()" class="btn btn--primary">Payer</button>
+          <button class="btn btn--primary">Annuler</button>
+        </div>
+      </div>
+
+    </div>
+
+
+  </section>
+</main>

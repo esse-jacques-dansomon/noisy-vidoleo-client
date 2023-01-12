@@ -1564,6 +1564,40 @@ input[type="checkbox"]{
   border-radius: 50px;
 }
 
+.btn{
+  background-color: var(--first-color);
+  color: white;
+  font-weight: bold;
+  padding: .6rem 1.1rem;
+  border: none;
+  cursor: pointer;
+  margin-top:  1rem;
+  border-radius: 50px;
+}
+
+.request-details-card{
+  max-width: 1000px;
+  /*box-shadow: 0 0 10px rgba(0,0,0,.1);*/
+  /*background-color: #ffffff;*/
+  margin: 4rem auto;
+  padding: 2rem 1rem;
+  text-align: start;
+  display: grid;
+  grid-template-columns: 1fr ;
+  column-gap: 10px;
+}
+.request-details-card > div{
+  border: 1px solid #ccc;
+  padding: 2rem 1rem;
+
+}
+
+@media screen and (min-width: 600px) {
+  .request-details-card{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 @media screen and (max-width:1054px ) and (min-width:950px){
 
   .menu_items > li{

@@ -22,4 +22,7 @@ export class DemandService extends ResourceService<Demande> {
    return this.http.post<PaymentUrl>(API_CONSTANTES.URI_DEMANDES_VIDEOS, demand);
   }
 
+  public getDemandeByClientAndCode$ = (code : string) : Observable<Demande> => this.http.get<Demande>(API_CONSTANTES.URI_DEMANDES_VIDEOS + '/code/' + code);
+
+
 }
