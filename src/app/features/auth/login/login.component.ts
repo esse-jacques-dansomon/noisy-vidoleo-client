@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../core/services/AuthService";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {NotiflixService} from "../../../core/services/notiflix.service";
 
 
@@ -18,10 +18,13 @@ export class LoginComponent implements OnInit {
 
   isLoading = false;
 
+
   constructor(
     private authService: AuthService,
     private router: Router,
-    private _notiflix : NotiflixService
+    private _notiflix : NotiflixService,
+
+    private _route : ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +36,7 @@ export class LoginComponent implements OnInit {
     if(this.authService.isLoggedIn()) {
       this.router.navigate(['/client/demandes']);
     }
+
   }
 
   login() {
@@ -47,9 +51,19 @@ export class LoginComponent implements OnInit {
           this._notiflix.success('Vous êtes connecté avec succès');
           this._notiflix.removeLoading();
           if (data.user.role.name == "client") {
-            this.router.navigate(['/client/demandes']);
+            let returnUrl = this._route.snapshot.queryParamMap.get('returnUrl');
+            if (returnUrl) {
+              this.router.navigateByUrl(returnUrl);
+            }else{
+              this.router.navigate(['/client/demandes']);
+            }
           } else if (data.user.role.name == "creator") {
-            this.router.navigate(['/admin/dashboard']);
+            let returnUrl = this._route.snapshot.queryParamMap.get('returnUrl');
+            if (returnUrl) {
+              this.router.navigateByUrl(returnUrl);
+            }else{
+              this.router.navigate(['/creator/demandes']);
+            }
           }
         },
         error: (err) => {

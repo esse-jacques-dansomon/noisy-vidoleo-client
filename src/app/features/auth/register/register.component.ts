@@ -21,14 +21,15 @@ export class RegisterComponent implements OnInit {
     private _notiflix: NotiflixService
   ) { }
   isLoading = false;
-  registerForm : FormGroup = new FormGroup({
-    first_name: new FormControl('', [Validators.required]),
-    last_name: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
-  });
+  registerForm : FormGroup ;
   ngOnInit(): void {
+    this.registerForm = new FormGroup({
+      first_name: new FormControl('', [Validators.required]),
+      last_name: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    })
   }
 
   registerFormSubmit() {
@@ -39,8 +40,12 @@ export class RegisterComponent implements OnInit {
         next: (res) => {
             this.isLoading = false;
             Loading.remove();
-            this._notiflix.reportSuccess('Success', 'Registration Successful');
-            this._router.navigateByUrl('/client/demandes');
+            // this._notiflix.reportSuccess('Success', 'Registration Successful');
+            this._router.navigateByUrl('/client/demandes').then(
+              () => {
+                Notify.success('Registration Successful');
+              }
+            );
         },
         error : (err) => {
           this.isLoading = false;
@@ -49,5 +54,9 @@ export class RegisterComponent implements OnInit {
         }
       });
 
+  }
+
+  validatePassword() {
+    return this.registerForm.value.password == this.registerForm.value.confirmPassword;
   }
 }

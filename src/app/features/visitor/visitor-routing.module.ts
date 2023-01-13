@@ -37,7 +37,7 @@ const routes: Routes = [
     path: 'categories/:slug',
     component: CategoryComponent
   },{
-    path: 'a-apropos',
+    path: 'comment-ca-marche',
     component: AboutUsComponent
   },
   {
