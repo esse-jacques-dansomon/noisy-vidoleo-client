@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import {AuthService} from "../../../core/services/AuthService";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import {NotiflixService} from "../../../core/services/notiflix.service";
 
@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private _authService: AuthService,
     private _router: Router,
-
+    private _route : ActivatedRoute,
     private _notiflix: NotiflixService
   ) { }
   isLoading = false;
@@ -29,6 +29,7 @@ export class RegisterComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      phone: new FormControl('', [Validators.required, Validators.minLength(10)]),
     })
   }
 
@@ -38,14 +39,18 @@ export class RegisterComponent implements OnInit {
     this._authService.register(this.registerForm.value).subscribe(
       {
         next: (res) => {
-            this.isLoading = false;
-            Loading.remove();
-            // this._notiflix.reportSuccess('Success', 'Registration Successful');
+          this.isLoading = false;
+          Loading.remove();
+          let returnUrl = this._route.snapshot.queryParamMap.get('returnUrl');
+          if (returnUrl) {
+            this._router.navigateByUrl(returnUrl);
+          }else{
             this._router.navigateByUrl('/client/demandes').then(
               () => {
                 Notify.success('Registration Successful');
               }
             );
+          }
         },
         error : (err) => {
           this.isLoading = false;

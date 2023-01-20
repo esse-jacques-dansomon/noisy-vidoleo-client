@@ -5,6 +5,8 @@ import {BehaviorSubject, finalize, Observable, of, tap} from 'rxjs';
 import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
 import {LoginResponse, LoginResponsePayload} from "../data/LoginResponse";
+import {User} from "../../data/models/user";
+import {Client} from "../../data/models/client";
 
 
 @Injectable({
@@ -17,8 +19,8 @@ export class AuthService {
 
   connectedUser$ : Observable<LoginResponsePayload> = of(this.getUserConnectedInfo());
 
-  verifyInfos() : Observable<LoginResponsePayload> {
-    return  this.http.get<LoginResponsePayload>(`${this.apiUrl}/jwt/me`);
+  verifyInfos() : Observable<Client> {
+    return  this.http.get<Client>(`${this.apiUrl}jwt/me`);
     // this._connectedVendor.asObservable();
   }
 
@@ -118,4 +120,11 @@ export class AuthService {
   }
 
 
+  public updateClient(client: any,id : number) : Observable<any>{
+    return this.http.put<any>(`${this.apiUrl}clients/${id}`, client);
+  }
+
+  resetPassword(value) : Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}jwt/reset-password`, value);
+  }
 }

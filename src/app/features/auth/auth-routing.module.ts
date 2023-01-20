@@ -17,10 +17,6 @@ const routes: Routes = [
   {
     path: 'mot-de-passe-oublie',
     component: ForgotPasswordComponent
-  },
-  {
-    path: "changement-de-mot-de-passe",
-    component: ResetPasswordComponent
   }
 ];
 
