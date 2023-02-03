@@ -1637,7 +1637,7 @@ input[type="checkbox"]{
     height: 410px;
   }
   .video-item{
-    height: 100%;
+    /*height: 100%;*/
   }
 
 }

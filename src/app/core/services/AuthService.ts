@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {LoginResponse, LoginResponsePayload} from "../data/LoginResponse";
 import {User} from "../../data/models/user";
 import {Client} from "../../data/models/client";
+import {API_CONSTANTES} from "../constants/API_CONSTANTES";
 
 
 @Injectable({
@@ -14,6 +15,7 @@ import {Client} from "../../data/models/client";
 })
 export class AuthService {
   protected apiUrl: string = environment.apiUrl;
+  private _tokenName = API_CONSTANTES.TOKEN_KEY
 
   private _connectedVendor: BehaviorSubject<LoginResponsePayload> = new BehaviorSubject(null);
 
@@ -50,7 +52,7 @@ export class AuthService {
 
   private setSession(authResult: LoginResponse) {
     // Set the time that the access token will expire moment
-    localStorage.setItem('access_token', authResult.access_token);
+    localStorage.setItem(this._tokenName, authResult.access_token);
   }
 
   clearLocalStorage() {
@@ -80,7 +82,7 @@ export class AuthService {
   }
 
   getExpiration() : moment.Moment {
-    const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem(this._tokenName);
     if(!token) {
       return null;
     }
@@ -108,7 +110,7 @@ export class AuthService {
   }
 
   public  getUserConnectedInfo() : LoginResponsePayload {
-    const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem(this._tokenName);
     if(!token) {
       return null;
     }
