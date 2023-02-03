@@ -17,8 +17,6 @@ export class Auth20Service {
    private timer: Subscription;
    private _user = new BehaviorSubject<LoginResponse>(null);
    user$: Observable<LoginResponse> = this._user.asObservable();
-
-
    constructor(private router: Router, private http: HttpClient) {
       window.addEventListener('storage', this.storageEventListener.bind(this));
    }
