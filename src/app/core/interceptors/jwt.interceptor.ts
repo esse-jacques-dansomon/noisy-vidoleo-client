@@ -17,7 +17,7 @@ export class JwtInterceptor implements HttpInterceptor {
       // add JWT auth header if a user is logged in for API requests
       const accessToken = localStorage.getItem('access_token');
       const isApiUrl = request.url.startsWith(environment.apiUrl);
-      if (accessToken && isApiUrl) {
+      if (accessToken) {
          request = request.clone({
             setHeaders: { Authorization: `Bearer ${accessToken}` },
          });

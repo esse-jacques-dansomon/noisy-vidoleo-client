@@ -18,20 +18,19 @@ export class AuthInterceptor implements HttpInterceptor {
              next: HttpHandler): Observable<HttpEvent<any>> {
       const idToken = localStorage.getItem("access_token");
       const isApiUrl = req.url.startsWith(environment.apiUrl);
-      if (idToken && isApiUrl) {
+     console.log("intercept")
+      if (idToken ) {
+        console.log("intercept2")
          const cloned = req.clone({
             headers: req.headers
                .set("Authorization", "Bearer " + idToken)
-               // .set("countryCode", this.paysService.getPaysFromLocal() ? this.paysService.getPaysFromLocal().code : 'sn')
-            //add country to header
          });
          return next.handle(cloned);
       }
       else {
+        console.log("intercept3")
          const cloned2 = req.clone({
             headers: req.headers
-               // .set("countryCode",this.paysService.getPaysFromLocal() ? this.paysService.getPaysFromLocal().code : 'sn')
-            //add country to header
          });
          return next.handle(cloned2);
       }

@@ -23,7 +23,7 @@ export class AuthService {
 
   verifyInfos() : Observable<Client> {
     return  this.http.get<Client>(`${this.apiUrl}jwt/me`);
-    // this._connectedVendor.asObservable();
+     this._connectedVendor.asObservable();
   }
 
   constructor(private http: HttpClient, private router: Router) { }
