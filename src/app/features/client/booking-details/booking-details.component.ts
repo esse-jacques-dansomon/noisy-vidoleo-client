@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {DemandService} from "../../../data/services/demand.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Demande} from "../../../data/models/demande";
+import {Observable, of} from "rxjs";
 
 @Component({
   selector: 'app-booking-detilas',
@@ -11,7 +12,8 @@ import {Demande} from "../../../data/models/demande";
 export class BookingDetailsComponent implements OnInit {
 
   code : string = this._route.snapshot.params['slug'];
-  demand : Demande ;
+  demand$ : Observable<Demande>  ;
+  demand : Demande;
   constructor(
     private _demandService : DemandService,
     private _route: ActivatedRoute,
@@ -23,6 +25,7 @@ export class BookingDetailsComponent implements OnInit {
     this._demandService.getDemandeByClientAndCode$(this.code).subscribe(
       {
         next: (data) => {
+          this.demand$ = of(data);
           this.demand = data;
         },
         error: (err) => {

@@ -1,47 +1,47 @@
 <main class="container">
-  <section class="request-details-card flex-c-s ">
-    <div class="">
+  <section class="request-details-card flex-c-s " *ngIf="demand$ | async as dmnd">
+    <div class="" >
       <h5 class="form__card-title">Details de la demande</h5>
-      <div class="flex-c-s mt-1">
+      <div class="flex-c-s mt-1" *ngIf="dmnd.creatorOccasionType.creator" >
         <p>Talend demandé</p>
-        <h4>{{demand.creatorOccasionType.creator.titre}}</h4>
+        <h4>{{dmnd.creatorOccasionType.creator.titre}}</h4>
       </div>
 
-      <div class="flex-c-s mt-1">
+      <div class="flex-c-s mt-1" *ngIf="dmnd.receiver">
         <p>Video pour</p>
-        <h4>{{demand.receiver}}</h4>
+        <h4>{{dmnd.receiver}}</h4>
       </div>
 
-      <div class="flex-c-s mt-1">
+      <div class="flex-c-s mt-1" *ngIf="dmnd.sender">
         <p>Demandé par </p>
-        <h4>{{demand.sender}} </h4>
+        <h4>{{dmnd.sender}} </h4>
       </div>
-      <div class="flex-c-s mt-1" *ngIf="demand.options">
+      <div class="flex-c-s mt-1" *ngIf="dmnd.options">
         <p>Options </p>
-        <h4 *ngFor="let option of demand.options" >{{option.name}}</h4>
+        <h4 *ngFor="let option of dmnd.options" >{{option.name}}</h4>
       </div>
-      <div class="flex-c-s mt-1">
+      <div class="flex-c-s mt-1" *ngIf="dmnd.message">
         <h4>Instruction </h4>
         <p class="flex-c-s ">
-          {{demand.message}}
+          {{dmnd.message}}
         </p>
       </div>
     </div>
     <div class="">
       <h6 class="form__card-title">Paiement</h6>
-      <div class="flex-c-s mt-1">
+      <div class="flex-c-s mt-1 " *ngIf="dmnd.price">
         <p>Total</p>
-        <h4>{{demand.price}} FCFA</h4>
+        <h4>{{dmnd.price}} FCFA</h4>
       </div>
 
-      <div class="flex-c-s mt-1">
+      <div class="flex-c-s mt-1" *ngIf="dmnd.status">
         <p>Etat payment</p>
-        <h4>{{demand.status}}</h4>
+        <h4>{{dmnd.status}}</h4>
       </div>
 
-      <div class="flex-c-s mt-1">
+      <div class="flex-c-s mt-1" *ngIf="dmnd.payment">
         <p>Moyen de paiement </p>
-        <h4> {{demand.payment.type}}</h4>
+        <h4> {{dmnd.payment.type}}</h4>
       </div>
 
       <div class="flex-c-s mt-1">

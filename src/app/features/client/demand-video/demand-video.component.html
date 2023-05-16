@@ -1,6 +1,5 @@
 <main >
-  <ng-container *ngIf="demands$ | withLoading | async as demandsWithPagination">
-    <ng-template [ngIf]="demandsWithPagination.value" >
+
       <section class="container">
         <div class="form__card">
           <h4 class="form__card-title">Tes demandes de video</h4>
@@ -11,6 +10,8 @@
           </div>
         </div>
 
+        <ng-container *ngIf="demands$ | withLoading | async as demandsWithPagination">
+          <ng-template [ngIf]="demandsWithPagination.value" >
         <div class="client-request-content container grid mt-1">
           <demand-client-card *ngFor="let demand of demandsWithPagination.value.data" [demand]="demand"></demand-client-card>
         </div>
@@ -28,10 +29,10 @@
             </div>
           </div>
         </section>
-
+          </ng-template>
+          <ng-template [ngIf]="demandsWithPagination.error" ></ng-template>
+          <ng-template [ngIf]="demandsWithPagination.loading" ></ng-template>
+        </ng-container>
       </section>
-    </ng-template>
-    <ng-template [ngIf]="demandsWithPagination.error" ></ng-template>
-    <ng-template [ngIf]="demandsWithPagination.loading" ></ng-template>
-  </ng-container>
+
 </main>

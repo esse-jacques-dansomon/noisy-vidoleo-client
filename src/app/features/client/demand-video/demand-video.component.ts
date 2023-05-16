@@ -47,7 +47,8 @@ export class DemandVideoComponent implements OnInit {
     this._authService.connectedUser$.subscribe(
       {
         next: (user) => {
-          this.demands$  = this._demandService.getOneByTypeAndUriAndPage$('client/'+user.id, number);
+          console.log('connectedUser$', user);
+          this.demands$  = this._demandService.getOneByTypeAndUriAndPage$('client/' + user.id, number);
           window.scrollTo(0, 0);        }
       });
 
@@ -58,7 +59,8 @@ export class DemandVideoComponent implements OnInit {
     this._authService.connectedUser$.subscribe(
       {
         next: (user) => {
-          this.demands$  = this._demandService.getOneByTypeAndUri$('client/'+user.id + '+/'+status, );
+          console.log('connectedUser$', user);
+          this.demands$  = this._demandService.getOneByTypeAndUri$('client/' + user.id + '+/' + status, );
         }
       });
   }
