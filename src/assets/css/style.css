@@ -10,12 +10,15 @@
   /* Green dark 190 - Green 171 Green Blue 200*/
   --hue-color: 190;
   /*    HSL color mode*/
-  --first-color: hsl(var(--hue-color), 64%, 22%);
-  --first-color-second: hsl(var(--hue-color), 64%, 22%);
-  --first-color-color-alt: hsl(var(--hue-color), 64%, 15%);
+  --primary-color: #191D5C;
+  --secondary-color: #EA5D30;
+  --third-color: #FFFFFF;
+  --first-color: #191D5C;
+  --first-color-second: #191D5C;
+  --first-color-color-alt: #191D5C;
   --title-color: hsl(var(--hue-color), 64%, 18%);
   --text-color: hsl(var(--hue-color), 24%, 22%);
-  --text-light: hsl(var(--hue-color), 8%, 60%);
+  --text-light: #EA5D30;
   --imput-color: hsl(var(--hue-color), 24%, 37%);
   --body-color: hsl(var(--hue-color), 100%, 99%);
   --white-color: #fff;
