@@ -60,7 +60,7 @@ export class DemandVideoComponent implements OnInit {
       {
         next: (user) => {
           console.log('connectedUser$', user);
-          this.demands$  = this._demandService.getOneByTypeAndUri$('client/' + user.id + '+/' + status, );
+          this.demands$  = this._demandService.getOneByTypeAndUri$('client/' + user.id + '/' + status, );
         }
       });
   }
