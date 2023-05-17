@@ -56,3 +56,9 @@ html, body {
 .user__account{
   position: relative;
 }
+
+.visitor-logo{
+  width: 150px;
+  height: 50px;
+  object-fit: cover;
+}
