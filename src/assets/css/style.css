@@ -13,6 +13,7 @@
   --primary-color: #191D5C;
   --secondary-color: #EA5D30;
   --third-color: #FFFFFF;
+  --fourth-color: #0C134F;
   --first-color: #191D5C;
   --first-color-second: #191D5C;
   --first-color-color-alt: #191D5C;
@@ -846,7 +847,7 @@ footer{
   margin-bottom: 1rem;
 }
 .subscribe__inner-form-submit{
-  background-color: var(--first-color);
+  background-color: var(--fourth-color);
   color: white;
   width: 38%;
   font-size: 1rem;
@@ -860,8 +861,8 @@ footer{
 }
 .became-celebrity{
   padding: .5rem 1rem;
-  background: var(--first-color);
-  color: white;
+  background: var(--third-color);
+  color: black;
   border-radius: .2rem;
 }
 .subscribe__social-item{

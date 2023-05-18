@@ -26,6 +26,13 @@
           {{demand.message}}
         </p>
       </div>
+      <div *ngIf="videoVisible" class="flex-c-s mt-1">
+        <h4>Commentaire</h4>
+        <form action="" method="post">
+          <textarea name="" id="" cols="40" rows="5">{{demand.comment.body}}</textarea>
+        </form>
+        <button class="btn btn-submit" type="submit">Soumettre</button>
+      </div>
     </div>
     <div class="">
       <h6 class="form__card-title">Paiement</h6>
@@ -55,6 +62,14 @@
           <button (click)="makePayment()" class="btn btn--primary">Payer</button>
           <button class="btn btn--primary">Annuler</button>
         </div>
+      </div>
+      <br>
+      <div *ngIf="videoVisible" class="flex-c-s">
+        <p>Vidéo demandée</p>
+        <video width="330"  height="300" controls autoplay>
+          <source [src]="baseUrl" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
 
     </div>
