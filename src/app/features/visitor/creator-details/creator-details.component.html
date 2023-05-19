@@ -17,7 +17,7 @@
               <video playsinline  height="100%" class="video-item" controls>
                 <source [src]="'https://cdn.cameo.com/static/assets/AboutCameo_FullEdit_v06output.mp4'">
               </video>
-              <i class="video-item-play ri-play-circle-line"></i>
+              <!-- <i class="video-item-play ri-play-circle-line"></i> -->
               <i class="video-item-volume ri-volume-down-line"></i>
             </div>
           </div>
@@ -59,7 +59,7 @@
           </div>
         </div>
         <div class="book__buttons flex">
-          <a [routerLink]="['/client/booking/'+ occasionType.id]" *ngFor="let occasionType of creator.occasionsTypes" class="book__buttons-item-button">
+          <a [routerLink]="['/client/booking/'+ occasionType.id]" *ngFor="let occasionType of creator.occasionsTypes.slice(0,2)" class="book__buttons-item-button">
            {{occasionType.occasionType.name}}  {{occasionType.price}}  FCFA
           </a>
         </div>
