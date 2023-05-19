@@ -1,0 +1,57 @@
+<main>
+    <div class="breadcrumb container">
+      <a [routerLink]="['/']">Accueil</a>
+      <span> / </span>
+      <a [routerLink]="['/categories']">Celebrities</a>
+      <span> / </span>
+      <a [routerLink]="['/']">Presentation</a>
+      <span> / </span>
+      <a routerLink="/createurs/{{creator.slug}}">{{creator.first_name}}  {{creator.last_name}}</a>
+      <span> / </span>
+      <a href="#">Avis</a>
+    </div>
+
+    <div class="avis-clients">
+      <ng-container *ngIf="creatorDemands$ | withLoading | async as demandsWithPagination">
+        <ng-template [ngIf]="demandsWithPagination.value">
+          <div *ngFor="let demand of demandsWithPagination.value.data" class="celebrity-feedbacks-item flex">
+            <div class="celebrity-feedbacks-item-stars flex">
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-half-line"></i>
+            </div>
+            <h4>Par Lino et D**** - 28 août 2022</h4>
+            <p>Vidéo parfaite, elle en a pleuré de joie merci elo!</p>
+          </div>
+
+          <section class="pagination grid ">
+            <div class="pagination__container">
+              <div  class="pagination__item   flex cursor-pointer" >
+                <i class="pagination__link ri-arrow-left-circle-line" (click)="pageChange(demandsWithPagination.value.meta.current_page-1)"  [ngClass]=" demandsWithPagination.value.meta.current_page == 1 ? 'pagination-disable-color' : ''"></i>
+              </div>
+              <div class="pagination-page">
+                <span>Page {{demandsWithPagination.value.meta.current_page}} sur {{demandsWithPagination.value.meta.last_page}}</span>
+              </div>
+              <div class="pagination__item  flex cursor-pointer ">
+                <i class=" pagination__link  ri-arrow-right-circle-line"  (click)="pageChange(demandsWithPagination.value.meta.current_page+1)"  [ngClass]="demandsWithPagination.value.meta.current_page == demandsWithPagination.value.meta.last_page ? 'pagination-disable-color' : ''"></i>
+              </div>
+            </div>
+          </section>
+
+          <ng-template [ngIf]="demandsWithPagination.loading">
+            <app-loader-spinner [isLoading]="true"></app-loader-spinner>
+          </ng-template>
+      
+          <ng-template [ngIf]="demandsWithPagination.error">
+            <div class="error">
+              {{creatorsWithPagination.error}}
+            </div>
+          </ng-template>
+          
+        </ng-template>
+      </ng-container>
+    </div>
+</main>
+  

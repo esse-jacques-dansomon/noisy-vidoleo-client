@@ -8,10 +8,6 @@
         <span>/</span>
         <a href="#" class="breadcrumb-links-item">Celebrities</a>
       </div>
-      <div class="breadcrumb-filter-options flex" >
-        <button id="hideFilter"> Sort & Filtres </button>
-        <button id="clearFilter"> Effacer les filtres </button>
-      </div>
     </div>
   </section>
 
@@ -51,6 +47,7 @@
           <h3>All in category</h3>
         </div>
         <div class="all-category-celebrities grid">
+          <h2 *ngIf="creatorsWithPagination.value.data.length==0" >Cette catégorie ne contient pas de créateurs</h2>
           <creator-card *ngFor="let creator of creatorsWithPagination.value.data" [creator]="creator"></creator-card>
         </div>
       </section>

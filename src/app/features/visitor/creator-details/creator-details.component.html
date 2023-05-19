@@ -6,7 +6,7 @@
     <span> / </span>
     <a [routerLink]="['/']">Presentation</a>
     <span> / </span>
-    <a href="#">Author</a>
+    <a href="#">{{creator.first_name}}  {{creator.last_name}}</a>
   </div>
   <div class="container ">
     <div class="celebrity">
@@ -122,7 +122,7 @@
           <i class="ri-checkbox-circle-fill"></i>
         </div>
         <div class="celebrity-feedbacks-see-all">
-          Voir tous les avis
+          <a routerLink="/createurs/avis/{{creator.slug}}">Voir tous les avis</a>
         </div>
       </div>
       <div class="celebrity-feedbacks-content" *ngIf="creatorDemands$ | async as creatorDemands">
@@ -133,7 +133,7 @@
           </div>
           <h4>Par *** le {{demand.comment.created_at}}</h4>
           <p>{{demand.comment.body}}</p>
-        </div>
+      </div>
 
       </div>
 <!--      <div class="celebrity-categories ">-->

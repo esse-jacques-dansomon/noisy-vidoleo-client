@@ -12,6 +12,8 @@ import {RgpdComponent} from "./rgpd/rgpd.component";
 import {TestimoneyComponent} from "./testimoney/testimoney.component";
 import {BecameCreatorComponent} from "./became-creator/became-creator.component";
 import {CreatorDetailsResolver} from "./visitor-resolvers.resolver";
+import { ForCompagniesComponent } from './for-compagnies/for-compagnies.component';
+import { CreatorCommentsComponent } from './creator-comments/creator-comments.component';
 
 const routes: Routes = [
   {
@@ -23,8 +25,19 @@ const routes: Routes = [
     component: SearchComponent
   },
   {
+    path: 'for-compagnies',
+    component: ForCompagniesComponent
+  },
+  {
     path: 'createurs/:slug',
     component: CreatorDetailsComponent,
+    resolve: {
+      creator: CreatorDetailsResolver
+    }
+  },
+  {
+    path: 'createurs/avis/:slug',
+    component: CreatorCommentsComponent,
     resolve: {
       creator: CreatorDetailsResolver
     }

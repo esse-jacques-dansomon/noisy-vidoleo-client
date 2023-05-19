@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   // apiUrl: "http://apinoisy.dreamhosters.com/api/"
-  apiUrl: "http://localhost:8000/api/"
+  apiUrl: "http://localhost:8000/api/",
+  videoUrl:"http://localhost:8000/storage/videos/"
 };
 
 /*

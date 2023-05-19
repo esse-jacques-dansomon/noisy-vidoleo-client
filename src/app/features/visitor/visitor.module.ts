@@ -17,6 +17,8 @@ import {SharedModule} from "../../shared/shared.module";
 import {NgxUsefulSwiperModule} from "ngx-useful-swiper";
 import {CoreModule} from "../../core/core.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import { ForCompagniesComponent } from './for-compagnies/for-compagnies.component';
+import { CreatorCommentsComponent } from './creator-comments/creator-comments.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import {ReactiveFormsModule} from "@angular/forms";
     CguComponent,
     RgpdComponent,
     MentionLegalesComponent,
-    BecameCreatorComponent
+    BecameCreatorComponent,
+    ForCompagniesComponent,
+    CreatorCommentsComponent
   ],
     imports: [
         CommonModule,
