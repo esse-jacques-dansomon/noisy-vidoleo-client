@@ -1654,6 +1654,9 @@ input[type="checkbox"]{
 main{
   margin-top: 5rem;
 }
+#no-margin-main{
+  margin-top: -1rem;
+}
 
 .pagination-disable-color{
   color: #cccccc !important;

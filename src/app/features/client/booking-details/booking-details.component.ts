@@ -5,7 +5,7 @@ import {Demande} from "../../../data/models/demande";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-booking-detilas',
+  selector: 'app-booking-details',
   templateUrl: './booking-details.component.html',
   styleUrls: ['./booking-details.component.css']
 })

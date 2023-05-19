@@ -12,10 +12,6 @@
         <h4>{{demand.receiver}}</h4>
       </div>
 
-      <div class="flex-c-s mt-1">
-        <p>Demandé par </p>
-        <h4>{{demand.sender}} </h4>
-      </div>
       <div class="flex-c-s mt-1" *ngIf="demand.options">
         <p>Options </p>
         <h4 *ngFor="let option of demand.options" >{{option.name}}</h4>
@@ -59,8 +55,8 @@
       <div class="flex-c-s mt-1">
         <h4>Actions </h4>
         <div class="flex ">
-          <button (click)="makePayment()" class="btn btn--primary">Payer</button>
-          <button class="btn btn--primary">Annuler</button>
+          <button *ngIf="demand.status=='pending'" (click)="makePayment()" class="btn btn--primary">Payer</button>
+          <button *ngIf="demand.status=='pending'" class="btn btn--primary">Annuler</button>
         </div>
       </div>
       <br>

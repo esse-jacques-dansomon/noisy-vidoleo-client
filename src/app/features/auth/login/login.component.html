@@ -1,22 +1,6 @@
 <main>
   <section class="form__card flex">
-    <h4 class="form__card-title">Se Connecter A Noisy</h4>
-    <button class="facebook-login__button flex">
-      <i class="ri-facebook-fill"></i>
-      <span>Se Connecter Avec Facebook</span>
-    </button>
-
-
-    <button class="apple-login__button flex">
-      <i class="ri-apple-fill"></i>
-      <span>Se Connecter Avec Apple</span>
-    </button>
-
-    <div class="form-divider flex">
-      <div class="form_divider-item">.</div>
-      <div class="form_divider-item-text">Ou</div>
-      <div class="form_divider-item">.</div>
-    </div>
+    <h4 class="form__card-title">Se Connecter A Afrofame</h4>
     <form  [formGroup]="loginForm"  (ngSubmit)="loginForm.valid && login()" class="form__login">
       <div class="form__group">
         <label  for="email" >Email</label>
@@ -29,7 +13,7 @@
       <div class="form__group">
         <button type="submit" [ngClass]="loginForm.invalid ? 'button-disable-color':''" [disabled]="loginForm.invalid" *ngIf="!isLoading"  class="form__button">Se connecter</button>
       </div>
-      <p>En t'inscrivant, tu acceptes les Conditions d'utilisation de Noisy, y compris les Conditions supplémentaires et la Politique de confidentialité.</p>
+      <p>En t'inscrivant, tu acceptes les Conditions d'utilisation de Afroframe, y compris les Conditions supplémentaires et la Politique de confidentialité.</p>
       <div class="">
         <a [routerLink]="'/auth/mot-de-passe-oublie'" class="forgot__password">Mot de Passe Oublié ?</a>
       </div>
