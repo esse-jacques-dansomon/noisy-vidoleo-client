@@ -1,18 +1,10 @@
 <main>
   <section class="form__card flex">
-    <h4 class="form__card-title">Bienvenue sur Cameo</h4>
+    <h4 class="form__card-title">Bienvenue sur Afroframe</h4>
     <p>
-      Réserve des dédicaces vidéo personnalisées réalisées par tes célébrités préférées.        </p>
-    <button class="facebook-login__button flex">
-      <i class="ri-facebook-fill"></i>
-      <span>Se Connecter Avec Facebook</span>
-    </button>
+      Réserve des dédicaces vidéo personnalisées réalisées par tes célébrités préférées.        
+    </p>
 
-    <div class="form-divider flex">
-      <div class="form_divider-item"></div>
-      <div class="form_divider-item-text">Ou continuer avec l’adresse e-mail</div>
-      <div class="form_divider-item"></div>
-    </div>
     <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && registerFormSubmit()" class="form__login">
       <div class="form__group">
         <label >Nom </label>
@@ -48,7 +40,7 @@
       </div>
       <div class="">
         <input type="checkbox">
-        <label>Tenez-moi au courant des offres exclusives de Cameo, des mises à jour et d’autres actus ! Tu peux te désinscrire à tout moment.</label>
+        <label>Tenez-moi au courant des offres exclusives de Afroframe, des mises à jour et d’autres actus ! Tu peux te désinscrire à tout moment.</label>
       </div>
       <div class="">
         <a [routerLink]="'/auth/se-connecter'" class="forgot__password">Tu as déjà un compte ? Connecte-toi</a>
