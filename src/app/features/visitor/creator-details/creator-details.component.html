@@ -14,7 +14,9 @@
         <swiper  class="height-100" [config]="config">
           <div class="celebrity-videos-container swiper-wrapper">
             <div *ngFor="let number of [1, 2, 3, 4, 5, 6, 7]" class="swiper-slide celebrity-videos-response">
-              <video playsinline  height="100%" class="video-item" [src]="'https://cdn.cameo.com/static/assets/AboutCameo_FullEdit_v06output.mp4'" ></video>
+              <video playsinline  height="100%" class="video-item" controls>
+                <source [src]="'https://cdn.cameo.com/static/assets/AboutCameo_FullEdit_v06output.mp4'">
+              </video>
               <i class="video-item-play ri-play-circle-line"></i>
               <i class="video-item-volume ri-volume-down-line"></i>
             </div>
