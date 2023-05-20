@@ -24,5 +24,5 @@ export class DemandService extends ResourceService<Demande> {
 
   public getDemandeByClientAndCode$ = (code : string) : Observable<any> => this.http.get<any>(API_CONSTANTES.URI_DEMANDES_VIDEOS + '/code/' + code);
 
-
+  public commmentDemande$ = (id : number, comment : string, stars:number) : Observable<any> => this.http.post<any>(API_CONSTANTES.URI_DEMANDES_VIDEOS +'/'+ id + '/comment', {body : comment, stars: stars});
 }

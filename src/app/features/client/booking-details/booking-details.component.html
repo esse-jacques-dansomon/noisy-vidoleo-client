@@ -24,10 +24,33 @@
       </div>
       <div *ngIf="videoVisible" class="flex-c-s mt-1">
         <h4>Commentaire</h4>
-        <form action="" method="post">
-          <textarea name="" id="" cols="40" rows="5">{{demand.comment.body}}</textarea>
+        <div *ngIf="demand.comment">
+          <textarea name="" id="" cols="40" rows="5" disabled>{{demand.comment.body}}</textarea>
+          <div class="rating">
+            <ng-container *ngFor="let i of stars">
+              <i class="fa-solid fa-star" [ngClass]="{'active-star':i<=rating}"></i>
+            </ng-container>
+          </div>
+        </div>
+        
+        <form method="post" *ngIf="!demand.comment" [formGroup]="commentForm" (ngSubmit)="commentForm.valid && onFormSubmit()">
+          <textarea name="" id="" cols="40" rows="5" formControlName="body"
+          [ngClass]="{
+            'is-valid':commentForm.get('body').valid && (commentForm.get('body').touched||commentForm.get('body').dirty),
+            'is-invalid':commentForm.get('body').invalid && (commentForm.get('body').touched||commentForm.get('body').dirty)
+          }"
+          ></textarea>
+          <div class="text-danger mt-2" *ngIf="commentForm.get('body').invalid && (commentForm.get('body').touched||commentForm.get('body').dirty)">
+            <span class="error-span" *ngIf="commentForm.get('body').errors['required']">Le champ est obligatoire</span>
+          </div>
+          <div class="rating">
+            <ng-container *ngFor="let i of stars">
+              <i class="fa-solid fa-star" (click)="updateRating(i)" [ngClass]="{'active-star':i<=rating}"></i>
+            </ng-container>
+          </div>
+          <button class="btn btn-submit" type="submit" [disabled]="commentForm.invalid">Soumettre son avis</button> 
         </form>
-        <button class="btn btn-submit" type="submit">Soumettre</button>
+        
       </div>
     </div>
     <div class="">
@@ -62,7 +85,7 @@
       <br>
       <div *ngIf="videoVisible" class="flex-c-s">
         <p>Vidéo demandée</p>
-        <video width="330"  height="300" controls autoplay>
+        <video width="330"  height="300" controls>
           <source [src]="baseUrl" type="video/mp4">
           Your browser does not support the video tag.
         </video>

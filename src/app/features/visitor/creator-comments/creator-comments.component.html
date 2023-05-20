@@ -16,13 +16,13 @@
         <ng-template [ngIf]="demandsWithPagination.value">
           <div *ngFor="let demand of demandsWithPagination.value.data" class="celebrity-feedbacks-item flex">
             <div class="celebrity-feedbacks-item-stars flex">
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-half-line"></i>
+              <div class="rating">
+                <ng-container *ngFor="let i of [1,2,3,4,5]">
+                  <i class="fa-solid fa-star" [ngClass]="{'active-star':i<=demand.comment.stars}"></i>
+                </ng-container>
+              </div>
             </div>
-            <h4>Par Lino et D**** - 28 août 2022</h4>
+            <h4>Par **** le {{demand.comment.created_at|date:'medium':'fr'}}</h4>
             <p>Vidéo parfaite, elle en a pleuré de joie merci elo!</p>
           </div>
 

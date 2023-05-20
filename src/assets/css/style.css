@@ -1608,7 +1608,35 @@ input[type="checkbox"]{
     margin: 0 .6rem;
   }
 }
+
+/*=========STAR RATING==========*/
+.rating {
+  display: flex;
+  gap: 5px;
+  margin-top: 20px;
+}
+i{
+  cursor: pointer;
+}
+.active-star{
+  color:orange;
+}
+/*=========END STAR RATING==========*/
+
+
+/*=========FORM VALIDATION==========*/
+.is-valid{
+  border: 2px solid green;
+}
+.is-invalid{
+  border: 1px solid red;
+}
+.error-span{
+  color:red;
+}
 /*=========AUTHOR CARD==========*/
+
+
 @media screen and (min-width:320px ) {
   .author__card{
     height: 350px;

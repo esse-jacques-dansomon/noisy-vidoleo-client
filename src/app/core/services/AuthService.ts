@@ -19,7 +19,7 @@ export class AuthService {
 
   private _connectedVendor: BehaviorSubject<LoginResponsePayload> = new BehaviorSubject(null);
 
-  connectedUser$ : Observable<LoginResponsePayload> = of(this.getUserConnectedInfo());
+  connectedUser$ : Observable<LoginResponsePayload> = this._connectedVendor.asObservable();
 
   verifyInfos() : Observable<Client> {
     return  this.http.get<Client>(`${this.apiUrl}jwt/me`);
@@ -118,7 +118,9 @@ export class AuthService {
     const payload = token.split('.')[1];
     //decode payload to json
     const infos = JSON.parse(atob(payload));
-    return infos as LoginResponsePayload;
+    const informations = infos as LoginResponsePayload;
+    this._connectedVendor.next(informations);
+    return informations;
   }
 
 

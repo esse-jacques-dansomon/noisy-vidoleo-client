@@ -5,6 +5,7 @@ import {PaginationType} from "../../../core/data/PaginationType";
 import {Observable} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {FormControl, FormGroup} from "@angular/forms";
+import { PaginationParams, SearchRequest } from 'src/app/core/data/search-request';
 
 @Component({
   selector: 'app-search',
@@ -16,6 +17,7 @@ export class SearchComponent implements OnInit {
   creators$: Observable<PaginationType<Creator>>;
   filterModel : any = {
   }
+  filterRequest:SearchRequest; 
 
   starsData: [
     {name: 'Trier par', value: 'default'},
@@ -71,6 +73,7 @@ export class SearchComponent implements OnInit {
     minPrice: new FormControl(''),
     stars: new FormControl(''),
     responseTime: new FormControl(''),
+    params: new FormControl('')
 
   });
   constructor(
@@ -83,11 +86,18 @@ export class SearchComponent implements OnInit {
 
 
   searchByKeyWorld() {
-    this.creators$  = this._creatorService.getOneByTypeAndUri$('search/'+this.keyWorld);
+    this.creators$  = this._creatorService.getByFilters(this.filterForm.value);
   }
 
   pageChange(number: number) {
-    this.creators$  = this._creatorService.getOneByTypeAndUriAndPage$('search/'+this.keyWorld, number);
+    let params:PaginationParams={
+      page:number.toString(),
+      pageSize:'40'
+    }
+    this.filterRequest = this.filterForm.value;
+    this.filterRequest.params=params;
+    //this.filterForm.controls['params'].setValue(params);
+    this.creators$  = this._creatorService.getByFilters(this.filterRequest);
     window.scrollTo(0, 0);
   }
 
@@ -97,7 +107,17 @@ export class SearchComponent implements OnInit {
       let key= params['keyWorld'];
       if(key != undefined && key != ''){
         this.keyWorld = key;
-        this.searchByKeyWorld();
+        //this.searchByKeyWorld();
+        let params:PaginationParams={
+          page:'1',
+          pageSize:'40'
+        }
+        this.filterRequest = this.filterForm.value;
+        this.filterRequest.params=params;
+        //console.log(this.filterRequest);
+        //this.filterForm.controls['keyWorld'].setValue(this.keyWorld);
+        //this.filterForm.controls['params'].setValue(params);
+        this.creators$  = this._creatorService.getByFilters(this.filterRequest);
         // this.searchAttributes.keyWorld = key ?? '';
         // this.searchForm.controls['keyWorld'].setValue(key);
         // this.searchResult$ = this.searchService.search(this.searchAttributes, 1);
@@ -105,7 +125,17 @@ export class SearchComponent implements OnInit {
     });
 
     this.filterForm.valueChanges.subscribe((value) => {
-      console.log(value);
+      let params:PaginationParams={
+        page:'1',
+        pageSize:'40'
+      }
+      this.filterRequest = this.filterForm.value;
+      this.filterRequest.params=params;
+      //console.log(this.filterRequest);
+      //this.filterForm.controls['keyWorld'].setValue(this.keyWorld);
+      //this.filterForm.controls['params'].setValue(params);
+      this.creators$  = this._creatorService.getByFilters(this.filterRequest);
+      //console.log(this.filterForm.value);
     });
 
   }
@@ -130,4 +160,10 @@ export class SearchComponent implements OnInit {
       document.body.classList.add("overlay");
     }
   }
+
+  TriePar(value: any){
+    //Build an object with the formGroup values
+    
+  }
+
 }

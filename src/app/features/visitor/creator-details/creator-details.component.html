@@ -130,10 +130,13 @@
       <div class="celebrity-feedbacks-content" *ngIf="creatorDemands$ | async as creatorDemands">
         <div *ngFor="let demand of creatorDemands.data" class="celebrity-feedbacks-item flex">
           <div class="celebrity-feedbacks-item-stars flex">
-            {{demand.comment.stars}}
-            <i class="ri-star-fill"></i>
+            <div class="rating">
+              <ng-container *ngFor="let i of [1,2,3,4,5]">
+                <i class="fa-solid fa-star" [ngClass]="{'active-star':i<=demand.comment.stars}"></i>
+              </ng-container>
+            </div>
           </div>
-          <h4>Par *** le {{demand.comment.created_at}}</h4>
+          <h4>Par ***** le {{demand.comment.created_at|date:'medium':'fr'}}</h4>
           <p>{{demand.comment.body}}</p>
       </div>
 

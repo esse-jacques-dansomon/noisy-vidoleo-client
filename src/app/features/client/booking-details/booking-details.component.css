@@ -1,0 +1,9 @@
+.is-valid{
+    border: 2px solid green;
+}
+.is-invalid{
+    border: 1px solid red;
+}
+.error-span{
+    color:red;
+}
