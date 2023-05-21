@@ -5,7 +5,6 @@ import {PaginationType} from "../../../core/data/PaginationType";
 import {Observable} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {FormControl, FormGroup} from "@angular/forms";
-import { PaginationParams, SearchRequest } from 'src/app/core/data/search-request';
 
 @Component({
   selector: 'app-search',
@@ -15,9 +14,7 @@ import { PaginationParams, SearchRequest } from 'src/app/core/data/search-reques
 export class SearchComponent implements OnInit {
 
   creators$: Observable<PaginationType<Creator>>;
-  filterModel : any = {
-  }
-  filterRequest:SearchRequest; 
+  isButtonVisible = true;
 
   starsData: [
     {name: 'Trier par', value: 'default'},
@@ -67,13 +64,12 @@ export class SearchComponent implements OnInit {
 
   keyWorld: string;
   filterForm: FormGroup= new FormGroup<any>({
-    keyWorld: new FormControl(''),
-    triType: new FormControl(''),
-    maxPrice: new FormControl(''),
-    minPrice: new FormControl(''),
-    stars: new FormControl(''),
-    responseTime: new FormControl(''),
-    params: new FormControl('')
+    keyWorld: new FormControl(null),
+    triType: new FormControl(null),
+    maxPrice: new FormControl(null),
+    minPrice: new FormControl(null),
+    stars: new FormControl(null),
+    responseTime: new FormControl(null),
 
   });
   constructor(
@@ -85,19 +81,33 @@ export class SearchComponent implements OnInit {
 
 
 
-  searchByKeyWorld() {
-    this.creators$  = this._creatorService.getByFilters(this.filterForm.value);
+  searchByKeyWorld(page: number = 1) {
+   const data = {
+      page: page,
+      perPage: 30,
+    }
+    if (this.filterForm.get('triType').value != null) {
+      data['triType'] = this.filterForm.get('triType').value;
+    }
+    if (this.filterForm.get('maxPrice').value != null) {
+      data['maxPrice'] = this.filterForm.get('maxPrice').value;
+    }
+    if (this.filterForm.get('minPrice').value != null) {
+      data['minPrice'] = this.filterForm.get('minPrice').value;
+    }
+    if (this.filterForm.get('stars').value != null) {
+      data['stars'] = this.filterForm.get('stars').value;
+    }
+    if (this.filterForm.get('responseTime').value != null) {
+      data['responseTime'] = this.filterForm.get('responseTime').value;
+    }if (this.filterForm.get('keyWorld').value != null) {
+      data['keyWorld'] = this.filterForm.get('keyWorld').value;
+    }
+    this.creators$  = this._creatorService.filterCreator(data);
   }
 
   pageChange(number: number) {
-    let params:PaginationParams={
-      page:number.toString(),
-      pageSize:'40'
-    }
-    this.filterRequest = this.filterForm.value;
-    this.filterRequest.params=params;
-    //this.filterForm.controls['params'].setValue(params);
-    this.creators$  = this._creatorService.getByFilters(this.filterRequest);
+    this.searchByKeyWorld(number);
     window.scrollTo(0, 0);
   }
 
@@ -107,35 +117,14 @@ export class SearchComponent implements OnInit {
       let key= params['keyWorld'];
       if(key != undefined && key != ''){
         this.keyWorld = key;
-        //this.searchByKeyWorld();
-        let params:PaginationParams={
-          page:'1',
-          pageSize:'40'
-        }
-        this.filterRequest = this.filterForm.value;
-        this.filterRequest.params=params;
-        //console.log(this.filterRequest);
-        //this.filterForm.controls['keyWorld'].setValue(this.keyWorld);
-        //this.filterForm.controls['params'].setValue(params);
-        this.creators$  = this._creatorService.getByFilters(this.filterRequest);
-        // this.searchAttributes.keyWorld = key ?? '';
-        // this.searchForm.controls['keyWorld'].setValue(key);
-        // this.searchResult$ = this.searchService.search(this.searchAttributes, 1);
+        this.filterForm.patchValue({
+          keyWorld: key
+        })
       }
     });
 
     this.filterForm.valueChanges.subscribe((value) => {
-      let params:PaginationParams={
-        page:'1',
-        pageSize:'40'
-      }
-      this.filterRequest = this.filterForm.value;
-      this.filterRequest.params=params;
-      //console.log(this.filterRequest);
-      //this.filterForm.controls['keyWorld'].setValue(this.keyWorld);
-      //this.filterForm.controls['params'].setValue(params);
-      this.creators$  = this._creatorService.getByFilters(this.filterRequest);
-      //console.log(this.filterForm.value);
+      this.searchByKeyWorld();
     });
 
   }
@@ -148,6 +137,7 @@ export class SearchComponent implements OnInit {
     } else {
       document.body.classList.add("overlay");
     }
+    this.isButtonVisible = !this.isButtonVisible;
   }
 
   hideAndShowMobile() {
@@ -160,10 +150,4 @@ export class SearchComponent implements OnInit {
       document.body.classList.add("overlay");
     }
   }
-
-  TriePar(value: any){
-    //Build an object with the formGroup values
-    
-  }
-
 }

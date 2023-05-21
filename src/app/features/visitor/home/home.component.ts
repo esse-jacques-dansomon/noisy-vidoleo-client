@@ -22,9 +22,9 @@ export class HomeComponent implements OnInit {
 
   //get creators vedettes
   $featuredCreators : Observable<PaginationType<Creator>> =  this.creatorService.getOneByTypeAndUri$("featured") ;
-  $acteurs : Observable<PaginationType<Creator>> =  this.creatorService.getOneByTypeAndUri$("category/tv") ;
+  $acteurs : Observable<PaginationType<Creator>> =  this.creatorService.getOneByTypeAndUri$("category/acteurs") ;
   $artistes : Observable<PaginationType<Creator>> =  this.creatorService.getOneByTypeAndUri$("category/artistes") ;
-  $creators : Observable<PaginationType<Creator>> =  this.creatorService.getOneByTypeAndUri$("category/createurs") ;
+  $creators : Observable<PaginationType<Creator>> =  this.creatorService.getOneByTypeAndUri$("category/influenceurs") ;
   $sportifs : Observable<PaginationType<Creator>> =  this.creatorService.getOneByTypeAndUri$("category/sportifs") ;
   //swiper config
   breakpoints = {
