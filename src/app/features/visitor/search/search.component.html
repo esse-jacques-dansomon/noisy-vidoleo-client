@@ -3,16 +3,16 @@
     <!--   START  FILTER HEADER-->
     <div class="search__header container  justify-space-between flex">
       <div class="search__header-text">
-        <h3>Resultats pour</h3>
-        <p>Search for your favorite movies</p>
+        <h3>Resultats pour la recherche</h3>
       </div>
       <div class="search__header-buttons  flex">
         <button  (click)="hideAndShow()" id="show-filter-mobile" class="show__filter-button">
-          Afficher les filtres
+           {{isButtonVisible ? 'Afficher les filtres' : 'Masquer les filtres'}}
         </button>
-        <button class="hide__filter-button">
-          Masquer les filtres
+        <button  (click)="hideAndShow()" id="show-filter-mobile" class="show__filter-button">
+           Renitialiser
         </button>
+
       </div>
     </div>
     <!--   END  FILTER HEADER-->
@@ -30,6 +30,7 @@
             <h3>Filtres</h3>
           </div>
           <form action="" [formGroup]="filterForm">
+<!--            CLEAR -->
             <!--     START FILTER ITEM : TRI-->
             <div class="search__filter-content-filters-item">
               <div class="search__filter-content-filters-item-title">
@@ -131,8 +132,23 @@
               </section>
             </ng-template>
             <ng-template [ngIf]="creatorsWithPagination.value.data.length == 0 ">
-
+              <section class="all-category">
+                <div class="all-category-celebrities grid">
+                  <div class="all-category-celebrities-empty">
+                    <h3>Aucun résultat trouvé</h3>
+                  </div>
+                </div>
+              </section>
             </ng-template>
+            <ng-template [ngIf]="creatorsWithPagination.loading">
+              <section class="all-category">
+                <div class="all-category-celebrities grid">
+                  <div class="all-category-celebrities-empty">
+                    <h3>Chargement en cours</h3>
+                  </div>
+                </div>
+              </section>
+          </ng-template>
           </ng-template>
         </ng-container>
 

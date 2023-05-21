@@ -14,8 +14,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 export class SearchComponent implements OnInit {
 
   creators$: Observable<PaginationType<Creator>>;
-  filterModel : any = {
-  }
+  isButtonVisible = true;
 
   starsData: [
     {name: 'Trier par', value: 'default'},
@@ -65,12 +64,12 @@ export class SearchComponent implements OnInit {
 
   keyWorld: string;
   filterForm: FormGroup= new FormGroup<any>({
-    keyWorld: new FormControl(''),
-    triType: new FormControl(''),
-    maxPrice: new FormControl(''),
-    minPrice: new FormControl(''),
-    stars: new FormControl(''),
-    responseTime: new FormControl(''),
+    keyWorld: new FormControl(null),
+    triType: new FormControl(null),
+    maxPrice: new FormControl(null),
+    minPrice: new FormControl(null),
+    stars: new FormControl(null),
+    responseTime: new FormControl(null),
 
   });
   constructor(
@@ -82,12 +81,33 @@ export class SearchComponent implements OnInit {
 
 
 
-  searchByKeyWorld() {
-    this.creators$  = this._creatorService.getOneByTypeAndUri$('search/'+this.keyWorld);
+  searchByKeyWorld(page: number = 1) {
+   const data = {
+      page: page,
+      perPage: 30,
+    }
+    if (this.filterForm.get('triType').value != null) {
+      data['triType'] = this.filterForm.get('triType').value;
+    }
+    if (this.filterForm.get('maxPrice').value != null) {
+      data['maxPrice'] = this.filterForm.get('maxPrice').value;
+    }
+    if (this.filterForm.get('minPrice').value != null) {
+      data['minPrice'] = this.filterForm.get('minPrice').value;
+    }
+    if (this.filterForm.get('stars').value != null) {
+      data['stars'] = this.filterForm.get('stars').value;
+    }
+    if (this.filterForm.get('responseTime').value != null) {
+      data['responseTime'] = this.filterForm.get('responseTime').value;
+    }if (this.filterForm.get('keyWorld').value != null) {
+      data['keyWorld'] = this.filterForm.get('keyWorld').value;
+    }
+    this.creators$  = this._creatorService.filterCreator(data);
   }
 
   pageChange(number: number) {
-    this.creators$  = this._creatorService.getOneByTypeAndUriAndPage$('search/'+this.keyWorld, number);
+    this.searchByKeyWorld(number);
     window.scrollTo(0, 0);
   }
 
@@ -97,15 +117,14 @@ export class SearchComponent implements OnInit {
       let key= params['keyWorld'];
       if(key != undefined && key != ''){
         this.keyWorld = key;
-        this.searchByKeyWorld();
-        // this.searchAttributes.keyWorld = key ?? '';
-        // this.searchForm.controls['keyWorld'].setValue(key);
-        // this.searchResult$ = this.searchService.search(this.searchAttributes, 1);
+        this.filterForm.patchValue({
+          keyWorld: key
+        })
       }
     });
 
     this.filterForm.valueChanges.subscribe((value) => {
-      console.log(value);
+      this.searchByKeyWorld();
     });
 
   }
@@ -118,6 +137,7 @@ export class SearchComponent implements OnInit {
     } else {
       document.body.classList.add("overlay");
     }
+    this.isButtonVisible = !this.isButtonVisible;
   }
 
   hideAndShowMobile() {
