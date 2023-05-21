@@ -585,9 +585,7 @@ header{
   padding: .5rem .1rem;
   margin-top: .3rem;
   text-align: start;
-  white-space: nowrap;
   text-overflow: ellipsis;
-
 }
 
 .author__card-info-title h3{
@@ -1659,7 +1657,7 @@ i{
 
 
 }@media screen and (min-width:768px ) {
-  
+
 
 }@media screen and (min-width:950px ) {
   .celebrity{
@@ -1691,7 +1689,7 @@ i{
   .author__card{
     height: 350px;
   }
-  
+
 }
 main{
   margin-top: 5rem;

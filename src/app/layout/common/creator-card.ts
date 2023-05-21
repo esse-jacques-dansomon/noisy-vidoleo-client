@@ -18,7 +18,7 @@ import {Creator} from "../../data/models/creator";
             <span>{{creator.titre}}</span>
           </div>
           <div class="author__card-info-price">
-            <span>{{getOccasionTypeMinPrice() | currency : 'FCFA' : 'code' : '3.2-2' }} </span>
+            <span>{{getOccasionTypeMinPrice() | currency : ' FCFA ' : 'code' : '3.2-2' }} </span>
           </div>
         </div>
       </a>

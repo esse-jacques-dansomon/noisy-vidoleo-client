@@ -54,8 +54,9 @@ export class AppComponent implements OnInit{
         let subMenu = document.querySelector('.sub-menu');
         subMenu.classList.toggle('show-submenu');
       })
-
     });
+
+
   }
 
   categories$ = this._categoryService.getOneByTypeAndUri$('');
@@ -64,7 +65,7 @@ export class AppComponent implements OnInit{
     dropdown.classList.toggle("show-dropdown");
   };
 
-  title = 'angular-start-prototype';
+  title = 'afrofame';
   keyWorld: any;
 
   connectedUser$ = this._authService.connectedUser$;
@@ -102,6 +103,11 @@ export class AppComponent implements OnInit{
       icon.classList.add('ri-arrow-right-s-line');
       icon.classList.remove('ri-arrow-down-s-line');
     }
+  }
+
+  toggleMenu() {
+    const menu = document.querySelector('.nav__list');
+    menu.classList.toggle('show-menu');
   }
 
 

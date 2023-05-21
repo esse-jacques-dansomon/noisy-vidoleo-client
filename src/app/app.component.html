@@ -1,9 +1,8 @@
 <header class="">
-  <nav class="navBar flex">
-    <div id="nav__toggle">
+  <nav class="navBar flex ">
+    <div id="nav__toggle" (click)="toggleMenu()">
       <i id="nav__toggle-icon" class="ri-menu-2-line"></i>
     </div>
-    <!--<h1 class="logo flex"><a [routerLink]="'/'"></a></h1>-->
     <img class="visitor-logo" [routerLink]="'/'" src="../assets/img/logo1.jpg" alt="">
     <div class="flex nav__list">
       <ul class="menu_items flex-c-s">
@@ -27,7 +26,7 @@
         <li class="nav__item"><a class="nav__link" [routerLink]="'/comment-ca-marche'">Comment ça marche</a></li>
       </ul>
 
-      <div id="close-icon">
+      <div id="close-icon"  (click)="toggleMenu()">
         <i class="ri-close-line"></i>
       </div>
     </div>
@@ -36,7 +35,7 @@
         <i class="ri-search-line"></i>
       </button>
       <label>
-        <input  [(ngModel)]="keyWorld" (keyup)="handleKeyUp($event)" type="text" placeholder="Search">
+        <input  [(ngModel)]="keyWorld" (keyup)="handleKeyUp($event)" type="text" placeholder="Recherche">
       </label>
 
     </div>
