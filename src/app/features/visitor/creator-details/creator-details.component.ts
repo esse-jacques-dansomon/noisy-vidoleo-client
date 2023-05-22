@@ -7,6 +7,7 @@ import {Observable} from "rxjs";
 import {CreatorService} from "../../../data/services/creator.service";
 import {PaginationType} from "../../../core/data/PaginationType";
 import {Demande} from "../../../data/models/demande";
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-creator-details',
@@ -89,7 +90,7 @@ export class CreatorDetailsComponent implements OnInit {
   creator : Creator ;
   creatorsInSameCategory$: Observable<PaginationType<Creator>>;
   creatorDemands$: Observable<PaginationType<Demande>>
-
+  pictureUrl:string = environment.pictureUrl;
   constructor(
     private route: ActivatedRoute,
     private _creatorService: CreatorService,
@@ -102,6 +103,7 @@ export class CreatorDetailsComponent implements OnInit {
       this.creator = data['creator'];
       this.creatorsInSameCategory$ = this._creatorService.getOneByTypeAndUri$('category/' + this.creator.sub_category.category.slug);
       this.creatorDemands$ = this._creatorService.getOneByTypeAndUriAndPage$('avis/' + this.creator.id, 1, '5');
+      console.log(this.creator);
     });
   }
 

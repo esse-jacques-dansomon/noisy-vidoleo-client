@@ -4,49 +4,52 @@
     <p>
       Si tu as de nombreux fans et que tu souhaites devenir un talent Cameo, tu peux postuler ici et nous te contacterons dans les 72 heures.
     </p>
-    <form action="" class="register__login">
+    <form action="" class="register__login" [formGroup]="becomeCreatorForm" (ngSubmit)="becomeCreatorForm.valid && onSubmit()">
       <div class="form__group">
         <label >Nom * </label>
-        <input type="text" placeholder="Esse jacques">
+        <input type="text" placeholder="Dams" formControlName="last_name">
+      </div>
+      <div class="form__group">
+        <label >Prenoms * </label>
+        <input type="text" placeholder="Esse jacques" formControlName="first_name">
       </div>
       <div class="form__group">
         <label >Adresse Email *</label>
-        <input type="email" placeholder="nom@exemple.com">
+        <input type="email" placeholder="nom@exemple.com" formControlName="email">
       </div>
       <div class="form__group">
         <label >Numero de téléphone * </label>
-        <input type="text" placeholder="555-555-555">
+        <input type="text" placeholder="77 123 45 67" formControlName="phone">
       </div>
       <div class="form__group">
         <label  for="socialMedia">Social Media * </label>
-        <select id="socialMedia" name="social">
-          <option value="">Facebook</option>
-          <option value="">Instagram</option>
-          <option value="">Twitter</option>
-          <option value="">Snapchat</option>
-          <option value="">Linkedin</option>
+        <select id="socialMedia" name="social" formControlName="principal_social_network">
+          <option value="Facebook">Facebook</option>
+          <option value="Instagram">Instagram</option>
+          <option value="Twitter">Twitter</option>
+          <option value="Snapchat">Snapchat</option>
+          <option value="Linkedin">Linkedin</option>
         </select>
       </div>
 
       <div class="form__group">
         <label >Ton nom d'utilisateur * </label>
-        <input type="text" placeholder="Esse jacques">
+        <input type="text" placeholder="Esse jacques" formControlName="pseudo_social_network" >
       </div>
       <div class="form__group">
         <label >Combien de personnes te suivent ? *</label>
-        <input type="text" placeholder="400k">
+        <input type="text" placeholder="400k" formControlName="followers">
       </div>
-      <div class="form__group">
+      <!-- <div class="form__group">
         <label >Y a-t-il autre chose que nous devrions savoir sur toi ?</label>
         <textarea maxlength="450"  rows="4" ></textarea>
-      </div>
+      </div> -->
       <div class="form__group">
-        <button class="form__button">Envoyer</button>
+        <button *ngIf="becomeCreatorForm.valid" type="submit" class="form__button">Envoyer</button>
       </div>
       <div class="remaque">
         <p>Remarque : ton inscription sur Cameo n'est pas automatique. Si tu remplis les conditions d'admissibilité, un représentant des talents te contactera dans les prochains jours pour finaliser ton inscription.</p>
       </div>
-
     </form>
 
   </section>

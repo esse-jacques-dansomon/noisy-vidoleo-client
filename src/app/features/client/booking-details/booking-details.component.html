@@ -2,33 +2,33 @@
   <section class="request-details-card flex-c-s ">
     <div class="">
       <h5 class="form__card-title">Details de la demande</h5>
-      <div class="flex-c-s mt-1">
-        <p>Talend demandé</p>
+      <div *ngIf="demand" class="flex-c-s mt-1">
+        <p>Talent demandé</p>
         <h4>{{demand.creatorOccasionType.creator.titre}}</h4>
       </div>
 
-      <div class="flex-c-s mt-1">
+      <div *ngIf="demand" class="flex-c-s mt-1">
         <p>Video pour</p>
         <h4>{{demand.receiver}}</h4>
       </div>
 
-      <div class="flex-c-s mt-1" *ngIf="demand.options">
+      <div class="flex-c-s mt-1" *ngIf="demand">
         <p>Options </p>
         <h4 *ngFor="let option of demand.options" >{{option.name}}</h4>
       </div>
-      <div class="flex-c-s mt-1">
+      <div *ngIf="demand" class="flex-c-s mt-1">
         <h4>Instruction </h4>
         <p class="flex-c-s ">
           {{demand.message}}
         </p>
       </div>
       <div *ngIf="videoVisible" class="flex-c-s mt-1">
-        <h4>Commentaire</h4>
         <div *ngIf="demand.comment">
+          <h4>Commentaire</h4>
           <textarea name="" id="" cols="40" rows="5" disabled>{{demand.comment.body}}</textarea>
           <div class="rating">
             <ng-container *ngFor="let i of stars">
-              <i class="fa-solid fa-star" [ngClass]="{'active-star':i<=rating}"></i>
+              <i class="fa-solid fa-star" [ngClass]="{'active-star':i<=demand.comment.stars}"></i>
             </ng-container>
           </div>
         </div>
@@ -53,19 +53,19 @@
         
       </div>
     </div>
-    <div class="">
+    <div class="" *ngIf="demand">
       <h6 class="form__card-title">Paiement</h6>
       <div class="flex-c-s mt-1">
         <p>Total</p>
         <h4>{{demand.price}} FCFA</h4>
       </div>
 
-      <div class="flex-c-s mt-1">
+      <div *ngIf="demand" class="flex-c-s mt-1">
         <p>Etat payment</p>
         <h4>{{demand.status}}</h4>
       </div>
 
-      <div class="flex-c-s mt-1">
+      <div *ngIf="demand" class="flex-c-s mt-1">
         <p>Moyen de paiement </p>
         <h4> {{demand.payment.type}}</h4>
       </div>
@@ -75,11 +75,11 @@
         <h4>Wave, orange money, CB </h4>
       </div>
 
-      <div class="flex-c-s mt-1">
+      <div class="flex-c-s mt-1" *ngIf="demand.status=='pending'">
         <h4>Actions </h4>
         <div class="flex ">
-          <button *ngIf="demand.status=='pending'" (click)="makePayment()" class="btn btn--primary">Payer</button>
-          <button *ngIf="demand.status=='pending'" class="btn btn--primary">Annuler</button>
+          <button (click)="makePayment()" class="btn btn--primary">Payer</button>
+          <button class="btn btn--primary">Annuler</button>
         </div>
       </div>
       <br>

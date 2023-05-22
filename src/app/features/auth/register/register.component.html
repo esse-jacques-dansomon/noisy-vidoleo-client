@@ -33,7 +33,7 @@
       </div>
       <div class="form__group">
         <label >Code d’invitation (facultatif)</label>
-        <input type="text" placeholder="Mot de Passe">
+        <input type="text" placeholder="Code d'invitation">
       </div>
       <div class="form__group " >
         <button [disabled]="registerForm.invalid  && !validatePassword()" [ngClass]="(registerForm.invalid  || !validatePassword()) ? 'button-disable-color':''" *ngIf="!isLoading" type="submit" class="form__button">Créer un compte</button>

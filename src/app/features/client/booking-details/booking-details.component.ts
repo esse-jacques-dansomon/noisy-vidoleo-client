@@ -69,8 +69,10 @@ export class BookingDetailsComponent implements OnInit {
     }else{
       this._demandService.commmentDemande$(this.demand.id, this.commentForm.value.body, this.rating).subscribe(
         data=>{
+          console.log(data);
+          this.demand= data;
           this._notiflixService.success('Commentaire ajouté avec succès');
-          location.reload();
+          //location.reload();
         }
       );
     }

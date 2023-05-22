@@ -23,4 +23,5 @@ export interface Creator {
   account: Account;
   sub_category: SubCategory;
   withdrawals: any[];
+  comment_count: number;
 }

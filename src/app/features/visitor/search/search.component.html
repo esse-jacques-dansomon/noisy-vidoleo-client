@@ -38,7 +38,7 @@
               </div>
               <div class="filter-item">
                 <div class="search__radio-item" *ngFor="let trieElement of trieData">
-                  <input type="radio"(click)="TriePar(trieElement.value)"  [id]="trieElement.value"  formControlName="triType" [value]="trieElement.value" >
+                  <input type="radio" [id]="trieElement.value"  formControlName="triType" [value]="trieElement.value" >
                   <label  [for]="trieElement.value">{{trieElement.name}}</label>
                 </div>
               </div>
@@ -68,7 +68,7 @@
               </div>
               <div class="filter-item">
                 <div class="search__radio-item" *ngFor="let star of trieData2">
-                  <input  formControlName="stars" (click)="TriePar(star.value)" type="radio" [id]="star.value"  [value]="star.value" >
+                  <input  formControlName="stars" type="radio" [id]="star.value"  [value]="star.value" >
                   <label [for]="star.value" >{{star.name}}</label>
                 </div>
               </div>

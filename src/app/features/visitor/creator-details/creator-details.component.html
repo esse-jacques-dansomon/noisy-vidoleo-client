@@ -34,13 +34,19 @@
                 <span>{{creator.titre}}</span>
               </div>
             </div>
-            <img class="celebrity__card-author-img"  [src]="creator.profile_image" alt="">
+            <img class="celebrity__card-author-img"  [src]="pictureUrl+''+creator.profile_image" alt="">
           </div>
           <div class="celebrity__context flex">
             <div class="flex">
               <div class="celebrity__context-rating flex">
-                <i class="ri-star-fill"></i>
-                <span>(71)</span>
+                <div class="celebrity-feedbacks-item-stars flex">
+                  <div class="rating">
+                    <ng-container *ngFor="let i of [1,2,3,4,5]">
+                      <i class="fa-solid fa-star" [ngClass]="{'active-star':i<=creator.stars_avg}"></i>
+                    </ng-container>
+                  </div>
+                </div>
+                <span>({{creator.comment_count}})</span>
               </div>
               <div class="celebrity__context-verify flex" >
                 <i class="ri-checkbox-circle-fill"></i>

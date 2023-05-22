@@ -51,7 +51,7 @@
         <div class="dropdown-content hide" *ngIf="isLogged()">
           <a [routerLink]="['client/profil']">Profile</a>
           <a [routerLink]="['client/demandes']">Mes Demandes</a>
-          <a (click)="logout()">Logout</a>
+          <a (click)="logout()">Deconnexion</a>
         </div>
         <div class="dropdown-content hide" *ngIf="!isLogged()">
           <a [routerLink]="['auth/se-connecter']">Se Connecter </a>
@@ -104,10 +104,12 @@
         <p>Prêt à devenir un talent sur Afroframe ?</p>
         <a class="became-celebrity" [routerLink]="'devenir-createur'">Devenir une célébrité </a>
       </div>
-      <div class="footer-item-2-item">
+      <div class="footer-item-2-item" *ngIf="!isLogged()">
         <p>Vous avez un compte ?</p>
         <a class="became-celebrity" [routerLink]="'auth/se-connecter'">Se Connecter</a>
-
+      </div>
+      <div class="footer-item-2-item" *ngIf="isLogged()">
+        <a class="became-celebrity" (click)="logout()">Deconnexion</a>
       </div>
     </div>
   </div>
