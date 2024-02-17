@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ContactVendorComponent} from "./components/contact-vendor.component";
 import {CreatorCard} from "../layout/common/creator-card";
-import {RouterLinkWithHref} from "@angular/router";
+import {RouterLink} from "@angular/router";
 import {DemandClientCard} from "../layout/common/demand-client-card";
 
 
@@ -25,7 +25,7 @@ import {DemandClientCard} from "../layout/common/demand-client-card";
   ],
   imports: [
     CommonModule,
-    RouterLinkWithHref,
+    RouterLink,
   ]
 })
 export class SharedModule { }
