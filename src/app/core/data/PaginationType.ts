@@ -1,6 +1,6 @@
 
 export interface PaginationType <T> {
-   data : T[];
+   data : T[] ;
    meta: Meta;
 
 }
