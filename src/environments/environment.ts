@@ -7,7 +7,8 @@ export const environment = {
   // apiUrl: "http://apinoisy.dreamhosters.com/api/"
   apiUrl: "http://localhost:8000/api/",
   videoUrl:"http://localhost:8000/storage/videos/",
-  pictureUrl:"http://localhost:8000/storage/pictures/"
+  pictureUrl:""
+  // pictureUrl:"http://localhost:8000/storage/pictures/"
 };
 
 /*

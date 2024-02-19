@@ -3,9 +3,15 @@ import {Injectable} from "@angular/core";
 import {CreatorService} from "../../../data/services/creator.service";
 import {
   LoadActorCreatorsFailure,
-  LoadActorCreatorsSuccess, LoadCategoriesFailure, LoadCategoriesSuccess,
+  LoadActorCreatorsSuccess,
+  LoadCategoriesFailure,
+  LoadCategoriesSuccess,
   LoadFeaturedCreatorsFailure,
-  LoadFeaturedCreatorsSuccess, LoadNewCreatorsFailure, LoadNewCreatorsSuccess,
+  LoadFeaturedCreatorsSuccess,
+  LoadNewCreatorsFailure,
+  LoadNewCreatorsSuccess,
+  SelectCategoryFailure,
+  SelectCategorySuccess,
   VisitorActionType
 } from "./visitor.action";
 import {ofType} from "@ngrx/effects";
@@ -17,16 +23,15 @@ import {CategoryService} from "../../../data/services/category.service";
 @Injectable()
 export class VisitorEffects {
 
-  loadFeaturedCreator$ = createEffect(() =>
+  loadFeaturedCreators$ = createEffect(() =>
     this.actions$.pipe(
       ofType(VisitorActionType.LoadFeaturedCreators),
       switchMap(() =>
-        this.creatorService
-          .getOneByTypeAndUri$('featured')
+        this.creatorService.getOneByTypeAndUri$("featured")
           .pipe(
             map((data : PaginationType<Creator> ) => {
               return new LoadFeaturedCreatorsSuccess({
-                creators: data.data,
+                data: data,
               });
             }),
             catchError((error) => of(new LoadFeaturedCreatorsFailure(error)))
@@ -35,16 +40,15 @@ export class VisitorEffects {
     )
   );
 
-  loadFeaturedActorsCreator$ = createEffect(() =>
+  loadActorsCreators$ = createEffect(() =>
     this.actions$.pipe(
       ofType(VisitorActionType.LoadActorCreators),
       switchMap(() =>
-        this.creatorService
-          .getOneByTypeAndUri$('category/acteurs')
+        this.creatorService.getOneByTypeAndUri$("category/acteurs")
           .pipe(
             map((data : PaginationType<Creator> ) => {
               return new LoadActorCreatorsSuccess({
-                creators: data.data,
+                data: data,
               });
             }),
             catchError((error) => of(new LoadActorCreatorsFailure(error)))
@@ -53,16 +57,33 @@ export class VisitorEffects {
     )
   );
 
-  loadNewCreator$ = createEffect(() =>
+  loadNewCreators$ = createEffect(() =>
     this.actions$.pipe(
       ofType(VisitorActionType.LoadNewCreators),
       switchMap(() =>
-        this.creatorService
-          .getOneByTypeAndUri$('new')
+        this.creatorService.getOneByTypeAndUri$("category/artistes")
           .pipe(
             map((data : PaginationType<Creator> ) => {
               return new LoadNewCreatorsSuccess({
-                creators: data.data,
+                data: data,
+              });
+            }),
+            catchError((error) => of(new LoadNewCreatorsFailure(error)))
+          )
+      )
+    )
+  );
+
+  loadSelectedCreator$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(VisitorActionType.LoadSelectedCreator),
+      switchMap((action:  {slug : string}) =>
+        this.creatorService
+          .getOneByTypeAndUri$('creator/' + action.slug)
+          .pipe(
+            map((data : PaginationType<Creator> ) => {
+              return new LoadNewCreatorsSuccess({
+                data: data,
               });
             }),
             catchError((error) => of(new LoadNewCreatorsFailure(error)))
@@ -75,12 +96,11 @@ export class VisitorEffects {
     this.actions$.pipe(
       ofType(VisitorActionType.LoadCategories),
       switchMap(() =>
-        this.categoryService
-          .getOneByTypeAndUri$('')
+        this.categoryService.getOneByTypeAndUri$('')
           .pipe(
             map((data ) => {
               return new LoadCategoriesSuccess({
-                categories: data,
+                categories: data.data,
               });
             }),
             catchError((error) => of(new LoadCategoriesFailure(error)))
@@ -88,6 +108,26 @@ export class VisitorEffects {
       )
     )
   );
+
+  loadCategoryCreators$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(VisitorActionType.SelectCategory),
+      switchMap((action:  {slug : string}) =>
+        this.categoryService
+          .getOneByTypeAndUri$('category/' + action.slug)
+          .pipe(
+            map((data : PaginationType<Creator> ) => {
+              return new SelectCategorySuccess({
+                creators: data,
+              });
+            }),
+            catchError((error) => of(new SelectCategoryFailure(error)))
+          )
+      )
+    )
+  );
+
+
 
 
   constructor(

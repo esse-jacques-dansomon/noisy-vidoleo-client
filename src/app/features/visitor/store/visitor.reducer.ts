@@ -1,49 +1,76 @@
 import {Creator} from "../../../data/models/creator";
 import {Category} from "../../../data/models/category";
 import {VisitorActions, VisitorActionType} from "./visitor.action";
+import {PaginationType} from "../../../core/data/PaginationType";
+import {Demande} from "../../../data/models/demande";
 
 export interface VisitorState {
 
-  featuredCreators: Creator[],
-  newCreators: Creator[],
-  actorsCreators: Creator[],
-  selectedCreator: Creator,
-
-  categories: Category[],
-  selectedCategory: Category,
-  selectedCategoryCreators: Creator[],
-
-  filter: {
-    stars: string,
-    keyword: string,
-    minPrice: number,
-    maxPrice: number,
-    new: string,
-    orderType: 'price-asc' | 'price-desc' | 'new'
+  creatorsState: {
+    featuredCreators: PaginationType<Creator>,
+    newCreators: PaginationType<Creator>,
+    actorsCreators: PaginationType<Creator>,
   }
-  filterCreators: Creator[],
+
+  categoriesState: {
+    categories: Category[],
+    selectedCategory: Category,
+    selectedCategoryCreators: PaginationType<Creator>,
+  }
+
+  creatorState: {
+    selectedCreator: Creator,
+    selectedCreatorsByCategory: PaginationType<Creator>,
+    creatorDemands: PaginationType<Demande>,
+  }
+
+  filterState: {
+    filter: {
+      stars: string,
+      keyword: string,
+      minPrice: number,
+      maxPrice: number,
+      new: string,
+      orderType: 'price-asc' | 'price-desc' | 'new'
+    }
+    filterCreators: PaginationType<Creator>,
+  }
 
   isLoading: boolean,
   error: any;
 }
 
 export const visitorInitialState: VisitorState = {
-  selectedCreator: null,
-  featuredCreators: [],
-  newCreators: [],
-  actorsCreators: [],
-  filterCreators: [],
-  filter: {
-    stars: null,
-    keyword: null,
-    minPrice: null,
-    maxPrice: null,
-    new: null,
-    orderType: "price-asc"
+  creatorsState: {
+    featuredCreators: null,
+    newCreators: null,
+    actorsCreators: null,
   },
-  categories: [],
-  selectedCategory: null,
-  selectedCategoryCreators: [],
+
+  categoriesState: {
+    categories: null,
+    selectedCategory: null,
+    selectedCategoryCreators: null,
+  },
+
+  creatorState: {
+    selectedCreator: null,
+    selectedCreatorsByCategory: null,
+    creatorDemands: null,
+  },
+
+  filterState: {
+    filter: {
+      stars: null,
+      keyword: null,
+      minPrice: null,
+      maxPrice: null,
+      new: null,
+      orderType: null
+    },
+    filterCreators: null,
+  },
+
   isLoading: false,
   error: null
 }
@@ -64,14 +91,17 @@ export function visitorReducer(state: VisitorState, action: VisitorActions): Vis
     case VisitorActionType.LoadFeaturedCreatorsSuccess:
       return {
         ...state,
-        featuredCreators: state.featuredCreators
+        creatorsState: {
+          ...state.creatorsState,
+          featuredCreators: action.payload.data
+        }
       }
 
     case VisitorActionType.LoadFeaturedCreatorsFailure:
       return {
         ...state,
         isLoading: false,
-        error: state.error
+        error: action.payload.error
       }
 
 
@@ -87,14 +117,17 @@ export function visitorReducer(state: VisitorState, action: VisitorActions): Vis
     case VisitorActionType.LoadNewCreatorsSuccess:
       return {
         ...state,
-        newCreators: state.newCreators
+        creatorsState: {
+          ...state.creatorsState,
+          newCreators: action.payload.data
+        }
       }
 
     case VisitorActionType.LoadNewCreatorsFailure:
       return {
         ...state,
         isLoading: false,
-        error: state.error
+        error: action.payload.error
       }
 
 
@@ -110,19 +143,27 @@ export function visitorReducer(state: VisitorState, action: VisitorActions): Vis
     case VisitorActionType.LoadActorCreatorsSuccess:
       return {
         ...state,
-        actorsCreators: state.actorsCreators
+        creatorsState: {
+          ...state.creatorsState,
+          actorsCreators: action.payload.data
+        }
       }
 
     case VisitorActionType.LoadActorCreatorsFailure:
       return {
         ...state,
         isLoading: false,
-        error: state.error
+        error: action.payload.error
       }
 
 
     /**
-     * Load Selected Creator : LoadActorCreators LoadActorCreatorsSuccess,LoadActorCreatorsFailure
+     * Load Selected Creator :
+     * LoadActorCreators
+     * LoadActorCreatorsSuccess,
+     * LoadSelectedCreatorDemandsSuccess
+     * LoadSelectedCreatorFeaturedCreatorSuccess
+     * LoadActorCreatorsFailure
      */
     case VisitorActionType.LoadSelectedCreator:
       return {
@@ -133,14 +174,35 @@ export function visitorReducer(state: VisitorState, action: VisitorActions): Vis
     case VisitorActionType.LoadSelectedCreatorSuccess:
       return {
         ...state,
-        selectedCreator: state.selectedCreator
+        creatorState: {
+          ...state.creatorState,
+          selectedCreator: action.payload.creator
+        }
+      }
+
+    case VisitorActionType.LoadSelectedCreatorDemandsSuccess:
+      return {
+        ...state,
+        creatorState: {
+          ...state.creatorState,
+          creatorDemands: action.payload.demands
+        }
+      }
+
+    case VisitorActionType.LoadSelectedCreatorFeaturedCreatorsSuccess:
+      return {
+        ...state,
+        creatorState: {
+          ...state.creatorState,
+          selectedCreatorsByCategory: action.payload.creators
+        }
       }
 
     case VisitorActionType.LoadSelectedCreatorFailure:
       return {
         ...state,
         isLoading: false,
-        error: state.error
+        error: action.payload.error
       }
 
     /**
@@ -155,36 +217,45 @@ export function visitorReducer(state: VisitorState, action: VisitorActions): Vis
     case VisitorActionType.LoadCategoriesSuccess:
       return {
         ...state,
-        categories: state.categories
+        categoriesState: {
+          ...state.categoriesState,
+          categories: action.payload.categories
+        }
       }
 
     case VisitorActionType.LoadCategoriesFailure:
       return {
         ...state,
         isLoading: false,
-        error: state.error
+        error: action.payload.error
       }
 
 
     /**
      * Load Selected Category
-      */
+     */
     case VisitorActionType.SelectCategory:
       return {
         ...state,
-        selectedCategory: state.selectedCategory,
-        isLoading: true
+        isLoading: true,
+        categoriesState: {
+          ...state.categoriesState,
+          selectedCategory: action.payload.category
+        }
       }
     case VisitorActionType.SelectCategorySuccess:
       return {
         ...state,
-        selectedCategoryCreators: state.selectedCategoryCreators
+        categoriesState: {
+          ...state.categoriesState,
+          selectedCategoryCreators: action.payload.creators
+        }
       }
     case VisitorActionType.SelectCategoryFailure:
       return {
         ...state,
         isLoading: false,
-        error: state.error
+        error: action.payload.error
       }
 
     /**
@@ -193,25 +264,42 @@ export function visitorReducer(state: VisitorState, action: VisitorActions): Vis
     case VisitorActionType.ApplyFilter:
       return {
         ...state,
-        filter: state.filter,
-        isLoading: true
+        isLoading: true,
+        filterState: {
+          ...state.filterState,
+          filter: action.payload.filter
+        }
       }
     case VisitorActionType.ClearFilter:
       return {
         ...state,
-        filter: visitorInitialState.filter,
-        isLoading: true
+        isLoading: true,
+        filterState: {
+          ...state.filterState,
+          filter: {
+            stars: null,
+            keyword: null,
+            minPrice: null,
+            maxPrice: null,
+            new: null,
+            orderType: null
+          }
+        }
       }
     case VisitorActionType.ApplyFilterSuccess:
       return {
         ...state,
-        filterCreators: state.filterCreators
+        isLoading: false,
+        filterState: {
+          ...state.filterState,
+          filterCreators: action.payload.data
+        }
       }
     case VisitorActionType.ApplyFilterFailure:
       return {
         ...state,
         isLoading: false,
-        error: state.error
+        error: action.payload.error
       }
 
     default:

@@ -62,11 +62,8 @@ export class CategoryComponent implements OnInit {
         },
       },
     };
-
-
   slug: string = this._route.snapshot.paramMap.get('slug') || '';
   categoryCreators$ : Observable<PaginationType<Creator>>;
-
 
   constructor(
     private _creatorService: CreatorService,
@@ -74,10 +71,9 @@ export class CategoryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //evry time the slug change we get the new data
     this._route.params.subscribe(params => {
       this.slug = params['slug'];
-      this.categoryCreators$ = this._creatorService.getOneByTypeAndUri$('category/'+this.slug);
+      this.categoryCreators$ = this._creatorService.getOneByTypeAndUri$('category/' + this.slug);
     });
   }
   pageChange(number: number) {

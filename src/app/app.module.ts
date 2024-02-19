@@ -18,6 +18,7 @@ import { EffectsModule } from '@ngrx/effects';
 import {registerLocaleData} from "@angular/common";
 import localeFr from '@angular/common/locales/fr';
 import {VisitorStoreModule} from "./features/visitor/store/visitor-store.module";
+import {VisitorStoreService} from "./features/visitor/store/visitor-store.service";
 
 registerLocaleData(localeFr);
 
@@ -70,4 +71,11 @@ registerLocaleData(localeFr);
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private visitorStoreService: VisitorStoreService) {
+    this.visitorStoreService.loadFeaturedCreators();
+    this.visitorStoreService.loadActorsCreators();
+    this.visitorStoreService.loadNewCreators();
+    this.visitorStoreService.loadCategories();
+  }
+}

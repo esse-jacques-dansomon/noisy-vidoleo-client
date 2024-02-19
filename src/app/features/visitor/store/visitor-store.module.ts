@@ -7,6 +7,7 @@ import {VisitorEffects} from "./visitor.effects";
 import {featureStoreConfigFactory, StoreStateService} from "../../../store";
 import {CreatorService} from "../../../data/services/creator.service";
 import {CategoryService} from "../../../data/services/category.service";
+import {VisitorStoreService} from "./visitor-store.service";
 
 const featureKey = visitorConfig.store.key;
 
@@ -39,6 +40,7 @@ export const visitorStoreFeatureConfigToken = new InjectionToken<StoreConfig<Vis
     },
     CreatorService,
     CategoryService,
+    VisitorStoreService
   ],
 })
 export class VisitorStoreModule {}

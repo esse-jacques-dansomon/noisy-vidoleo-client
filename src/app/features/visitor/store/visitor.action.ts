@@ -1,6 +1,8 @@
 import {Action} from "@ngrx/store";
 import {Category} from "../../../data/models/category";
 import {Creator} from "../../../data/models/creator";
+import {PaginationType} from "../../../core/data/PaginationType";
+import {Demande} from "../../../data/models/demande";
 
 
 export enum VisitorActionType {
@@ -19,6 +21,8 @@ export enum VisitorActionType {
 
   LoadSelectedCreator = '[Visitor] Load selected creator',
   LoadSelectedCreatorSuccess = '[Visitor] Load selected creatorSuccess',
+  LoadSelectedCreatorDemandsSuccess = '[Visitor] Load selected creatorDemands Success',
+  LoadSelectedCreatorFeaturedCreatorsSuccess = '[Visitor] Load selected CreatorFeatured Creators Success',
   LoadSelectedCreatorFailure = '[Visitor] Load selected creator Failure',
 
   ClearFilter = '[Visitor] Clear filter',
@@ -45,7 +49,7 @@ export class LoadFeaturedCreators implements Action {
 
 export class LoadFeaturedCreatorsSuccess implements Action {
   readonly type = VisitorActionType.LoadFeaturedCreatorsSuccess;
-  constructor(public payload: { creators: Creator[] }) {}
+  constructor(public payload: { data: PaginationType<Creator> }) {}
 }
 
 export class LoadFeaturedCreatorsFailure implements Action {
@@ -61,7 +65,7 @@ export class LoadNewCreators implements Action {
 
 export class LoadNewCreatorsSuccess implements Action {
   readonly type = VisitorActionType.LoadNewCreatorsSuccess;
-  constructor(public payload: { creators: Creator[] }) {}
+  constructor(public payload: { data: PaginationType<Creator> }) {}
 }
 
 export class LoadNewCreatorsFailure implements Action {
@@ -75,7 +79,7 @@ export class LoadActorCreators implements Action {
 
 export class LoadActorCreatorsSuccess implements Action {
   readonly type = VisitorActionType.LoadActorCreatorsSuccess;
-  constructor(public payload: { creators: Creator[] }) {}
+  constructor(public payload: { data: PaginationType<Creator> }) {}
 }
 
 export class LoadActorCreatorsFailure implements Action {
@@ -95,6 +99,16 @@ export class LoadSelectedCreator implements Action {
 export class LoadSelectedCreatorSuccess implements Action {
   readonly type = VisitorActionType.LoadSelectedCreatorSuccess
   constructor(public payload: {creator : Creator}) {}
+}
+
+export class LoadSelectedCreatorDemandsSuccess implements Action {
+  readonly type = VisitorActionType.LoadSelectedCreatorDemandsSuccess
+  constructor(public payload: {demands : PaginationType<Demande>}) {}
+}
+
+export class LoadSelectedCreatorFeaturedCreatorsSuccess implements Action {
+  readonly type = VisitorActionType.LoadSelectedCreatorFeaturedCreatorsSuccess
+  constructor(public payload: {creators : PaginationType<Creator>}) {}
 }
 
 export class LoadSelectedCreatorFailure implements Action {
@@ -117,7 +131,7 @@ export class ApplyFilter implements Action {
 
 export class ApplyFilterSuccess implements Action {
   readonly type = VisitorActionType.ApplyFilterSuccess
-  constructor(public payload: {creators: Creator[]}) {
+  constructor(public payload: { data: PaginationType<Creator> }) {
   }
 }
 
@@ -148,7 +162,7 @@ export class SelectCategory implements Action {
 
 export class SelectCategorySuccess implements Action {
   readonly type = VisitorActionType.SelectCategorySuccess;
-  constructor(public payload: { selectedCategory: Category }) {}
+  constructor(public payload: { creators: PaginationType<Creator> }) {}
 }
 
 export class SelectCategoryFailure implements Action {
@@ -174,6 +188,8 @@ export type VisitorActions =
 
   | LoadSelectedCreator
   | LoadSelectedCreatorSuccess
+  | LoadSelectedCreatorDemandsSuccess
+  | LoadSelectedCreatorFeaturedCreatorsSuccess
   | LoadSelectedCreatorFailure
 
 

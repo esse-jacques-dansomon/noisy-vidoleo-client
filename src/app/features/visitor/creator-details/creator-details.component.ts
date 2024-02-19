@@ -94,16 +94,14 @@ export class CreatorDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private _creatorService: CreatorService,
-
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
       this.creator = data['creator'];
+      console.log(this.creator)
       this.creatorsInSameCategory$ = this._creatorService.getOneByTypeAndUri$('category/' + this.creator.sub_category.category.slug);
       this.creatorDemands$ = this._creatorService.getOneByTypeAndUriAndPage$('avis/' + this.creator.id, 1, '5');
-      console.log(this.creator);
     });
   }
 
