@@ -29,7 +29,7 @@ export class AppComponent implements OnInit{
       if (event instanceof NavigationStart) {
         // Ajoutez la classe `transition-scroll` lorsque la navigation commence
         document.body.classList.add('transition-scroll');
-        Loading.standard();
+        // Loading.standard();
       }
       else  if (event instanceof NavigationEnd) {
         if ('scrollBehavior' in document.documentElement.style) {
@@ -45,7 +45,7 @@ export class AppComponent implements OnInit{
           scrollableElement.scrollTop = 0;
         }
         document.body.classList.remove('transition-scroll');
-        Loading.remove();
+        // Loading.remove();
       }
     });
 

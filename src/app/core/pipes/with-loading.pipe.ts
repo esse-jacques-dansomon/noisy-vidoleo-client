@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { isObservable, of } from 'rxjs';
-import { map, startWith, catchError } from 'rxjs/operators';
+import { Observable, of, isObservable } from 'rxjs';
+import { catchError, map, startWith } from 'rxjs/operators';
 
 @Pipe({
   name: 'withLoading',
@@ -9,10 +9,10 @@ export class WithLoadingPipe implements PipeTransform {
   transform(val) {
     return isObservable(val)
       ? val.pipe(
-        map((value: any) => ({ loading: false, value })),
+        map(value => ({ loading: false, value })),
         startWith({ loading: true }),
         catchError(error => of({ loading: false, error }))
       )
-      : val;
+      : of({ loading: false, value: val });
   }
 }

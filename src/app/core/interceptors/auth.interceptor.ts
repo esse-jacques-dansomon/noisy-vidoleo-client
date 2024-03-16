@@ -7,7 +7,6 @@ import {
 import { Observable } from 'rxjs';
 import {environment} from "../../../environments/environment";
 import {Injectable} from "@angular/core";
-// import {PaysService} from "../../data/services/pays.service";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -18,9 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
              next: HttpHandler): Observable<HttpEvent<any>> {
       const idToken = localStorage.getItem("access_token");
       const isApiUrl = req.url.startsWith(environment.apiUrl);
-     console.log("intercept")
       if (idToken ) {
-        console.log("intercept2")
          const cloned = req.clone({
             headers: req.headers
                .set("Authorization", "Bearer " + idToken)
@@ -28,7 +25,6 @@ export class AuthInterceptor implements HttpInterceptor {
          return next.handle(cloned);
       }
       else {
-        console.log("intercept3")
          const cloned2 = req.clone({
             headers: req.headers
          });

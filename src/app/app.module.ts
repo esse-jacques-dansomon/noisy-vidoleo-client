@@ -19,6 +19,7 @@ import {NgOptimizedImage, registerLocaleData} from "@angular/common";
 import localeFr from '@angular/common/locales/fr';
 import {VisitorStoreModule} from "./features/visitor/store/visitor-store.module";
 import {VisitorStoreService} from "./features/visitor/store/visitor-store.service";
+import {SpinnerInterceptor} from "./core/interceptors/spinner.interceptor";
 
 registerLocaleData(localeFr);
 
@@ -42,7 +43,7 @@ registerLocaleData(localeFr);
       },
     }),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
+    StoreDevtoolsModule.instrument({maxAge: 100, logOnly: !isDevMode()}),
     //
     VisitorStoreModule,
     NgOptimizedImage,
@@ -60,6 +61,9 @@ registerLocaleData(localeFr);
     //   useClass: CacheInterceptor,
     //   multi: true
     // },
+    { provide: HTTP_INTERCEPTORS,
+      useClass: SpinnerInterceptor,
+      multi: true },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
