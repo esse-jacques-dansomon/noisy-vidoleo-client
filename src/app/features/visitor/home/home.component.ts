@@ -4,6 +4,7 @@ import {CreatorService} from "../../../data/services/creator.service";
 import {Observable} from "rxjs";
 import {PaginationType} from "../../../core/data/PaginationType";
 import {Creator} from "../../../data/models/creator";
+import {VisitorStoreService} from "../store/visitor-store.service";
 
 @Component({
   selector: 'app-home',
@@ -15,17 +16,16 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private creatorService: CreatorService,
+    private _visitorStoreService: VisitorStoreService
   ) { }
 
   ngOnInit(): void {
   }
 
   //get creators vedettes
-  $featuredCreators : Observable<PaginationType<Creator>> =  this.creatorService.getOneByTypeAndUri$("featured") ;
-  $acteurs : Observable<PaginationType<Creator>> =  this.creatorService.getOneByTypeAndUri$("category/acteurs") ;
-  $artistes : Observable<PaginationType<Creator>> =  this.creatorService.getOneByTypeAndUri$("category/artistes") ;
-  $creators : Observable<PaginationType<Creator>> =  this.creatorService.getOneByTypeAndUri$("category/influenceurs") ;
-  $sportifs : Observable<PaginationType<Creator>> =  this.creatorService.getOneByTypeAndUri$("category/sportifs") ;
+  $featuredCreators : Observable<PaginationType<Creator>> =  this._visitorStoreService.selectFeaturedCreators$() ;
+  $news : Observable<PaginationType<Creator>> =  this._visitorStoreService.selectNewCreators$();
+  $artistes : Observable<PaginationType<Creator>> =  this._visitorStoreService.selectActorsCreators$();
   //swiper config
   breakpoints = {
     200:  {

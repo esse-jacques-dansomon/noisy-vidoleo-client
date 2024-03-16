@@ -57,6 +57,10 @@ html, body {
   position: relative;
 }
 
+.site-name{
+  display: none;
+}
+
 .visitor-logo{
   width: 150px;
   height: 40px;
@@ -65,5 +69,8 @@ html, body {
 @media (width<550px) {
   .visitor-logo{
     display: none;
+  }
+  .site-name {
+    display: flex;
   }
 }

@@ -3,9 +3,10 @@
     <div id="nav__toggle" (click)="toggleMenu()">
       <i id="nav__toggle-icon" class="ri-menu-2-line"></i>
     </div>
-    <img class="visitor-logo" [routerLink]="'/'" src="../assets/img/logo1.jpg" alt="">
+    <img class="visitor-logo" [routerLink]="'/'" ngSrc="../assets/img/logo1.jpg" alt="" height="653" width="966">
     <div class="flex nav__list">
       <ul class="menu_items flex-c-s">
+        <li class="nav__item site-name"><a class="nav__link" [routerLink]="'/'">Accueil</a></li>
         <li class="nav__item has-submenu">
           <div class="flex nav_link_icon">
             <a class="nav__link cursor-pointer"  (click)="clickOnHasSubmenuIcon()">
@@ -15,7 +16,7 @@
           </div>
 
           <ul class="sub-menu" *ngIf="categories$ | async as categories">
-            <li  (click)="goToCategory(category.slug)" class="sub-menu__item cursor-pointer" *ngFor="let category of categories.data">
+            <li  (click)="goToCategory(category.slug)" class="sub-menu__item cursor-pointer" *ngFor="let category of categories">
               <a >{{category.name}}</a>
             </li>
 

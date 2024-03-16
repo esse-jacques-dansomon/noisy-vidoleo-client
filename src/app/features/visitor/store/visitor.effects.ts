@@ -96,7 +96,7 @@ export class VisitorEffects {
     this.actions$.pipe(
       ofType(VisitorActionType.LoadCategories),
       switchMap(() =>
-        this.categoryService.getOneByTypeAndUri$('')
+        this.categoryService.getAll$()
           .pipe(
             map((data ) => {
               return new LoadCategoriesSuccess({

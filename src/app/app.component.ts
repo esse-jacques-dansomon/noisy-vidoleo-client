@@ -3,6 +3,8 @@ import {Router, NavigationEnd, NavigationStart} from '@angular/router';
 import {CategoryService} from "./data/services/category.service";
 import {AuthService} from "./core/services/AuthService";
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import {HttpClient} from "@angular/common/http";
+import {VisitorStoreService} from "./features/visitor/store/visitor-store.service";
 
 @Component({
   selector: 'app-root',
@@ -15,7 +17,7 @@ export class AppComponent implements OnInit{
 
   constructor(
     private router: Router,
-    private _categoryService : CategoryService,
+    private _visitorStoreSelector : VisitorStoreService,
     private _authService: AuthService,
   ) {
     this._authService.getUserConnectedInfo();
@@ -59,7 +61,7 @@ export class AppComponent implements OnInit{
 
   }
 
-  categories$ = this._categoryService.getOneByTypeAndUri$('');
+  categories$ =  this._visitorStoreSelector.selectCategories$();
   showDropdown() {
     let dropdown = document.querySelector(".dropdown-content");
     dropdown.classList.toggle("show-dropdown");

@@ -1,5 +1,7 @@
 export const environment = {
   production: true,
-   apiUrl: "http://apinoisy.dreamhosters.com/api/",
-   videoUrl:"http://apinoisy.dreamhosters.com/storage/videos/"
+  apiUrl: "https://afrofame.jacques-dansomon.com/api/",
+  videoUrl:"",
+  pictureUrl:""
+  // pictureUrl:"http://localhost:8000/storage/pictures/"
 };

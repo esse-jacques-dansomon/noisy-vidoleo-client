@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CategoryService} from "../../../data/services/category.service";
 import {Router} from "@angular/router";
 import {AuthService} from "../../../core/services/AuthService";
+import {VisitorStoreService} from "../../../features/visitor/store/visitor-store.service";
 
 @Component({
   selector: 'app-client-layout',
@@ -12,13 +13,13 @@ export class ClientLayoutComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private _categoryService : CategoryService,
+    private _visitorStoreService : VisitorStoreService,
     private _authService: AuthService,
   ) { }
 
   ngOnInit(): void {}
 
-  categories$ = this._categoryService.getOneByTypeAndUri$('');
+  categories$ = this._visitorStoreService.selectCategories$();
   showDropdown() {
     let dropdown = document.querySelector(".dropdown-content");
     dropdown.classList.toggle("show-dropdown");

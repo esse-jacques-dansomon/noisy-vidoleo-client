@@ -59,12 +59,12 @@
   </section>
 
   <!--    Acteurs AUTHORS-->
-  <section class="container authors"  *ngIf="$acteurs  | withLoading | async as creatorWithPagination">
+  <section class="container authors"  *ngIf="$news  | withLoading | async as creatorWithPagination">
 
     <ng-template [ngIf]="creatorWithPagination.value">
       <div class="flex container authors__category">
         <div class="authors__category-title">
-          Acteurs
+          News
         </div>
         <div class="authors__category-title-buttons flex">
           <a class="authors__category-title-buttons-title" [routerLink]="'categories/acteurs'">
@@ -101,44 +101,6 @@
 
   </section>
 
-  <!--   Artistes AUTHORS-->
-  <section class="container authors"  *ngIf="$artistes  | withLoading | async as creatorWithPagination">
-    <ng-template [ngIf]="creatorWithPagination.value">
-      <div class="flex container authors__category">
-        <div class="authors__category-title">
-          Artistes
-        </div>
-        <div class="authors__category-title-buttons flex">
-          <a class="authors__category-title-buttons-title" [routerLink]="'categories/artistes'">
-            Voir tous
-          </a>
-          <div class="authors__category-title-buttons-icons flex">
-            <div class="button-prev3">
-              <i class="pagination-icon ri-arrow-left-s-line"></i>
-            </div>
-            <div class="button-next3">
-              <i class=" pagination-icon ri-arrow-right-s-line"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-      <swiper [config]="getSwiperConfig(3)">
-        <div class="authors_container swiper-wrapper">
-          <creator-card class="swiper-slide" *ngFor="let creator of creatorWithPagination.value.data" [creator]="creator"></creator-card>
-        </div>
-      </swiper>
-    </ng-template>
-    <ng-template [ngIf]="creatorWithPagination.loading">
-      <app-loader-spinner [isLoading]="true"></app-loader-spinner>
-    </ng-template>
-
-    <ng-template [ngIf]="creatorWithPagination.error">
-      <div class="error">
-        {{creatorWithPagination.error}}
-      </div>
-    </ng-template>
-
-  </section>
 
   <!--    HOW IT WORKS-->
   <section class="how_it_works container" id="how_it_works">
@@ -195,7 +157,7 @@
   </section>
 
   <!-- INFLUENCES-->
-  <section class="container authors"  *ngIf="$creators  | withLoading | async as creatorWithPagination">
+  <section class="container authors"  *ngIf="$artistes  | withLoading | async as creatorWithPagination">
     <ng-template [ngIf]="creatorWithPagination.value">
       <div class="flex container authors__category">
         <div class="authors__category-title">
@@ -233,44 +195,6 @@
     </ng-template>
   </section>
 
-  <!--   SPORTIFS AUTHORS-->
-  <section class="container authors"  *ngIf="$sportifs  | withLoading | async as creatorWithPagination">
-    <ng-template [ngIf]="creatorWithPagination.value">
-      <div class="flex container authors__category" >
-        <div class="authors__category-title">
-          À la une
-        </div>
-        <div class="authors__category-title-buttons flex">
-          <a class="authors__category-title-buttons-title" [routerLink]="'categories'">
-            Voir tous
-          </a>
-          <div class="authors__category-title-buttons-icons flex">
-            <div class="button-prev5">
-              <i class="pagination-icon ri-arrow-left-s-line"></i>
-            </div>
-            <div class="button-next5">
-              <i class=" pagination-icon ri-arrow-right-s-line"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-      <swiper [config]="getSwiperConfig(5)">
-        <div class="authors_container swiper-wrapper">
-          <creator-card class="swiper-slide" *ngFor="let creator of creatorWithPagination.value.data" [creator]="creator"></creator-card>
-        </div>
-      </swiper>
-    </ng-template>
-    <ng-template [ngIf]="creatorWithPagination.loading">
-      <app-loader-spinner [isLoading]="true"></app-loader-spinner>
-    </ng-template>
-
-    <ng-template [ngIf]="creatorWithPagination.error">
-      <div class="error">
-        {{creatorWithPagination.error}}
-      </div>
-    </ng-template>
-
-  </section>
 
 
   <!-- /*=================== C'EST QUOI ===========================*/-->

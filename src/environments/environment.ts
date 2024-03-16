@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   // apiUrl: "http://apinoisy.dreamhosters.com/api/"
-  apiUrl: "http://localhost:8000/api/",
+  // apiUrl: "http://localhost:8000/api/",
+  apiUrl: "http://afrofame.jacques-dansomon.com:3004/api/",
   videoUrl:"http://localhost:8000/storage/videos/",
   pictureUrl:""
   // pictureUrl:"http://localhost:8000/storage/pictures/"

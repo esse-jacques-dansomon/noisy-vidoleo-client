@@ -15,7 +15,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {appReducer, metaReducersProvider} from "./store/app.reducer";
 import { EffectsModule } from '@ngrx/effects';
-import {registerLocaleData} from "@angular/common";
+import {NgOptimizedImage, registerLocaleData} from "@angular/common";
 import localeFr from '@angular/common/locales/fr';
 import {VisitorStoreModule} from "./features/visitor/store/visitor-store.module";
 import {VisitorStoreService} from "./features/visitor/store/visitor-store.service";
@@ -27,25 +27,26 @@ registerLocaleData(localeFr);
     AppComponent,
     ClientLayoutComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        NgxUsefulSwiperModule,
-        HttpClientModule,
-        FormsModule,
-        ReactiveFormsModule,
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgxUsefulSwiperModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
 
-      StoreModule.forRoot(appReducer, {
-        runtimeChecks: {
-          strictActionImmutability: false,
-          strictStateImmutability: false,
-        },
-      }),
-      EffectsModule.forRoot([]),
-      StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-      //
-      VisitorStoreModule,
-    ],
+    StoreModule.forRoot(appReducer, {
+      runtimeChecks: {
+        strictActionImmutability: false,
+        strictStateImmutability: false,
+      },
+    }),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
+    //
+    VisitorStoreModule,
+    NgOptimizedImage,
+  ],
   providers: [
     metaReducersProvider,
     // {provide: ErrorHandler, useClass: GlobalErrorHandler},
