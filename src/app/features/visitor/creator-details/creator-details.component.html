@@ -1,256 +1,259 @@
-<main>
-  <div class="breadcrumb container">
-    <a [routerLink]="['/']">Accueil</a>
-    <span> / </span>
-    <a [routerLink]="['/categories']">Celebrities</a>
-    <span> / </span>
-    <a [routerLink]="['/']">Presentation</a>
-    <span> / </span>
-    <a href="#">{{creator.first_name}}  {{creator.last_name}}</a>
-  </div>
-  <div class="container ">
-    <div class="celebrity">
-      <div class="celebrity-videos ">
-        <swiper  class="height-100" [config]="config">
-          <div class="celebrity-videos-container swiper-wrapper">
-            <div *ngFor="let number of [1, 2, 3, 4, 5, 6, 7]" class="swiper-slide celebrity-videos-response">
-              <video playsinline  height="100%" class="video-item" controls>
-                <source [src]="'https://cdn.cameo.com/static/assets/AboutCameo_FullEdit_v06output.mp4'">
-              </video>
-              <!-- <i class="video-item-play ri-play-circle-line"></i> -->
-              <i class="video-item-volume ri-volume-down-line"></i>
+<ng-container *ngIf="creator$ | async as creator">
+  <main>
+    <div class="breadcrumb container">
+      <a [routerLink]="['/']">Accueil</a>
+      <span> / </span>
+      <a [routerLink]="['/categories']">Celebrities</a>
+      <span> / </span>
+      <a [routerLink]="['/']">Presentation</a>
+      <span> / </span>
+      <a *ngIf="creator" href="#">{{creator.first_name}}  {{creator.last_name}}</a>
+    </div>
+    <div class="container " *ngIf="creator" >
+      <div class="celebrity">
+        <div class="celebrity-videos ">
+          <swiper  class="height-100" [config]="config">
+            <div class="celebrity-videos-container swiper-wrapper">
+              <div *ngFor="let number of [1, 2, 3, 4, 5, 6, 7]" class="swiper-slide celebrity-videos-response">
+                <video playsinline  height="100%" class="video-item" controls>
+                  <source [src]="'https://cdn.cameo.com/static/assets/AboutCameo_FullEdit_v06output.mp4'">
+                </video>
+                <!-- <i class="video-item-play ri-play-circle-line"></i> -->
+                <i class="video-item-volume ri-volume-down-line"></i>
+              </div>
+            </div>
+          </swiper>
+        </div>
+        <div class="celebrity-details-container">
+          <div class="celebrity-details">
+            <div class="celebrity__card  flex">
+              <div class="celebrity__card-author">
+                <div class="celebrity__card-author-name">
+                  <h2>{{creator.first_name}}  {{creator.last_name}}</h2>
+                </div>
+                <div class="celebrity__card-author-title">
+                  <span>{{creator.titre}}</span>
+                </div>
+              </div>
+              <img class="celebrity__card-author-img"  [src]="pictureUrl+''+creator.profile_image" alt="">
+            </div>
+            <div class="celebrity__context flex">
+              <div class="flex">
+                <div class="celebrity__context-rating flex">
+                  <div class="celebrity-feedbacks-item-stars flex">
+                    <div class="rating">
+                      <ng-container *ngFor="let i of [1,2,3,4,5]">
+                        <i class="fa-solid fa-star" [ngClass]="{'active-star':i<=creator.stars_avg}"></i>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <span>({{creator.comment_count}})</span>
+                </div>
+                <div class="celebrity__context-verify flex" >
+                  <i class="ri-checkbox-circle-fill"></i>
+                  <span>Voir les avis</span>
+                </div>
+              </div>
+              <div class="">
+                <div class="celebrity__context-flash flex">
+                  <i class="ri-flashlight-fill"></i>
+                  <span>Livraison 24H disponible</span>
+                </div>
+              </div>
+            </div>
+            <div class="celebrity__content-author-context">
+              {{creator.description}}
             </div>
           </div>
-        </swiper>
+          <div class="book__buttons flex">
+            <a [routerLink]="['/client/booking/'+ occasionType.id]" *ngFor="let occasionType of creator.occasionsTypes.slice(0,2)" class="book__buttons-item-button">
+              {{occasionType.occasionType.name}}  {{occasionType.price}}  FCFA
+            </a>
+          </div>
+          <div class="promotion-text">
+            <p>Commande maintenant et reçois ta vidéo avant demain 11h00 ⏰</p>
+          </div>
+
+        </div>
       </div>
-      <div class="celebrity-details-container">
-        <div class="celebrity-details">
-          <div class="celebrity__card  flex">
-            <div class="celebrity__card-author">
-              <div class="celebrity__card-author-name">
-                <h2>{{creator.first_name}}  {{creator.last_name}}</h2>
-              </div>
-              <div class="celebrity__card-author-title">
-                <span>{{creator.titre}}</span>
-              </div>
-            </div>
-            <img class="celebrity__card-author-img"  [src]="pictureUrl+''+creator.profile_image" alt="">
-          </div>
-          <div class="celebrity__context flex">
-            <div class="flex">
-              <div class="celebrity__context-rating flex">
-                <div class="celebrity-feedbacks-item-stars flex">
-                  <div class="rating">
-                    <ng-container *ngFor="let i of [1,2,3,4,5]">
-                      <i class="fa-solid fa-star" [ngClass]="{'active-star':i<=creator.stars_avg}"></i>
-                    </ng-container>
+
+      <div class="celebrity-how-it-works">
+        <div class="celebrity-how-it-works-swiper">
+          <div class="celebrity-request-content">
+            <swiper [config]="howItWorksCelebrity">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide celebrity-how-it-works-item">
+                  <div class="celebrity-how-it-works-item-title flex">
+                    <i class="ri-edit-box-line"></i>
+                    <h3>100% personnalisé</h3>
+                  </div>
+                  <div class="celebrity-how-it-works-item-content">
+                    La célébrité va suivre tes instructions et te faire une vidéo sur mesure
                   </div>
                 </div>
-                <span>({{creator.comment_count}})</span>
-              </div>
-              <div class="celebrity__context-verify flex" >
-                <i class="ri-checkbox-circle-fill"></i>
-                <span>Voir les avis</span>
-              </div>
-            </div>
-            <div class="">
-              <div class="celebrity__context-flash flex">
-                <i class="ri-flashlight-fill"></i>
-                <span>Livraison 24H disponible</span>
-              </div>
-            </div>
-          </div>
-          <div class="celebrity__content-author-context">
-            {{creator.description}}
-          </div>
-        </div>
-        <div class="book__buttons flex">
-          <a [routerLink]="['/client/booking/'+ occasionType.id]" *ngFor="let occasionType of creator.occasionsTypes.slice(0,2)" class="book__buttons-item-button">
-           {{occasionType.occasionType.name}}  {{occasionType.price}}  FCFA
-          </a>
-        </div>
-        <div class="promotion-text">
-          <p>Commande maintenant et reçois ta vidéo avant demain 11h00 ⏰</p>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="celebrity-how-it-works">
-      <div class="celebrity-how-it-works-swiper">
-        <div class="celebrity-request-content">
-          <swiper [config]="howItWorksCelebrity">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide celebrity-how-it-works-item">
-                <div class="celebrity-how-it-works-item-title flex">
-                  <i class="ri-edit-box-line"></i>
-                  <h3>100% personnalisé</h3>
+                <div class="swiper-slide celebrity-how-it-works-item">
+                  <div class="celebrity-how-it-works-item-title flex">
+                    <i class="ri-lock-fill"></i>
+                    <h3>Paiement Sécurisé</h3>
+                  </div>
+                  <div class="celebrity-how-it-works-item-content">
+                    Nous utilisons le cryptage SSL/TLS pour des paiements en toute sécurité
+                  </div>
                 </div>
-                <div class="celebrity-how-it-works-item-content">
-                  La célébrité va suivre tes instructions et te faire une vidéo sur mesure
+                <div class="swiper-slide celebrity-how-it-works-item">
+                  <div class="celebrity-how-it-works-item-title flex">
+                    <i class="ri-money-dollar-box-line"></i>
+                    <h3>Remboursement Garanti</h3>
+                  </div>
+                  <div class="celebrity-how-it-works-item-content">
+                    Si la célébrité ne répond pas, tu seras immédiatement remboursé
+                  </div>
+                </div>
+                <div class="swiper-slide celebrity-how-it-works-item">
+                  <div class="celebrity-how-it-works-item-title flex">
+                    <i class="ri-phone-line"></i>
+                    <h3>Service Après Vente</h3>
+                  </div>
+                  <div class="celebrity-how-it-works-item-content">
+                    Besoin d'aide ? Nous sommes à ton service 7 jours sur 7
+                  </div>
                 </div>
               </div>
-              <div class="swiper-slide celebrity-how-it-works-item">
-                <div class="celebrity-how-it-works-item-title flex">
-                  <i class="ri-lock-fill"></i>
-                  <h3>Paiement Sécurisé</h3>
-                </div>
-                <div class="celebrity-how-it-works-item-content">
-                  Nous utilisons le cryptage SSL/TLS pour des paiements en toute sécurité
-                </div>
-              </div>
-              <div class="swiper-slide celebrity-how-it-works-item">
-                <div class="celebrity-how-it-works-item-title flex">
-                  <i class="ri-money-dollar-box-line"></i>
-                  <h3>Remboursement Garanti</h3>
-                </div>
-                <div class="celebrity-how-it-works-item-content">
-                  Si la célébrité ne répond pas, tu seras immédiatement remboursé
-                </div>
-              </div>
-              <div class="swiper-slide celebrity-how-it-works-item">
-                <div class="celebrity-how-it-works-item-title flex">
-                  <i class="ri-phone-line"></i>
-                  <h3>Service Après Vente</h3>
-                </div>
-                <div class="celebrity-how-it-works-item-content">
-                  Besoin d'aide ? Nous sommes à ton service 7 jours sur 7
-                </div>
-              </div>
-            </div>
-          </swiper>
-        </div>
-      </div>
-    </div>
-
-    <div class="celebrity-feedbacks">
-      <div class="celebrity-feedbacks-title flex">
-        <div class="celebrity-feedbacks-title-item flex">
-          <h4>Derniers Avis</h4>
-          <i class="ri-checkbox-circle-fill"></i>
-        </div>
-        <div class="celebrity-feedbacks-see-all">
-          <a routerLink="/createurs/avis/{{creator.slug}}">Voir tous les avis</a>
-        </div>
-      </div>
-      <div class="celebrity-feedbacks-content" *ngIf="creatorDemands$ | async as creatorDemands">
-        <div *ngFor="let demand of creatorDemands.data" class="celebrity-feedbacks-item flex">
-          <div class="celebrity-feedbacks-item-stars flex">
-            <div class="rating">
-              <ng-container *ngFor="let i of [1,2,3,4,5]">
-                <i class="fa-solid fa-star" [ngClass]="{'active-star':i<=demand.comment.stars}"></i>
-              </ng-container>
-            </div>
-          </div>
-          <h4>Par ***** le {{demand.comment.created_at|date:'medium':'fr'}}</h4>
-          <p>{{demand.comment.body}}</p>
-      </div>
-
-      </div>
-<!--      <div class="celebrity-categories ">-->
-<!--        <div class="celebrity-categories-title">-->
-<!--          <h4>Catégories Associées</h4>-->
-<!--        </div>-->
-<!--        <div class="celebrity-categories-items flex">-->
-<!--          <div class="celebrity-categories-item flex">-->
-<!--            <i class="ri-search-line"></i>-->
-<!--            <span>Chanteuse</span>-->
-<!--          </div>-->
-<!--          <div class="celebrity-categories-item flex">-->
-<!--            <i class="ri-search-line"></i>-->
-<!--            <span>En Vedette</span>-->
-<!--          </div>-->
-<!--          <div class="celebrity-categories-item flex">-->
-<!--            <i class="ri-search-line"></i>-->
-<!--            <span>TikTok</span>-->
-<!--          </div>-->
-<!--          <div class="celebrity-categories-item flex">-->
-<!--            <i class="ri-search-line"></i>-->
-<!--            <span>The Voice</span>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-    </div>
-
-    <div class="celebrity-request-step">
-      <div class="celebrity-request-step-title" >
-        <h4>Comment ça marche ?</h4>
-      </div>
-      <div class="celebrity-request-content">
-        <swiper [config]="celebrityRequestContentSteps">
-          <div class="swiper-wrapper">
-            <div class="celebrity-request-content-item swiper-slide">
-              <div class="celebrity-request-content-item-header flex">
-                <div class="celebrity-request-content-item-header-title">
-                  <h4>1. Choisis ta célébrité</h4>
-                </div>
-              </div>
-              <div class="celebrity-request-content-item-content">
-                <p>Commande en quelques clics et reçois ta dédicace vidéo personnalisée de Laurent Paganelli sous 7 jours.                             </p>
-              </div>
-            </div>
-            <div class="celebrity-request-content-item swiper-slide">
-              <div class="celebrity-request-content-item-header flex">
-                <div class="celebrity-request-content-item-header-title">
-                  <h4>2. Obtiens ta vidéo</h4>
-                </div>
-              </div>
-              <div class="celebrity-request-content-item-content">
-                <p>
-                  Dès que ta vidéo sera disponible, nous t'enverrons le lien de téléchargement par email.                             </p>
-              </div>
-            </div>
-            <div class="celebrity-request-content-item swiper-slide">
-              <div class="celebrity-request-content-item-header flex">
-                <div class="celebrity-request-content-item-header-title">
-                  <h4>3. Le cadeau idéal</h4>
-                </div>
-              </div>
-              <div class="celebrity-request-content-item-content">
-                <p>
-                  Que ce soit pour toi ou un proche, obtiens un moment unique et un souvenir inoubliable.                            </p>
-              </div>
-            </div>
-          </div>
-        </swiper>
-      </div>
-
-
-      <!--    FEATURED AUTHORS-->
-      <section class="container authors">
-        <div class="flex container authors__category" >
-          <div class="authors__category-title">
-            De la même categorie
-          </div>
-          <div class="authors__category-title-buttons flex">
-            <a class="authors__category-title-buttons-title" [routerLink]="['/categories/'+creator.sub_category.category.slug]">
-              Voir tous
-            </a>
-            <div class="authors__category-title-buttons-icons flex">
-              <div class="button-prev">
-                <i class="pagination-icon ri-arrow-left-s-line"></i>
-              </div>
-              <div class="button-next">
-                <i class=" pagination-icon ri-arrow-right-s-line"></i>
-              </div>
-            </div>
+            </swiper>
           </div>
         </div>
-        <ng-container *ngIf="creatorsInSameCategory$ | async as creatorsInSameCategory">
-          <swiper [config]="otherAuthorCon">
-            <div class="authors_container swiper-wrapper">
-              <ng-container *ngFor="let creatorSame of creatorsInSameCategory.data">
-                <ng-container *ngIf="creator.id !== creatorSame.id " >
-                  <creator-card class="swiper-slide" [creator]="creatorSame"></creator-card>
+      </div>
+
+      <div class="celebrity-feedbacks">
+        <div class="celebrity-feedbacks-title flex">
+          <div class="celebrity-feedbacks-title-item flex">
+            <h4>Derniers Avis</h4>
+            <i class="ri-checkbox-circle-fill"></i>
+          </div>
+          <div class="celebrity-feedbacks-see-all">
+            <a routerLink="/createurs/avis/{{creator.slug}}">Voir tous les avis</a>
+          </div>
+        </div>
+        <div class="celebrity-feedbacks-content" *ngIf="creatorDemands$ | async as creatorDemands">
+          <div *ngFor="let demand of creatorDemands.data" class="celebrity-feedbacks-item flex">
+            <div class="celebrity-feedbacks-item-stars flex">
+              <div class="rating">
+                <ng-container *ngFor="let i of [1,2,3,4,5]">
+                  <i class="fa-solid fa-star" [ngClass]="{'active-star':i<=demand.comment.stars}"></i>
                 </ng-container>
-              </ng-container>
+              </div>
+            </div>
+            <h4>Par ***** le {{demand.comment.created_at|date:'medium':'fr'}}</h4>
+            <p>{{demand.comment.body}}</p>
+          </div>
+
+        </div>
+        <!--      <div class="celebrity-categories ">-->
+        <!--        <div class="celebrity-categories-title">-->
+        <!--          <h4>Catégories Associées</h4>-->
+        <!--        </div>-->
+        <!--        <div class="celebrity-categories-items flex">-->
+        <!--          <div class="celebrity-categories-item flex">-->
+        <!--            <i class="ri-search-line"></i>-->
+        <!--            <span>Chanteuse</span>-->
+        <!--          </div>-->
+        <!--          <div class="celebrity-categories-item flex">-->
+        <!--            <i class="ri-search-line"></i>-->
+        <!--            <span>En Vedette</span>-->
+        <!--          </div>-->
+        <!--          <div class="celebrity-categories-item flex">-->
+        <!--            <i class="ri-search-line"></i>-->
+        <!--            <span>TikTok</span>-->
+        <!--          </div>-->
+        <!--          <div class="celebrity-categories-item flex">-->
+        <!--            <i class="ri-search-line"></i>-->
+        <!--            <span>The Voice</span>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--      </div>-->
+      </div>
+
+      <div class="celebrity-request-step">
+        <div class="celebrity-request-step-title" >
+          <h4>Comment ça marche ?</h4>
+        </div>
+        <div class="celebrity-request-content">
+          <swiper [config]="celebrityRequestContentSteps">
+            <div class="swiper-wrapper">
+              <div class="celebrity-request-content-item swiper-slide">
+                <div class="celebrity-request-content-item-header flex">
+                  <div class="celebrity-request-content-item-header-title">
+                    <h4>1. Choisis ta célébrité</h4>
+                  </div>
+                </div>
+                <div class="celebrity-request-content-item-content">
+                  <p>Commande en quelques clics et reçois ta dédicace vidéo personnalisée de Laurent Paganelli sous 7 jours.                             </p>
+                </div>
+              </div>
+              <div class="celebrity-request-content-item swiper-slide">
+                <div class="celebrity-request-content-item-header flex">
+                  <div class="celebrity-request-content-item-header-title">
+                    <h4>2. Obtiens ta vidéo</h4>
+                  </div>
+                </div>
+                <div class="celebrity-request-content-item-content">
+                  <p>
+                    Dès que ta vidéo sera disponible, nous t'enverrons le lien de téléchargement par email.                             </p>
+                </div>
+              </div>
+              <div class="celebrity-request-content-item swiper-slide">
+                <div class="celebrity-request-content-item-header flex">
+                  <div class="celebrity-request-content-item-header-title">
+                    <h4>3. Le cadeau idéal</h4>
+                  </div>
+                </div>
+                <div class="celebrity-request-content-item-content">
+                  <p>
+                    Que ce soit pour toi ou un proche, obtiens un moment unique et un souvenir inoubliable.                            </p>
+                </div>
+              </div>
             </div>
           </swiper>
-        </ng-container>
-      </section>
+        </div>
 
-      <!--    -->
+
+        <!--    FEATURED AUTHORS-->
+        <section class="container authors">
+          <div class="flex container authors__category" >
+            <div class="authors__category-title">
+              De la même categorie
+            </div>
+            <div class="authors__category-title-buttons flex">
+              <a class="authors__category-title-buttons-title" [routerLink]="['/categories/'+creator.sub_category.category.slug]">
+                Voir tous
+              </a>
+              <div class="authors__category-title-buttons-icons flex">
+                <div class="button-prev">
+                  <i class="pagination-icon ri-arrow-left-s-line"></i>
+                </div>
+                <div class="button-next">
+                  <i class=" pagination-icon ri-arrow-right-s-line"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ng-container *ngIf="creatorsInSameCategory$ | async as creatorsInSameCategory">
+            <swiper [config]="otherAuthorCon">
+              <div class="authors_container swiper-wrapper">
+                <ng-container *ngFor="let creatorSame of creatorsInSameCategory.data">
+                  <ng-container *ngIf="creator.id !== creatorSame.id " >
+                    <creator-card class="swiper-slide" [creator]="creatorSame"></creator-card>
+                  </ng-container>
+                </ng-container>
+              </div>
+            </swiper>
+          </ng-container>
+        </section>
+
+        <!--    -->
+      </div>
     </div>
-  </div>
 
-</main>
+  </main>
+</ng-container>
+

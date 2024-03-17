@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'creator-card',
   template: `
-    <div class="author__card ">
+    <div class="author__card">
       <a  routerLink="/createurs/{{creator.slug}}">
         <div class="author__card-img">
           <img [src]="pictureUrl+''+creator.profile_image" [alt]="creator.slug">

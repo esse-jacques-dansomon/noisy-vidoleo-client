@@ -4,6 +4,7 @@ import {SubCategory} from "./sub-category";
 import {Account} from "./account";
 
 export interface Creator {
+  stars_avg: number;
   id: number;
   email: string;
   first_name: string;

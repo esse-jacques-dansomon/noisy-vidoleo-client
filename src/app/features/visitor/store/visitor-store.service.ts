@@ -5,7 +5,7 @@ import {
   LoadActorCreators,
   LoadCategories,
   LoadFeaturedCreators,
-  LoadNewCreators,
+  LoadNewCreators, LoadSelectedCreator, LoadSelectedCreatorDemands, LoadSelectedCreatorFeaturedCreators,
   SelectCategory
 } from "./visitor.action";
 import {Category} from "../../../data/models/category";
@@ -30,15 +30,20 @@ export class VisitorStoreService {
   loadCategories() {this.store.dispatch(new LoadCategories());}
   selectCategories$ = () => this.store.select(state => state.visitor.categoriesState.categories);
 
+
+
   loadSelectedCategoryCreators(category: Category) {this.store.dispatch(new SelectCategory({
     category: category
   }));}
-
   selectSelectedCategory$ = () => this.store.select(state => state.visitor.categoriesState.selectedCategory);
   selectSelectedCategoryCreators$ = () => this.store.select(state => state.visitor.categoriesState.selectedCategoryCreators);
 
 
-
-
+  loadSelectedCreator = (slug: string) => this.store.dispatch(new LoadSelectedCreator({slug : slug}))
+  loadSelectedCreatorDemands = (id: number) => this.store.dispatch(new LoadSelectedCreatorDemands({id}))
+  loadSelectedCreatorFeaturedCreators = (slug: string) => this.store.dispatch(new LoadSelectedCreatorFeaturedCreators({slug : slug}))
+  selectedCreator = () => this.store.select(state => state.visitor.creatorState.selectedCreator)
+  selectedCreatorDemands = () => this.store.select(state => state.visitor.creatorState.creatorDemands)
+  selectedCreatorFeaturedCreators = () => this.store.select(state => state.visitor.creatorState.selectedCreatorsByCategory)
 
 }

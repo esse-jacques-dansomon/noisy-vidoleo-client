@@ -1,0 +1,6 @@
+.author__card-info .author__card-info-subtitle span {
+  white-space: nowrap; /* Empêche le texte de se répartir sur plusieurs lignes */
+  overflow: hidden; /* Cache le texte dépassant de la ligne */
+  text-overflow: ellipsis; /* Affiche "..." à la fin du texte si celui-ci est trop long pour tenir dans une seule ligne */
+  position: relative;
+}

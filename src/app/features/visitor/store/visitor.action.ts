@@ -21,7 +21,11 @@ export enum VisitorActionType {
 
   LoadSelectedCreator = '[Visitor] Load selected creator',
   LoadSelectedCreatorSuccess = '[Visitor] Load selected creatorSuccess',
+
+  LoadSelectedCreatorDemands = '[Visitor] Load selected creatorDemands]',
   LoadSelectedCreatorDemandsSuccess = '[Visitor] Load selected creatorDemands Success',
+
+  LoadSelectedCreatorFeaturedCreators = '[Visitor] Load selected CreatorFeatured Creators',
   LoadSelectedCreatorFeaturedCreatorsSuccess = '[Visitor] Load selected CreatorFeatured Creators Success',
   LoadSelectedCreatorFailure = '[Visitor] Load selected creator Failure',
 
@@ -93,6 +97,16 @@ export class LoadActorCreatorsFailure implements Action {
  */
 export class LoadSelectedCreator implements Action {
   readonly type = VisitorActionType.LoadSelectedCreator
+  constructor(public payload: {slug : string}) {}
+}
+
+export class LoadSelectedCreatorDemands implements Action {
+  readonly type = VisitorActionType.LoadSelectedCreatorDemands
+  constructor(public payload: {id : number}) {}
+}
+
+export class LoadSelectedCreatorFeaturedCreators implements Action {
+  readonly type = VisitorActionType.LoadSelectedCreatorFeaturedCreators
   constructor(public payload: {slug : string}) {}
 }
 
@@ -187,6 +201,8 @@ export type VisitorActions =
   | LoadActorCreatorsFailure
 
   | LoadSelectedCreator
+  | LoadSelectedCreatorDemands
+  | LoadSelectedCreatorFeaturedCreators
   | LoadSelectedCreatorSuccess
   | LoadSelectedCreatorDemandsSuccess
   | LoadSelectedCreatorFeaturedCreatorsSuccess

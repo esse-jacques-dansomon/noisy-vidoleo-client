@@ -1,6 +1,6 @@
 import {Creator} from "../../../data/models/creator";
 import {Category} from "../../../data/models/category";
-import {VisitorActions, VisitorActionType} from "./visitor.action";
+import {LoadSelectedCreatorFeaturedCreators, VisitorActions, VisitorActionType} from "./visitor.action";
 import {PaginationType} from "../../../core/data/PaginationType";
 import {Demande} from "../../../data/models/demande";
 
@@ -159,6 +159,8 @@ export function visitorReducer(state: VisitorState, action: VisitorActions): Vis
 
     /**
      * Load Selected Creator :
+     * Load SelectedCreatorDemands
+     * Load SelectedCreatorFeaturedCreators
      * LoadActorCreators
      * LoadActorCreatorsSuccess,
      * LoadSelectedCreatorDemandsSuccess
@@ -168,7 +170,29 @@ export function visitorReducer(state: VisitorState, action: VisitorActions): Vis
     case VisitorActionType.LoadSelectedCreator:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
+        creatorState: {
+          ...state.creatorState,
+        }
+      }
+
+      case VisitorActionType.LoadSelectedCreatorDemands:
+      return {
+        ...state,
+        isLoading: true,
+        creatorState: {
+          ...state.creatorState,
+          creatorDemands: null,
+        }
+      }
+      case VisitorActionType.LoadSelectedCreatorFeaturedCreators:
+      return {
+        ...state,
+        isLoading: true,
+        creatorState: {
+          ...state.creatorState,
+          selectedCreatorsByCategory: null
+        }
       }
 
     case VisitorActionType.LoadSelectedCreatorSuccess:

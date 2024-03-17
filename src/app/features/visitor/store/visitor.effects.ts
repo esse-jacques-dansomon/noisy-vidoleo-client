@@ -9,7 +9,10 @@ import {
   LoadFeaturedCreatorsFailure,
   LoadFeaturedCreatorsSuccess,
   LoadNewCreatorsFailure,
-  LoadNewCreatorsSuccess,
+  LoadNewCreatorsSuccess, LoadSelectedCreatorDemandsSuccess,
+  LoadSelectedCreatorFailure,
+  LoadSelectedCreatorFeaturedCreatorsSuccess,
+  LoadSelectedCreatorSuccess,
   SelectCategoryFailure,
   SelectCategorySuccess,
   VisitorActionType
@@ -19,6 +22,8 @@ import {switchMap, map, catchError, of} from "rxjs";
 import {PaginationType} from "../../../core/data/PaginationType";
 import {Creator} from "../../../data/models/creator";
 import {CategoryService} from "../../../data/services/category.service";
+import {VisitorStoreService} from "./visitor-store.service";
+import {Demande} from "../../../data/models/demande";
 
 @Injectable()
 export class VisitorEffects {
@@ -77,17 +82,59 @@ export class VisitorEffects {
   loadSelectedCreator$ = createEffect(() =>
     this.actions$.pipe(
       ofType(VisitorActionType.LoadSelectedCreator),
-      switchMap((action:  {slug : string}) =>
+      switchMap((action: {
+        payload: { slug : string}
+        }) =>
         this.creatorService
-          .getOneByTypeAndUri$('creator/' + action.slug)
+          .getBySlug$(action.payload.slug)
           .pipe(
-            map((data : PaginationType<Creator> ) => {
-              return new LoadNewCreatorsSuccess({
-                data: data,
+            map((creator : Creator ) => {
+              this.visitorStoreService.loadSelectedCreatorDemands(creator.id)
+              this.visitorStoreService.loadSelectedCreatorFeaturedCreators(creator.sub_category.category.slug)
+              return new LoadSelectedCreatorSuccess({
+                creator: creator,
               });
             }),
-            catchError((error) => of(new LoadNewCreatorsFailure(error)))
+            catchError((error) => of(new LoadSelectedCreatorFailure(error)))
           )
+      )
+    )
+  );
+
+  loadSelectedCreatorDemands$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(VisitorActionType.LoadSelectedCreatorDemands),
+      switchMap((action: {
+          payload: { id : number}
+        }) =>
+        this.creatorService.getOneByTypeAndUriAndPage$('avis/' + action.payload.id, 1, '5')
+            .pipe(
+              map((data : PaginationType<Demande> ) => {
+                return new LoadSelectedCreatorDemandsSuccess({
+                  demands:  data
+                });
+              }),
+              catchError((error) => of(new LoadSelectedCreatorFailure(error)))
+            )
+      )
+    )
+  );
+
+  loadSelectedCreatorFeaturedCreators$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(VisitorActionType.LoadSelectedCreatorFeaturedCreators),
+      switchMap((action: {
+          payload: { slug : string}
+        }) =>
+        this.creatorService.getOneByTypeAndUri$( 'category/'  + action.payload.slug)
+            .pipe(
+              map((creators : PaginationType<Creator> ) => {
+                return new LoadSelectedCreatorFeaturedCreatorsSuccess({
+                  creators: creators,
+                });
+              }),
+              catchError((error) => of(new LoadSelectedCreatorFailure(error)))
+            )
       )
     )
   );
@@ -133,6 +180,7 @@ export class VisitorEffects {
   constructor(
     private actions$: Actions,
     private creatorService: CreatorService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private visitorStoreService : VisitorStoreService,
   ) {}
 }

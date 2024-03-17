@@ -1,4 +1,5 @@
-<header class="">
+<div class="wrapper">
+  <header class="">
   <nav class="navBar flex ">
     <div id="nav__toggle" (click)="toggleMenu()">
       <i id="nav__toggle-icon" class="ri-menu-2-line"></i>
@@ -62,11 +63,11 @@
     </div>
   </nav>
 </header>
-<main>
-  <router-outlet  ></router-outlet>
-</main>
-<!--FOOTER -->
-<footer class="">
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+  <!--FOOTER -->
+  <footer class="">
   <div class="footer-group-1  container grid">
     <div class="subscribe">
       <div class="subscribe__inner">
@@ -134,3 +135,4 @@
 
 
 </footer>
+</div>

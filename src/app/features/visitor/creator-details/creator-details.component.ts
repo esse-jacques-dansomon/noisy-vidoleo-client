@@ -8,13 +8,14 @@ import {CreatorService} from "../../../data/services/creator.service";
 import {PaginationType} from "../../../core/data/PaginationType";
 import {Demande} from "../../../data/models/demande";
 import { environment } from 'src/environments/environment';
+import {VisitorStoreService} from "../store/visitor-store.service";
 
 @Component({
   selector: 'app-creator-details',
   templateUrl: './creator-details.component.html',
   styleUrls: ['./creator-details.component.css']
 })
-export class CreatorDetailsComponent implements OnInit {
+export class CreatorDetailsComponent {
   config: SwiperOptions = {
     slidesPerView: 1.6,
     spaceBetween: 25,
@@ -87,22 +88,13 @@ export class CreatorDetailsComponent implements OnInit {
       }
     }
   };
-  creator : Creator ;
-  creatorsInSameCategory$: Observable<PaginationType<Creator>>;
-  creatorDemands$: Observable<PaginationType<Demande>>
+  creator$ : Observable<Creator>  = this._visitorStoreService.selectedCreator();
+  creatorsInSameCategory$: Observable<PaginationType<Creator>> = this._visitorStoreService.selectedCreatorFeaturedCreators();
+  creatorDemands$: Observable<PaginationType<Demande>> = this._visitorStoreService.selectedCreatorDemands();
   pictureUrl:string = environment.pictureUrl;
   constructor(
-    private route: ActivatedRoute,
-    private _creatorService: CreatorService,
+    private _visitorStoreService: VisitorStoreService
   ) {}
 
-  ngOnInit(): void {
-    this.route.data.subscribe((data) => {
-      this.creator = data['creator'];
-      console.log(this.creator)
-      this.creatorsInSameCategory$ = this._creatorService.getOneByTypeAndUri$('category/' + this.creator.sub_category.category.slug);
-      this.creatorDemands$ = this._creatorService.getOneByTypeAndUriAndPage$('avis/' + this.creator.id, 1, '5');
-    });
-  }
 
 }
